@@ -15,25 +15,6 @@ module.exports = {
       .waitForElementVisible('#workspace', 120000)
       .verify.urlEquals('http://ide.goorm.io/');
   },
-  'open_project_table_and_share_panel' : function (browser) {
-    browser
-      .waitForElementPresent('li.me img.user_profile_image', 20000)
-      .waitForElementNotVisible('#dlg_loading_bar', 10000)
-      .pause(1000)
-      .click('button#project_selectbox')
-      .waitForElementPresent('#project_selector > div.open', 3000)
-      .click('#back_to_project_table')
-      .pause(2000)
-      .click('#main-menu-project > a')
-      .waitForElementPresent('#main-menu-project.open', 2000)
-      .click('#main-menu-project a[action=share_project]')
-      .waitForElementVisible('#dlg_project_share', 3000)
-      .pause(2000)
-      .verify.attributeEquals('#project_share_select_list :checked', 'localization_key', 'select_project')      
-      .waitForElementPresent('.modal-backdrop.fade.in', 10000)
-      .click('#g_prjs_btn_cancel')
-      .waitForElementNotPresent('.modal-backdrop', 10000)
-  },
   'open_shared_project_and_share_panel' : function (browser) {
     browser
       .waitForElementPresent('li.me img.user_profile_image', 20000)
@@ -80,8 +61,42 @@ module.exports = {
           .waitForElementVisible('#dlg_project_share', 3000)
           .pause(2000)
           .verify.containsText('#project_share_select_list :checked', project_path)
+          .waitForElementPresent('.modal-backdrop.fade.in', 10000)
+          .click('#g_prjs_btn_cancel')
+          .waitForElementNotPresent('.modal-backdrop', 10000)
       })
     },
+  'open_project_table_and_share_panel' : function (browser) {
+    browser
+      .waitForElementPresent('li.me img.user_profile_image', 20000)
+      .waitForElementNotVisible('#dlg_loading_bar', 10000)
+      .pause(1000)
+      .click('button#project_selectbox')
+      .waitForElementPresent('#project_selector > div.open', 3000)
+      .click('#back_to_project_table')
+      .pause(2000)
+      .click('#main-menu-project > a')
+      .waitForElementPresent('#main-menu-project.open', 2000)
+      .click('#main-menu-project a[action=share_project]')
+      .waitForElementVisible('#dlg_project_share', 3000)
+      .pause(2000)
+      .verify.attributeEquals('#project_share_select_list :checked', 'localization_key', 'select_project')
+  },
+  'check_when_project_not_selected' : function (browser) {
+    browser
+      .click('#g_prjs_btn_ok')
+      .pause(1000)
+      .waitForElementVisible('#dlg_alert', 3000, false)
+      .pause(1000)
+      .click('#g_alert_btn_ok')
+  },
+  'select_project_in_panel' : function (browser) {
+    browser
+      .click('#project_share_select_list')
+      .pause(1000)
+      .click('#project_share_select_list option:nth-child(2)')
+      .pause(1000)
+  },
   'check_placehold' : function (browser) {
       browser
         .getAttribute('#user_search_input', 'placeholder', function (result) {
@@ -112,9 +127,12 @@ module.exports = {
       .waitForElementVisible('#user_search_result_container > ul', 3000, false)
       .verify.containsText('#user_search_result_container > ul a:first-child', '테스트')
       .clearValue('#user_search_input')
+  },
+  'check_when_user_not_selected' : function (browser) {
+    browser
+      .click('#g_prjs_btn_ok')
+      .pause(1000)
+      .waitForElementNotVisible('#dlg_project_share', 3000, false)
       .end()
-
   }
-
-
 }
