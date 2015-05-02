@@ -46,9 +46,21 @@ module.exports = {
     browser
       .waitForElementPresent('img.user_profile_image', 1000000)
       .waitForElementNotVisible('#dlg_loading_bar', 1000000)
+      .click('#gLayoutTab_Debug')
       .click('#main-menu-project a[class=dropdown-toggle]')
       .waitForElementVisible('a[action=build_project]', 1000000)
       .click('#main-menu-project a[action=build_project]')
+      .pause(3000)
+      .verify.visible('#output_tab_cpp')
+      .click('#gLayoutTab_Debug')
+      .click('#main-menu-edit a[class=dropdown-toggle]')
+      .waitForElementVisible('a[action=do_undo]', 100000)
+      .click('#main-menu-edit a[action=do_undo]')
+      .click('#main_file_toolbar button[action=save_file]')
+      .click('#main-menu-edit a[class=dropdown-toggle]')
+      .waitForElementVisible('a[action=do_redo]', 100000)
+      .click('#main-menu-edit a[action=do_redo]')
+      .click('#main_file_toolbar button[action=save_file]')
       .pause(3000)
       .verify.visible('#output_tab_cpp')
   },
@@ -60,6 +72,7 @@ module.exports = {
       .waitForElementVisible('a[action=do_undo]', 100000)
       .click('#main-menu-edit a[action=do_undo]')
       .click('#main_file_toolbar button[action=save_file]')
+      .verify.elementPresent('#output_tab_cpp .dataTables_empty')
   },
   'cpp_project_build_menu' : function (browser) {
     browser
@@ -89,7 +102,19 @@ module.exports = {
     browser
       .waitForElementPresent('img.user_profile_image', 1000000)
       .waitForElementNotVisible('#dlg_loading_bar', 1000000)
+      .click('#gLayoutTab_Debug')
       .click('#main_project_toolbar button[action=build_project]')
+      .pause(3000)
+      .verify.visible('#output_tab_cpp')
+      .click('#gLayoutTab_Debug')
+      .click('#main-menu-edit a[class=dropdown-toggle]')
+      .waitForElementVisible('a[action=do_undo]', 100000)
+      .click('#main-menu-edit a[action=do_undo]')
+      .click('#main_file_toolbar button[action=save_file]')
+      .click('#main-menu-edit a[class=dropdown-toggle]')
+      .waitForElementVisible('a[action=do_redo]', 100000)
+      .click('#main-menu-edit a[action=do_redo]')
+      .click('#main_file_toolbar button[action=save_file]')
       .pause(3000)
       .verify.visible('#output_tab_cpp')
   },
@@ -101,6 +126,7 @@ module.exports = {
       .waitForElementVisible('a[action=do_undo]', 100000)
       .click('#main-menu-edit a[action=do_undo]')
       .click('#main_file_toolbar button[action=save_file]')
+      .verify.elementPresent('#output_tab_cpp .dataTables_empty')
   },
   'cpp_project_build_toolbar' : function (browser) {
     browser
