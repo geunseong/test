@@ -36,7 +36,6 @@ module.exports = {
   	browser
   		.click('#g_ap_pw_btn_mdf_act')
   		.waitForElementVisible('#g_ap_pw_btn_mdf', 1000)
-  		// .pause(1000)
   		.verify.elementNotPresent('#profile_name_input[disabled=disabled]')
   		.click('#g_ap_pw_btn_mdf')
   		.waitForElementVisible('#g_ap_pw_btn_mdf_act', 1000)
@@ -46,7 +45,7 @@ module.exports = {
   	browser
   		.click('#g_ap_pw_btn_mdf_act')
   		.waitForElementNotVisible('#g_ap_pw_btn_mdf_act', 1000)
-  		.setValue('input[id="profile_name_input"]', '1')
+  		.setValue('input[id="profile_name_input"]', [browser.Keys.BACK_SPACE, browser.Keys.BACK_SPACE, Math.floor((Math.random() * 100) + 1).toString()])
   		.click('#g_ap_pw_btn_mdf')
   		.waitForElementVisible('#profile_old_input_container', 1000)
   		.click('#g_cfrm_btn_no')
