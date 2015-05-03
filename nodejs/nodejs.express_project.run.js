@@ -40,7 +40,6 @@ module.exports = {
       .waitForElementNotVisible('#dlg_new_project', 200000)
       .waitForElementNotVisible('#dlg_loading_bar', 500000)
       .verify.containsText('#selected_project_name', 'nodejs_express')
-      
   },
   'run_with_toolbar' : function (browser) {
     browser
@@ -53,7 +52,7 @@ module.exports = {
   },
   'check_server_run' : function (browser) {
     browser
-      .verify.containsText('#server_tab_nodejs .inner_content', 'Express server listening')//check log
+      .assert.containsText('#server_tab_nodejs .inner_content', 'Express server listening')//check log
       .getAttribute('#server_tab_nodejs .server_status :nth-child(3)', 'href', function(result) {
         server_url = result.value;
         browser
@@ -69,7 +68,7 @@ module.exports = {
           });
       })
   },
-  'stop_server' : function (browser) {
+  'stop_server_with_button' : function (browser) {
     browser
       .click('#server_tab_nodejs .btn-danger')
       .pause(1000)
@@ -87,7 +86,7 @@ module.exports = {
     browser
       .click('#server_tab_nodejs .btn-primary')
       .waitForElementVisible('#dlg_toast', 200000, false)
-      .verify.containsText('#server_tab_nodejs .inner_content', 'Express server listening')//check log
+      .assert.containsText('#server_tab_nodejs .inner_content', 'Express server listening')//check log
       .getAttribute('#server_tab_nodejs .server_status :nth-child(3)', 'href', function(result) {
         server_url = result.value;
         browser
@@ -99,9 +98,45 @@ module.exports = {
             browser
               .switchWindow(handles[1])
               .verify.containsText('body', 'Welcome to Express')
-              .closeWindow()
               .switchWindow(handles[0])
           });
+      })
+  },
+  'stop_server_with_tab_close' : function (browser) {
+    browser
+      .click('#gLayoutServer_nodejs span')
+      .pause(1000)
+      .switchWindow(handles[1])
+      .refresh()
+      .pause(3000)
+      .getText('html', function (result) {
+        browser.verify.equal(result.value.indexOf('Welcom to Express'), -1)
+        browser
+          .closeWindow()
+          .switchWindow(handles[0])
+      })
+  },
+  'run_with_toolbar_and_check_tab' : function (browser) {
+    browser
+      .waitForElementPresent('img.user_profile_image', 10000)
+      .waitForElementNotVisible('#dlg_loading_bar', 10000)
+      .click('#main_project_toolbar button[action=run]')
+      .waitForElementVisible('#dlg_toast', 200000, false)
+      .waitForElementVisible('#gLayoutServer_nodejs', 30000, false)
+      .pause(2000)
+  },
+  'check_log_maintain' : function (browser) {
+    browser
+      .click('#gLayoutServer_nodejs')
+      .pause(2000)
+      .getText('#server_tab_nodejs .inner_content', function (result) {
+        var result = result.value;
+        browser
+          .click('#gLayoutTab_Terminal')
+          .pause(2000)
+          .click('#gLayoutServer_nodejs')
+          .pause(2000)
+          .verify.containsText('#server_tab_nodejs .inner_content', result)
       })
   },
   'delete_project' : function (browser) {
@@ -115,9 +150,13 @@ module.exports = {
       .click('#selector_nodejs_express')
       .click('#g_dp_btn_ok')
       .waitForElementVisible('#dlg_confirmation', 500000)
-      .click('#g_cfrm_btn_yes')
-      .waitForElementVisible('#dlg_notice', 100000)
-      .click('#g_nt_btn_ok')
-      .end();
+      .getText('#dlg_confirmation', function (result) {
+        browser.verify.equal(true, /서버가|Server/.test(result), 'Element <#dlg_confirmation> has message contain "서버가" or "Server"');
+        browser
+          .click('#g_cfrm_btn_yes')
+          .waitForElementVisible('#dlg_notice', 100000)
+          .click('#g_nt_btn_ok')
+          .end();
+      })
   }
 };
