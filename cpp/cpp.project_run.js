@@ -109,7 +109,6 @@ module.exports = {
       .waitForElementPresent('img.user_profile_image', 1000000)
       .waitForElementNotVisible('#dlg_loading_bar', 1000000)
       .click('#main_project_toolbar button[action=run]')
-      .waitForElementVisible('#dlg_confirmation', 100000)
       .waitForElementVisible('#gLayoutServer_run', 100000)
       .waitForElementVisible('#dlg_toast', 100000)
       .verify.containsText('#server_tab_run', 'Hello, goorm!')
