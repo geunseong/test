@@ -8,8 +8,8 @@ module.exports = {
       .setValue('input[name=pw]', data.password)
       .click('button[id=btn-login]')
       .waitForElementVisible('div#ide-vm-list', 2000)
-      .waitForElementNotPresent('button#btn-run-ide[disabled=disabled]', 10000)
-      .click('#btn-run-ide')
+      .waitForElementNotPresent('button.btn-run-ide[disabled=disabled]', 10000)
+      .click('.btn-run-ide')
       .pause(5000)
       .waitForElementVisible('#workspace', 120000)
       .verify.urlEquals('http://ide.goorm.io/');

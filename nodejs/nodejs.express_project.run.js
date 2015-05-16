@@ -12,9 +12,9 @@ module.exports = {
       .click('button[id=btn-login]')
       .waitForElementVisible('div#ide-vm-list', 2000)
       .pause(3000)
-      .waitForElementNotPresent('button#btn-run-ide[disabled=disabled]', 10000)
+      .waitForElementNotPresent('button.btn-run-ide[disabled=disabled]', 10000)
       .click('button[plugin=nodejs]')
-      .click('#btn-run-ide')
+      .click('.btn-run-ide')
       .pause(5000)
       .waitForElementVisible('#workspace', 120000)
       .verify.urlEquals('http://ide.goorm.io/');
