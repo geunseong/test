@@ -15,5 +15,5 @@ module.exports = {
       .waitForElementVisible('#workspace', 120000)
       .verify.urlEquals('http://ide.goorm.io/')
       .end();
-  } 
+  }
 };
