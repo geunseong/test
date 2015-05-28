@@ -7,11 +7,11 @@ exports.command = function(file_name, content) {
 		.waitForElementNotVisible('#dlg_open_file', 3000)
 		.waitForElementVisible('div.ui-dialog', 5000)
 		.verify.elementPresent('div.ui-dialog')
-		.execute(function() {
+		.execute(function(_filename, _content) {
 			var window_list = core.module.layout.workspace.window_manager.window;
 
-			window_list[window_list.length - 1].editor.editor.setValue(content);
-		}, [])
+			window_list[window_list.length - 1].editor.editor.setValue(_content);
+		}, [file_name, content])
 		.verify.visible('#g_window_tab_list .goorm_tab_menu:last-child .tab_option')
 	return this;
 };
