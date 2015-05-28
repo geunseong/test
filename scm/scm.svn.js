@@ -156,7 +156,7 @@ module.exports = {
       .setValue('#new_project_scm_config .scm_URL', url)
       .click('[for=new_scm_anonymous_bt]')
       .click('#new_proj_scm_test_bt')
-      .waitForElementVisible('#new_proj_scm_test_bt', 5000)
+      .waitForElementVisible('#new_proj_scm_test_bt', 10000)
       .verify.cssClassPresent('#new_proj_scm_test_bt', 'btn-success')
   },
   'project_create_big': function(browser) {
@@ -268,7 +268,7 @@ module.exports = {
       .click('#project_treeview [aria-level="1"] > a')
       .windowSize('current', 1280, 768)
       .waitForElementVisible('#main_scm_toolbar', 2000)
-      .click('#main_scm_toolbar [action=scm_status]')
+      .click('#main_scm_toolbar [action=scm_commit]')
       .waitForElementVisible('#dlg_svn', 2000)
       .waitForElementVisible('#svn_status_tab', 2000)
       .waitForElementNotVisible('#dlg_loading_bar', 10000)

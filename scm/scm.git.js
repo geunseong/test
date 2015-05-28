@@ -266,7 +266,7 @@ module.exports = {
       .click('#project_treeview [aria-level="1"] > a')
       .windowSize('current', 1280, 768)
       .waitForElementVisible('#main_scm_toolbar', 2000)
-      .click('#main_scm_toolbar [action=scm_status]')
+      .click('#main_scm_toolbar [action=scm_commit]')
       .waitForElementVisible('#dlg_git', 2000)
       .waitForElementVisible('#git_status_tab', 2000)
       .waitForElementNotVisible('#dlg_loading_bar', 10000)
