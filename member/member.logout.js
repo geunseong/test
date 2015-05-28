@@ -7,7 +7,7 @@ module.exports = {
       .setValue('input[name=id]', data.username)
       .setValue('input[name=pw]', data.password)
       .click('button[id=btn-login]')
-      .waitForElementVisible('div#ide-vm-list', 2000)
+      .waitForElementVisible('div#ide-vm-list', 10000)
       .pause(3000)
       .waitForElementNotPresent('button.btn-run-ide[disabled=disabled]', 10000)
       .click('.btn-run-ide')
@@ -48,7 +48,7 @@ module.exports = {
   		})
   		.click('#g_sv_btn_send')
   		.pause(3000)
-  		.verify.urlEquals(browser.globals.urls.qa)
+  		.verify.urlEquals('http://qa.goorm.io/')
   		.waitForElementVisible('#login-section', 2000)
   		.verify.hidden('#user-section')
   },
@@ -56,7 +56,7 @@ module.exports = {
   	browser
   		.url('http://ide.goorm.io/')
   		.pause(1000)
-  		.verify.urlEquals(browser.globals.urls.qa)
+  		.verify.urlEquals('http://qa.goorm.io/')
   		.end();
   }
 }

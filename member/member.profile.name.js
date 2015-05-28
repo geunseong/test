@@ -7,7 +7,7 @@ module.exports = {
       .setValue('input[name=id]', data.username)
       .setValue('input[name=pw]', data.password)
       .click('button[id=btn-login]')
-      .waitForElementVisible('div#ide-vm-list', 2000)
+      .waitForElementVisible('div#ide-vm-list', 10000)
       .pause(3000)
       .waitForElementNotPresent('button.btn-run-ide[disabled=disabled]', 10000)
       .click('.btn-run-ide')
@@ -50,7 +50,7 @@ module.exports = {
   		.waitForElementVisible('#profile_old_input_container', 1000)
   		.click('#g_cfrm_btn_no')
   		.verify.elementNotPresent('#dlg_confirmation.in')
-  }, 
+  },
   'name_changed_yes_wrong_pw' : function (browser) {
   	browser
   		.click('#g_ap_pw_btn_mdf')

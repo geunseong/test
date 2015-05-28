@@ -7,7 +7,7 @@ module.exports = {
       .setValue('input[name=id]', data.username)
       .setValue('input[name=pw]', data.password)
       .click('button[id=btn-login]')
-      .waitForElementVisible('div#ide-vm-list', 2000)
+      .waitForElementVisible('div#ide-vm-list', 10000)
       .pause(3000)
       .waitForElementNotPresent('button.btn-run-ide[disabled=disabled]', 10000)
       .click('.btn-run-ide')
@@ -47,7 +47,8 @@ module.exports = {
 			.execute(function() {
 				core.module.layout.workspace.window_manager.window[0].editor.editor.setValue('@@@');
 			}, [])
-			.verify.visible('span.title_option')
+			.pause(2000)
+			.verify.visible('span.tab_option')
   },
   'try_logout' : function (browser) {
   	browser
@@ -64,7 +65,7 @@ module.exports = {
   		.click('#g_sv_btn_cancel')
   		.waitForElementNotVisible('#dlg_survey', 1000)
   		.pause(3000)
-  		.verify.urlEquals(browser.globals.urls.qa)
+  		.verify.urlEquals('http://qa.goorm.io/')
   		.waitForElementVisible('#login-section', 2000)
   		.verify.hidden('#user-section')
   		.end();
