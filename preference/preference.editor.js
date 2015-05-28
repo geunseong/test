@@ -7,7 +7,7 @@ module.exports = {
       .setValue('input[name=id]', data.username)
       .setValue('input[name=pw]', data.password)
       .click('button[id=btn-login]')
-      .waitForElementVisible('div#ide-vm-list', 2000)
+      .waitForElementVisible('div#ide-vm-list', 10000)
       .pause(3000)
       .waitForElementNotPresent('button.btn-run-ide[disabled=disabled]', 10000)
       .click('.btn-run-ide')
