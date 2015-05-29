@@ -1,4 +1,7 @@
 exports.command = function(tab) {
+	if (tab == null) {
+		tab = 'template';
+	}
     this
         .click('#main_file_toolbar [action=new_project]')
         .waitForElementVisible('#dlg_new_project', 2000)

@@ -1,3 +1,4 @@
+var project_name = 'nodejs_express';
 var server_url = '';
 var handles;
 
@@ -5,41 +6,17 @@ module.exports = {
   'goorm_login' : function (browser) {
     var data = browser.globals;
     browser
-      .url('http://qa.goorm.io')
-      .waitForElementVisible('input.login-form', 2000)
-      .setValue('input[name=id]', data.username)
-      .setValue('input[name=pw]', data.password)
-      .click('button[id=btn-login]')
-      .waitForElementVisible('div#ide-vm-list', 2000)
-      .pause(3000)
-      .waitForElementNotPresent('button.btn-run-ide[disabled=disabled]', 10000)
-      .click('button[plugin=nodejs]')
-      .click('.btn-run-ide')
-      .pause(5000)
-      .waitForElementVisible('#workspace', 120000)
-      .verify.urlEquals('http://ide.goorm.io/');
+      .run_ide(data.username, data.password)
+      .waitForElementPresent('li.me img.user_profile_image', 20000)
+      .waitForElementNotVisible('#dlg_loading_bar', 100000)
+      .pause(1000)
+      .click('#g_cfrm_btn_no') //if there is confirmation
+      .pause(1000)
+      .waitForElementNotVisible('#dlg_loading_bar', 50000);
   },
   'create_default_project' : function (browser) {
     browser
-      .waitForElementPresent('img.user_profile_image', 200000)
-      .waitForElementNotVisible('#dlg_loading_bar', 200000)
-      .pause(3000)
-      .click('#g_cfrm_btn_no') //if there is confirmation
-      .pause(2000)
-      .waitForElementNotVisible('#dlg_loading_bar', 20000)
-      .click('#main_file_toolbar button[action=new_project]')
-      .waitForElementVisible('#dlg_new_project', 10000)
-      .click('.project_wizard_first_button[project_type=nodejs]')
-      .waitForElementVisible('.project_wizard_second_button[project_type=nodejs]', 10000)
-      .click('.project_wizard_second_button[detail_type=express]')
-      .waitForElementVisible('.project_wizard_second_button.selected_button[detail_type=express]', 10000)
-      .click('#g_np_btn_next')
-      .waitForElementVisible('#input_project_name', 10000)
-      .setValue('#input_project_name', 'nodejs_express')
-      .click('#g_np_btn_ok_template')
-      .waitForElementNotVisible('#dlg_new_project', 200000)
-      .waitForElementNotVisible('#dlg_loading_bar', 500000)
-      .verify.containsText('#selected_project_name', 'nodejs_express')
+      .new_project('nodejs', 'express', project_name)
   },
   'run_with_toolbar' : function (browser) {
     browser
