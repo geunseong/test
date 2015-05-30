@@ -128,7 +128,7 @@ module.exports = {
       .click('#g_dp_btn_ok')
       .waitForElementVisible('#dlg_confirmation', 500000)
       .getText('#dlg_confirmation', function (result) {
-        browser.verify.equal(true, /서버가|Server/.test(result), 'Element <#dlg_confirmation> has message contain "서버가" or "Server"');
+        browser.verify.equal(/서버가|Server/.test(result), true, 'Element <#dlg_confirmation> has message contain "서버가" or "Server"');
         browser
           .click('#g_cfrm_btn_yes')
           .waitForElementVisible('#dlg_notice', 100000)
