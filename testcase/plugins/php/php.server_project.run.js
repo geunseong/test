@@ -2,7 +2,7 @@ var project_name = 'php_default2';
 var plugin = 'php';
 var detail_type = 'default';
 var server_url = '';
-var tab_name = 'python_django';
+var tab_name = 'php';
 var console_msg = 'service apache2 start'; //when server running
 var server_msg = 'Hello Goorm'; //when server running
 var handles;
