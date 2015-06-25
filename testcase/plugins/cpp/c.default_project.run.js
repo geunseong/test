@@ -1,25 +1,25 @@
+var project_name = 'cpp_test90';
+var plugin = 'cpp';
+var detail_type = 'c';
+var default_msg = 'Hello, goorm!';
+
 var create_test_file = function (browser) {
   var random = Math.random();
   browser
-    .execute(function(random) {
+    .execute(function(random, default_msg) {
       var context = 
-        'function main(){' +
-        ' console.log("Hello Goorm!' + random + '");' +
-        '}' +
-        'main();';
+        '#include <stdio.h>\n\nint main(){' +
+        ' printf("' + default_msg + random + '");' +
+        '}';
       var active = core.module.layout.workspace.window_manager.active_window;
         core.module.layout.workspace.window_manager.window[active].editor.editor.setValue(context);
-    }, [random])
+    }, [random, default_msg])
     .pause(3000)
     .click('button[action=save_file]')
     .pause(1000)
 
   return random
 };
-
-var project_name = 'nodejs_test';
-var plugin = 'nodejs';
-var detail_type = 'default';
 
 module.exports = {
   'goorm_login' : function (browser) {
@@ -39,8 +39,10 @@ module.exports = {
       .click('#main-menu-project a[class=dropdown-toggle]')
       .pause(1000)
       .click('#main-menu-project a[action=run]')
-      .pause(2000)
-      .verify.containsText('#run_inner_content', 'Hello Goorm!')
+      .pause(1000)
+      .click('#g_cfrm_btn_yes') //if there is confirmation
+      .pause(4000)
+      .verify.containsText('#run_inner_content', default_msg)
       .pause(3000)
   },
   'run_with_toolbar' : function (browser) {
@@ -50,8 +52,10 @@ module.exports = {
     var random = create_test_file(browser);
     browser
       .click('#main_project_toolbar button[action=run]')
-      .pause(2000)
-      .verify.containsText('#run_inner_content', 'Hello Goorm!' + random)
+      .pause(1000)
+      .click('#g_cfrm_btn_yes') //if there is confirmation
+      .pause(4000)
+      .verify.containsText('#run_inner_content', default_msg + random)
       .pause(2000)
   },
   'run_with_keyboard' : function (browser) {
@@ -63,11 +67,13 @@ module.exports = {
       .keys([browser.Keys.SHIFT, browser.Keys.F5])
       .pause(1000)
       .keys(browser.Keys.NULL)
-      .pause(2000)
-      .verify.containsText('#run_inner_content', 'Hello Goorm!' + random)
+      .pause(1000)
+      .click('#g_cfrm_btn_yes') //if there is confirmation
+      .pause(4000)
+      .verify.containsText('#run_inner_content', default_msg + random)
       .pause(2000)       
   },
-  'delete_project' : function (browser) {
+    'delete_project' : function (browser) {
     browser
       .waitForElementPresent('img.user_profile_image', 10000)
       .waitForElementNotVisible('#dlg_loading_bar', 10000)
