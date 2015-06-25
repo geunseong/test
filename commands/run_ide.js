@@ -16,11 +16,21 @@ exports.command = function(id, pw, plugin) {
                 .pause(5000)
                 .waitForElementVisible('#workspace', 120000)
                 .verify.urlEquals('http://ide.goorm.io/')
-                .pause(1000)
-                .click('#g_cfrm_btn_no') //if there is confirmation
-                .waitForElementPresent('img.user_profile_image', 100000)
-                .waitForElementNotVisible('#dlg_loading_bar', 100000)
-                .pause(3000)
+                .waitForElementPresent('#terminal > div span[style="color:#8ae234;"]', 30000)
+                .waitForElementNotVisible('#dlg_loading_bar', 10000)
+                .getCssProperty('#dlg_confirmation', 'display', function(result) {
+                    if (typeof result == 'object') {
+                        if (result.value == 'block') {
+                            this.click('#g_cfrm_btn_yes')
+                                .pause(5000)
+                                .waitForElementVisible('#workspace', 120000)
+                                .verify.urlEquals('http://ide.goorm.io/')
+                                .waitForElementPresent('#terminal > div span[style="color:#8ae234;"]', 30000)
+                                .waitForElementNotVisible('#dlg_loading_bar', 10000)
+                                .pause(3000)
+                        }
+                    }
+                });
         }
 
         if (plugin) {
