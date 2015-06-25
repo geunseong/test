@@ -46,6 +46,8 @@ module.exports = {
     browser
       .click('#gLayoutServer_' + plugin + ' span')
       .pause(1000)
+      .click('#g_cfrm_btn_yes') //if there is confirmation
+      .pause(2000)
       .check_server_stopped(handles, 'Welcome to Express');  
   },
   'run_with_toolbar_and_check_tab' : function (browser) {

@@ -1,4 +1,4 @@
-var project_name = 'php_default2';
+var project_name = 'php_default';
 var plugin = 'php';
 var detail_type = 'default';
 var server_url = '';
@@ -50,6 +50,8 @@ module.exports = {
     browser
       .click('#gLayoutServer_' + tab_name + ' span')
       .pause(1000)
+      .click('#g_cfrm_btn_yes') //if there is confirmation
+      .pause(2000)
       .check_server_stopped(handles, server_msg);  
   },
   'run_with_toolbar_and_check_tab' : function (browser) {
