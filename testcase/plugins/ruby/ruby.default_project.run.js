@@ -1,26 +1,23 @@
+var project_name = 'ruby_test';
+var plugin = 'ruby';
+var detail_type = 'ruby';
+var default_msg = 'Hello World!';
+
 var create_test_file = function (browser) {
   var random = Math.random();
   browser
-    .execute(function(random) {
+    .execute(function(random, default_msg) {
       var context = 
-        'function main(){' +
-        ' console.log("Hello Goorm!' + random + '");' +
-        '}' +
-        'main();';
+        'puts "' + default_msg + random + '"';
       var active = core.module.layout.workspace.window_manager.active_window;
         core.module.layout.workspace.window_manager.window[active].editor.editor.setValue(context);
-    }, [random])
+    }, [random, default_msg])
     .pause(3000)
     .click('button[action=save_file]')
     .pause(1000)
 
   return random
 };
-
-var project_name = 'nodejs_test4';
-var plugin = 'nodejs';
-var detail_type = 'default';
-var default_msg = 'Hello Goorm!'
 
 module.exports = {
   'goorm_login' : function (browser) {
@@ -44,7 +41,8 @@ module.exports = {
       .run_project('toolbar')
       .verify.containsText('#run_inner_content', default_msg + random)
       .pause(2000)
-  },'run_with_keyboard' : function (browser) {
+  },
+  'run_with_keyboard' : function (browser) {
     var random = create_test_file(browser);
     browser
       .run_project('keyboard')
