@@ -3,7 +3,7 @@ exports.command = function(file_name) {
 		.click('.jstree-node[id$="' + file_name + '"] a')
 		.click('#main-menu-file .dropdown-toggle')
 		.waitForElementPresent('#main-menu-file.open', 2000)
-		.click('[action=delete_file]')
+		.click('#main-menu-file [action=delete_file]')
 		.waitForElementVisible('#dlg_confirmation', 2000)
 		.click('#g_cfrm_btn_yes')
 		.waitForElementNotVisible('#dlg_confirmation', 10000)

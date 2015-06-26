@@ -169,7 +169,6 @@ module.exports = {
   },
   'status': function (browser) {
     browser
-      .click('#project_treeview [aria-level="1"] > a')
       .windowSize('current', 1280, 768)
       .waitForElementVisible('#main_scm_toolbar', 2000)
       .click('#main_scm_toolbar [action=scm_commit]')
@@ -207,30 +206,27 @@ module.exports = {
       .waitForElementNotVisible('#dlg_loading_bar', 10000)
       .verify.containsText('#svn_log_tab .scm_selected_path', '/')
       .verify.elementPresent('#svn_log_contents tr')
+      .click('#dlg_svn .close')
+      .waitForElementNotVisible('#dlg_svn', 2000)
+  },
+  'blame': function (browser) {
+    browser
+      .click('#project_treeview [aria-level="2"]:first-child .jstree-ocl')
+      .waitForElementVisible('#project_treeview [aria-level="2"]:first-child .jstree-children', 2000)
+      .click('#project_treeview [aria-level="2"]:first-child [file_type]:first-child > a')
+      .click('#main_scm_toolbar .scm_update')
+      .waitForElementVisible('#dlg_svn', 2000)
+      .click('#svn_blame')
+      .waitForElementVisible('#svn_blame_tab', 2000)
+      .waitForElementNotVisible('#dlg_loading_bar', 10000)
+      .verify.containsText('#svn_blame_tab .scm_selected_path', '/')
+      .verify.elementPresent('#blame_container .CodeMirror-code')
+  },
+  'diff': function (browser) {
+    browser
+      .click('#svn_diff')
+      .waitForElementVisible('#svn_diff_tab', 2000)
+      .waitForElementNotVisible('#dlg_loading_bar', 10000)
+      .verify.containsText('#svn_diff_tab .scm_selected_path', '/')
   }
-  // 'open_file': function (browser) {
-  //   // body...
-  // },
-  // 'blame': function (browser) {
-  //   browser
-  //     .click('#project_treeview [aria-level="2"]:first-child .jstree-ocl')
-  //     .waitForElementVisible('#project_treeview [aria-level="2"]:first-child .jstree-children', 2000)
-  //     .click('#project_treeview [aria-level="2"]:first-child [file_type]:first-child > a')
-  //     .click('#child_svn_menu [action=scm_blame]')
-  //     .waitForElementVisible('#dlg_svn', 2000)
-  //     .waitForElementVisible('#svn_blame_tab', 2000)
-  //     .waitForElementNotVisible('#dlg_loading_bar', 10000)
-  //     .verify.containsText('#svn_blame_tab .scm_selected_path', '/')
-  //     .verify.elementPresent('#blame_container .CodeMirror-code')
-  //     .click('#dlg_svn .close')
-  //     .waitForElementNotVisible('#dlg_svn', 2000)
-  // },
-  // 'diff': function (browser) {
-  //   browser
-  //     .click('#child_svn_menu [action=scm_diff]')
-  //     .waitForElementVisible('#dlg_svn', 2000)
-  //     .waitForElementVisible('#svn_diff_tab', 2000)
-  //     .waitForElementNotVisible('#dlg_loading_bar', 10000)
-  //     .verify.containsText('#svn_diff_tab .scm_selected_path', '/')
-  // }
 }

@@ -167,7 +167,6 @@ module.exports = {
   },
   'status': function (browser) {
     browser
-      .click('#project_treeview [aria-level="1"] > a')
       .windowSize('current', 1280, 768)
       .waitForElementVisible('#main_scm_toolbar', 2000)
       .click('#main_scm_toolbar [action=scm_commit]')
@@ -193,5 +192,31 @@ module.exports = {
       .waitForElementNotVisible('#dlg_loading_bar', 10000)
       .verify.containsText('#git_log_tab .scm_selected_path', '/')
       .verify.elementPresent('#git_log_contents tr')
+      .click('#dlg_git .close')
+      .waitForElementNotVisible('#dlg_git', 2000)
+  },
+  'blame': function (browser) {
+    var self = this;
+
+    browser
+      .click('#project_treeview [file_type] > a')
+      .getText('#project_treeview [file_type] > a', function (result) {
+        self.file_name = result.value;
+
+        this.click('#main_scm_toolbar .scm_pull')
+            .waitForElementVisible('#dlg_git', 2000)
+            .click('#git_blame')
+            .waitForElementVisible('#git_blame_tab', 2000)
+            .waitForElementNotVisible('#dlg_loading_bar', 10000)
+            .verify.containsText('#git_blame_tab .scm_selected_path', result.value)
+            .verify.elementPresent('#blame_container .CodeMirror-code')
+      })
+  },
+  'diff': function (browser) {
+    browser
+      .click('#git_diff')
+      .waitForElementVisible('#git_diff_tab', 2000)
+      .waitForElementNotVisible('#dlg_loading_bar', 10000)
+      .verify.containsText('#git_diff_tab .scm_selected_path', this.file_name)
   }
 }
