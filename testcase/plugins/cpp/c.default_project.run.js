@@ -1,4 +1,4 @@
-var project_name = 'cpp_test90';
+var project_name = 'c_test';
 var plugin = 'cpp';
 var detail_type = 'c';
 var default_msg = 'Hello, goorm!';
@@ -33,60 +33,27 @@ module.exports = {
   },
   'run_with_menu' : function (browser) {
     browser
-      .waitForElementPresent('img.user_profile_image', 10000)
-      .waitForElementNotVisible('#dlg_loading_bar', 10000)
-      .pause(3000)
-      .click('#main-menu-project a[class=dropdown-toggle]')
-      .pause(1000)
-      .click('#main-menu-project a[action=run]')
-      .pause(1000)
-      .click('#g_cfrm_btn_yes') //if there is confirmation
-      .pause(4000)
+      .run_project('menu')
       .verify.containsText('#run_inner_content', default_msg)
       .pause(3000)
   },
   'run_with_toolbar' : function (browser) {
-    browser
-      .waitForElementPresent('img.user_profile_image', 10000)
-      .waitForElementNotVisible('#dlg_loading_bar', 10000)
     var random = create_test_file(browser);
     browser
-      .click('#main_project_toolbar button[action=run]')
-      .pause(1000)
-      .click('#g_cfrm_btn_yes') //if there is confirmation
-      .pause(4000)
+      .run_project('toolbar')
       .verify.containsText('#run_inner_content', default_msg + random)
       .pause(2000)
   },
   'run_with_keyboard' : function (browser) {
-    browser
-      .waitForElementPresent('img.user_profile_image', 10000)
-      .waitForElementNotVisible('#dlg_loading_bar', 10000)
     var random = create_test_file(browser);
     browser
-      .keys([browser.Keys.SHIFT, browser.Keys.F5])
-      .pause(1000)
-      .keys(browser.Keys.NULL)
-      .pause(1000)
-      .click('#g_cfrm_btn_yes') //if there is confirmation
-      .pause(4000)
+      .run_project('keyboard')
       .verify.containsText('#run_inner_content', default_msg + random)
       .pause(2000)       
   },
-    'delete_project' : function (browser) {
+  'delete_project' : function (browser) {
     browser
-      .waitForElementPresent('img.user_profile_image', 10000)
-      .waitForElementNotVisible('#dlg_loading_bar', 10000)
-      .click('#main-menu-project a[class=dropdown-toggle]')
-      .pause(1000)
-      .click('#main-menu-project a[action=delete_project]')
-      .pause(1000)
-      .click('#selector_' + project_name)
-      .click('#g_dp_btn_ok')
-      .waitForElementVisible('#dlg_confirmation', 50000)
-      .click('#g_cfrm_btn_yes')
-      .waitForElementVisible('#dlg_notice', 10000)
-      .click('#g_nt_btn_ok')
+      .delete_project(project_name)
       .end();
   }
 };
