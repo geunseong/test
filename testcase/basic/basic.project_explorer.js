@@ -31,7 +31,7 @@ module.exports = {
 			.waitForElementVisible('#project_treeview', 10000)
 			.verify.visible('#project_treeview')
 	},
-	'make_file_from_tree' : function (browser) {
+	'make_folder_from_tree' : function (browser) {
 		browser
 			.moveToElement('#project_treeview > ul > li.jstree-node > a.jstree-anchor:first-of-type', 30, 10)
 			.mouseButtonClick('right')
@@ -48,7 +48,38 @@ module.exports = {
 			.getAttribute('#project_treeview > ul > li.jstree-node:first-of-type', 'path', function(result) {
 				this.assert.equal(typeof result, 'object');
 				this.assert.elementPresent('#project_treeview > ul > li > ul.jstree-children > li[path="' + result.value + '/test' + t + '"]')
+			});
+	},
+	'make_file_from_tree_empty_space': function (browser) {
+		browser
+			.getElementSize('#project_explorer', function(result) {
+				this.assert.equal(typeof result, 'object');
+				this.assert.equal(result.status, 0);
+				var explorer_h = result.value.height;
+				this.getElementSize('#project_treeview', function(_result) {
+					this.assert.equal(typeof _result, 'object');
+					this.assert.equal(_result.status, 0);
+					var treeview_h = _result.value.height;
+					if(explorer_h > treeview_h) {
+						this
+							.moveToElement('#project_explorer', result.value.width/2, (explorer_h - treeview_h)/2)
+							.mouseButtonClick('right')
+							.waitForElementVisible('#project\\.explorer_context', 3000)
+							.click('#project\\.explorer_context a[action="new_file_file"]')
+							.waitForElementVisible('#dlg_new_file', 3000);
+						var t = new Date().getTime();
+						this.setValue('#file_new_target_name', t + '.nightwatch')
+							.click('#g_nf_btn_ok')
+							.waitForElementNotVisible('#dlg_new_file', 3000)
+							.pause(1000)
+							.getAttribute('#project_treeview > ul > li.jstree-node:first-of-type', 'path', function(result) {
+								this.assert.equal(typeof result, 'object');
+								this.assert.elementPresent('#project_treeview > ul > li > ul.jstree-children > li[path="' + result.value + '/' + t + '.nightwatch"]');
+							});
+					}
+				});
 			})
+			.pause(1000)
 			.end();
 	}
 }
