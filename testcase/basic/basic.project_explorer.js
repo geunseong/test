@@ -106,6 +106,20 @@ module.exports = {
 							.click('#g_cfrm_btn_no');
 					}
 				});
+			});
+	},
+	'overwrite_file' : function (browser) {
+		browser
+			.waitForElementNotVisible('#dlg_confirmation', 3000)
+			.click('#g_nf_btn_ok')
+			.waitForElementVisible('#dlg_confirmation', 3000)
+			.click('#g_cfrm_btn_yes')
+			.waitForElementNotVisible('#dlg_confirmation', 5000)
+			.waitForElementNotVisible('#dlg_new_file', 5000)
+			.pause(2000)
+			.getAttribute('#project_treeview > ul > li.jstree-node:first-of-type', 'path', function(result) {
+				this.assert.equal(typeof result, 'object');
+				this.assert.elementPresent('#project_treeview > ul > li > ul.jstree-children > li[path="' + result.value + '/' + saved_filename + '"]');
 			})
 			.end();
 	}
