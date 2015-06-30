@@ -10,7 +10,7 @@ exports.command = function(project_name) {
 		.click('#g_dp_btn_ok')
 		.waitForElementVisible('#dlg_confirmation', 50000)
 		.click('#g_cfrm_btn_yes')
-		.waitForElementVisible('#dlg_notice', 10000)
+		.waitForElementVisible('#dlg_notice', 30000)
 		.click('#g_nt_btn_ok')
 	return this;
 };
