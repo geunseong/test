@@ -1,88 +1,43 @@
+var project_name = 'java_test1234';
+var plugin = 'java';
+var detail_type = 'java_console';
+var main_file = '/src/project/main.class'
 
-  'java_project_create2' : function (browser) {
+module.exports = {
+  'goorm_login' : function (browser) {
+    var data = browser.globals;
     browser
-      .waitForElementPresent('img.user_profile_image', 1000000)
-      .waitForElementNotVisible('#dlg_loading_bar', 1000000)
-      .pause(3000)
-      .click('#main_file_toolbar button[action=new_project]')
-      .waitForElementVisible('#dlg_new_project', 1000000)
-      .assert.cssClassPresent('a.project_wizard_first_button', 'active')
-      .click('#new_project_template div.project_wizard_second_button')
-      .waitForElementVisible('div.project_wizard_second_button.selected_button', 1000000)
-      .click('#g_np_btn_next')
-      .waitForElementVisible('#input_project_name', 1000000)
-      .setValue('#input_project_name', 'java_test')
-      .click('#g_np_btn_ok_template')
-      .waitForElementNotVisible('#dlg_new_project', 1000000)
-      .waitForElementNotVisible('#dlg_loading_bar', 1000000)
-      .verify.containsText('#selected_project_name', 'java_test')
+      .run_ide(data.username, data.password, plugin);
   },
-  'java_project_build_toolbar' : function (browser) {
+  'create_default_project' : function (browser) {
     browser
-      .waitForElementPresent('img.user_profile_image', 1000000)
-      .waitForElementNotVisible('#dlg_loading_bar', 1000000)
+      .new_project(plugin, detail_type, project_name)
+  },
+  'build_project' : function (browser) {
+    browser
       .click('#main_project_toolbar button[action=build_project]')
-      .waitForElementVisible('#server_tab_build', 1000000)
-      .waitForElementVisible('#dlg_toast', 1000000)
+      .waitForElementVisible('#server_tab_build', 100000)
+      .waitForElementVisible('#dlg_toast', 100000)
       .verify.containsText('#server_tab_build .inner_content', 'Build Complete')
+      .pause(1000)
+      .click('#server_tab_build .clear_build_log_btn')
+      .pause(1000)
       .click('#server_tab_build .rebuild_btn')
-      .waitForElementVisible('#dlg_toast', 1000000)
+      .waitForElementVisible('#dlg_toast', 100000)
       .verify.containsText('#server_tab_build .inner_content', 'Build Complete')
       .click('#gLayoutServer_build .hide_tab')
-  },
-  'java_project_run_toolbar2' : function (browser) {
-    browser
-      .waitForElementPresent('img.user_profile_image', 1000000)
-      .waitForElementNotVisible('#dlg_loading_bar', 1000000)
-      .click('#main_project_toolbar button[action=run]')
-      .waitForElementVisible('#gLayoutServer_run', 100000)
+      .pause(1000)
+      .keys([browser.Keys.F5])
+      .keys(browser.Keys.NULL)
       .waitForElementVisible('#dlg_toast', 100000)
-      .verify.containsText('#server_tab_run', 'Hello, goorm!')
-      .click('#gLayoutServer_run .hide_tab')
+      .verify.containsText('#server_tab_build .inner_content', 'Build Complete')
+      .click('#gLayoutServer_build .hide_tab')
+      .pause(1000)  
   },
-  'delete_file': function(browser) {
-    var file_name = 'main.class';
-
+  'delete_project' : function (browser) {
     browser
-      .click('.jstree-ocl')
-      .click('.jstree-ocl')
-      .click('.jstree-ocl')
-      .click('.jstree-node[id$="' + file_name + '"] a')
-      .click('#main-menu-file .dropdown-toggle')
-      .waitForElementPresent('#main-menu-file.open', 2000)
-      .click('[action=delete_file]')
-      .waitForElementVisible('#dlg_confirmation', 2000)
-      .click('#g_cfrm_btn_yes')
-      .waitForElementNotVisible('#dlg_confirmation', 10000)
-      .waitForElementNotPresent('.jstree-node[id$="' + file_name + '"]', 2000)
-  },
-  'java_project_run_menu3' : function (browser) {
-    browser
-      .waitForElementPresent('img.user_profile_image', 100000)
-      .waitForElementNotVisible('#dlg_loading_bar', 100000)
-      .click('#main-menu-project a[class=dropdown-toggle]')
-      .waitForElementVisible('a[action=run]', 100000)
-      .click('#main-menu-project a[action=run]')
-      .waitForElementVisible('#dlg_confirmation', 100000)
-      .click('#g_cfrm_btn_yes')
-      .waitForElementVisible('#gLayoutServer_run', 100000)
-      .waitForElementVisible('#dlg_toast', 100000)
-      .verify.containsText('#server_tab_run', 'Hello, goorm!')
-      .click('#gLayoutServer_run .hide_tab')
-  },
-  'java_project_delete2' : function (browser) {
-    browser
-      .waitForElementPresent('img.user_profile_image', 100000)
-      .waitForElementNotVisible('#dlg_loading_bar', 100000)
-      .click('#main-menu-project a[class=dropdown-toggle]')
-      .waitForElementVisible('a[action=delete_project]', 100000)
-      .click('#main-menu-project a[action=delete_project]')
-      .waitForElementVisible('#dlg_delete_project', 100000)
-      .click('#selector_java_test')
-      .click('#g_dp_btn_ok')
-      .waitForElementVisible('#dlg_confirmation', 100000)
-      .click('#g_cfrm_btn_yes')
-      .waitForElementVisible('#dlg_notice', 100000)
-      .click('#g_nt_btn_ok')
-      .end()
+      .delete_project(project_name)
+      .end();
   }
+
+}
