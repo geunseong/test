@@ -65,7 +65,7 @@ module.exports = {
 					var treeview_h = _result.value.height;
 					if(explorer_h > treeview_h) {
 						this
-							.moveToElement('#project_explorer', result.value.width/2, (explorer_h - treeview_h)/2)
+							.moveToElement('#project_explorer', result.value.width/2, treeview_h + (explorer_h - treeview_h)/2)
 							.mouseButtonClick('right')
 							.waitForElementVisible('#project\\.explorer_context', 3000)
 							.click('#project\\.explorer_context a[action="new_file_file"]')
@@ -143,7 +143,47 @@ module.exports = {
 			.waitForElementVisible('#dlg_confirmation', 3000)
 			.click('#g_cfrm_btn_yes')
 			.waitForElementNotVisible('#dlg_confirmation', 3000)
-			.verify.elementNotPresent('#project_treeview li.jstree-node[id$="' + saved_filename + '"]')
+			.verify.elementNotPresent('#project_treeview li.jstree-node[id$="' + saved_filename + '"]');
+	},
+	'rename_folder_from_tree': function(browser) {
+		browser
+			.moveToElement('#project_treeview > ul > li.jstree-node > a.jstree-anchor:first-of-type', 30, 10)
+			.mouseButtonClick('right')
+			.waitForElementVisible('#project\\.explorer\\.folder_context', 1000)
+			.moveToElement('#project\\.explorer\\.folder_context a[action="new_context"]', 70, 10)
+			.click('#submenu_new a[action="new_file_folder_context"]')
+			.waitForElementVisible('#dlg_new_folder', 2000);
+		var t = new Date().getTime();
+		browser
+			.setValue('#folder_new_target_name', 'test' + t)
+			.click('#g_nfo_btn_ok')
+			.waitForElementNotVisible('#dlg_new_folder', 5000)
+			.pause(2000)
+			.moveToElement('#project_treeview li.jstree-node[id$="test' + t + '"]', 30, 10)
+			.mouseButtonClick('left')
+			.mouseButtonClick('right')
+			.waitForElementVisible('#project\\.explorer\\.folder_context', 2000)
+			.click('#project\\.explorer\\.folder_context a[action="rename_context"]')
+			.waitForElementVisible('#dlg_rename_file', 3000)
+			.clearValue('#input_rename_new_filename')
+			.setValue('#input_rename_new_filename', '<script>')
+			.click('#g_rf_btn_ok')
+			.waitForElementVisible('#dlg_alert', 3000)
+			.click('#g_alert_btn_ok')
+			.waitForElementNotVisible('#dlg_alert', 3000)
+			.clearValue('#input_rename_new_filename')
+			.setValue('#input_rename_new_filename', saved_foldername)
+			.click('#g_rf_btn_ok')
+			.waitForElementVisible('#dlg_alert', 3000)
+			.click('#g_alert_btn_ok')
+			.clearValue('#input_rename_new_filename');
+		t = new Date().getTime();
+		browser
+			.setValue('#input_rename_new_filename', 'test2' + t)
+			.pause(500)
+			.click('#g_rf_btn_ok')
+			.waitForElementNotVisible('#dlg_rename_file', 5000)
+			.pause(1000)
 			.end();
 	}
 }
