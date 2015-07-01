@@ -14,6 +14,14 @@ module.exports = {
       .new_project(plugin, detail_type, project_name)
       .pause(2000)
   },
+  'check_output_tab_not_visible' : function (browser) {
+    browser
+      .click('#gLayoutTab_Debug')
+      .pause(2000)
+      .click('button[action=save_file]')
+      .pause(2000)
+      .verify.hidden('#output_tab_' + plugin)
+  },
   'make_error_and_warning_file' : function (browser) {
     browser
       .execute(function() {
@@ -30,6 +38,11 @@ module.exports = {
       .pause(3000)
       .click('button[action=save_file]')
       .pause(2000);
+  },
+  'check_output_tab_visible' : function (browser) {
+    browser
+      .verify.visible('#output_tab_' + plugin)
+      .pause(1000)
   },
   'check_output_exist' : function (browser) {
     browser
