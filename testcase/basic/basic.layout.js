@@ -23,8 +23,7 @@ module.exports = {
             .resizeWindow(900, 700)
             .pause(1000)
             .verify.visible('#toolbar_more_button')
-            .pause(2000)
-    }
+    },
     'goorm_end': function(browser) {
         browser.end();
     }
