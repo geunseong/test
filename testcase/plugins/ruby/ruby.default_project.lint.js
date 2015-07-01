@@ -1,7 +1,7 @@
-var project_name = 'c_test';
-var plugin = 'cpp';
-var detail_type = 'c';
-var file_name = 'main.c';
+var project_name = 'ruby_test';
+var plugin = 'ruby';
+var detail_type = 'ruby';
+var file_name = 'index.rb';
 
 module.exports = {
   'goorm_login' : function (browser) {
@@ -18,7 +18,7 @@ module.exports = {
     browser
       .click('#gLayoutTab_Debug')
       .pause(2000)
-      .click('button[action=build_project]')
+      .click('button[action=save_file]')
       .pause(2000)
       .verify.hidden('#output_tab_' + plugin)
   },
@@ -26,17 +26,14 @@ module.exports = {
     browser
       .execute(function() {
         var context = 
-          '#include <stdio.h>\n\n' +
-          'int main(int argc, char* argv[]) {\n' +
-          'printf("a");\n' +
-          'scanf(1);\n' +
-          'return 0;\n' +
-          '}\n';
+          '\nsdfgsdf\n' +
+          'a=6\n' +
+          'puts "Hello World!"\n';
         var active = core.module.layout.workspace.window_manager.active_window;
           core.module.layout.workspace.window_manager.window[active].editor.editor.setValue(context);
       })
       .pause(3000)
-      .click('button[action=build_project]')
+      .click('button[action=save_file]')
       .pause(2000);
   },
   'check_output_tab_visible' : function (browser) {
@@ -58,9 +55,9 @@ module.exports = {
   },
   'check_error_box_and_output' : function (browser) {
     browser
-      .verify.containsText('#output_tab_' + plugin + ' tbody', 'integer without a cast')
-      .moveToElement('.fa-exclamation-triangle', 3, 3)
-      .verify.containsText('.error_message_box', 'integer without a cast');
+      .verify.containsText('#output_tab_' + plugin + ' tbody', 'undefined method')
+      .moveToElement('.fa-times-circle', 3, 3)
+      .verify.containsText('.error_message_box', 'undefined method');
   },
   'check_line' : function (browser) {
     browser
