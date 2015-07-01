@@ -18,6 +18,13 @@ module.exports = {
             .verify.visible('#goorm-mainmenu')
             .verify.visible('#goorm_main_toolbar')
     },
+    'show_more_toolbar': function(browser) {
+        browser
+            .resizeWindow(900, 700)
+            .pause(1000)
+            .verify.visible('#toolbar_more_button')
+            .pause(2000)
+    }
     'goorm_end': function(browser) {
         browser.end();
     }
