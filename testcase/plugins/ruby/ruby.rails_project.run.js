@@ -2,8 +2,8 @@ var project_name = 'ruby_rails';
 var plugin = 'ruby';
 var detail_type = 'rubyonrails';
 var tab_name = 'ruby_rubyonrails';
-var console_msg = 'Starting development server'; //when server running
-var server_msg = 'It worked!'; //when server running
+var console_msg = 'HTTPServer#start'; //when server running
+var server_msg = 'You’re riding Ruby on Rails!'; //when server running
 var handles;
 
 module.exports = {
@@ -15,6 +15,7 @@ module.exports = {
   'create_default_project' : function (browser) {
     browser
       .new_project(plugin, detail_type, project_name)
+      .waitForElementPresent('[path$="' + project_name + '/bin"]', 150000, false)
   },
   'run_with_toolbar' : function (browser) {
     browser
