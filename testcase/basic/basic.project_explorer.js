@@ -131,7 +131,19 @@ module.exports = {
 			.waitForElementNotVisible('#dlg_new_folder', 5000)
 			.waitForElementVisible('#dlg_alert', 3000)
 			.click('#g_alert_btn_ok')
-			.pause(2000)
+			.waitForElementNotVisible('#dlg_alert', 3000)
+			.pause(1000);
+	},
+	'delete_file_from_tree': function(browser) {
+		browser
+			.moveToElement('#project_treeview li.jstree-node[id$="' + saved_filename + '"]', 30, 10)
+			.mouseButtonClick('right')
+			.waitForElementVisible('#project\\.explorer\\.file_context', 2000)
+			.click('#project\\.explorer\\.file_context a[action="delete_context"]')
+			.waitForElementVisible('#dlg_confirmation', 3000)
+			.click('#g_cfrm_btn_yes')
+			.waitForElementNotVisible('#dlg_confirmation', 3000)
+			.verify.elementNotPresent('#project_treeview li.jstree-node[id$="' + saved_filename + '"]')
 			.end();
 	}
 }
