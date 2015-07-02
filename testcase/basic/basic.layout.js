@@ -5,24 +5,33 @@ module.exports = {
     },
     'toggle_top': function(browser) {
         browser
+            .pause(2000)
             .verify.visible('#goorm-mainmenu')
             .verify.visible('#goorm_main_toolbar')
             .click('div.ui-layout-toggler-north')
-            .pause(1000)
+            .pause(2000)
             .verify.hidden('#goorm_main_toolbar')
             .click('div.ui-layout-toggler-north')
-            .pause(1000)
+            .pause(2000)
             .verify.hidden('#goorm_top')
             .click('div.ui-layout-toggler-north')
-            .pause(1000)
+            .pause(2000)
             .verify.visible('#goorm-mainmenu')
             .verify.visible('#goorm_main_toolbar')
     },
     'show_more_toolbar': function(browser) {
         browser
-            .resizeWindow(900, 700)
-            .pause(1000)
-            .verify.visible('#toolbar_more_button')
+            .isVisible('#main_debug_toolbar', function(result) {
+                if (result.value === true) {
+                    this
+                        .resizeWindow(900, 700)
+                        .pause(3000)
+                        .verify.visible('#toolbar_more_button')
+                        .maximizeWindow()
+                        .pause(3000)
+                        .verify.hidden('#toolbar_more_button');
+                }
+            });
     },
     'goorm_end': function(browser) {
         browser.end();
