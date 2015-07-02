@@ -33,7 +33,13 @@ module.exports = {
                 }
             });
     },
+    'terminal_ls': function(browser) {
+        browser
+            .click('#terminal > div > span')
+            .keys(['l', 's', browser.Keys.ENTER])
+            .pause(3000)
+    },
     'goorm_end': function(browser) {
-        browser.end();
+        // browser.end();
     }
 }
