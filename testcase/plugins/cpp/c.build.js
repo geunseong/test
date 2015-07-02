@@ -1,6 +1,7 @@
-var project_name = 'c_test123';
-var plugin = 'cpp';
-var detail_type = 'c';
+var current = __filename.split('/');
+var plugin = current[current.length - 2];
+var detail_type = current[current.length - 1].split('.')[0];
+var project_name = plugin + detail_type + Math.floor(Math.random() * 100000);
 
 module.exports = {
   'goorm_login' : function (browser) {
@@ -15,21 +16,21 @@ module.exports = {
   'build_project' : function (browser) {
     browser
       .build_project('menu')
-      .pause(2000)
+      .pause(3000)
       .verify.containsText('#server_tab_build .inner_content', 'Build Complete')
       .click('#server_tab_build .clear_build_log_btn')
       .build_project('rebuild')
-      .pause(2000)
+      .pause(3000)
       .verify.containsText('#server_tab_build .inner_content', 'Build Complete')
       .click('#gLayoutServer_build .hide_tab')
       .pause(1000)
       .build_project('toolbar')
-      .pause(2000)
+      .pause(3000)
       .verify.containsText('#server_tab_build .inner_content', 'Build Complete')
       .click('#gLayoutServer_build .hide_tab')
       .pause(1000)
       .build_project('keyboard')
-      .pause(2000)
+      .pause(3000)
       .verify.containsText('#server_tab_build .inner_content', 'Build Complete')
       .click('#gLayoutServer_build .hide_tab')
   },
@@ -49,7 +50,7 @@ module.exports = {
       .pause(1000)
       .click('#main-menu-project a[action=build_configuration]')
       .waitForElementVisible('#dlg_project_property', 20000, false)
-    change('main')
+    change('index')
     change('source_path')
     change('build_path')
     browser
@@ -58,10 +59,35 @@ module.exports = {
       .click('#g_pp_btn_ok')
       .pause(1500)
   },
+  'modify_file' : function (browser) {
+    browser
+      .getAttribute('.g_windows_tab_li.active .tab_title', 'filepath', function(result) {
+        var path = result.value;
+        browser
+          .getAttribute('.g_windows_tab_li.active .tab_title', 'filename', function(result) {
+            path += result.value;
+            path = path.substring(path.indexOf('/') + 1);
+            browser
+              .execute(function() {
+                var context = 
+                  'abcdefg';
+                var active = core.module.layout.workspace.window_manager.active_window;
+                  core.module.layout.workspace.window_manager.window[active].editor.editor.setValue(context);
+              })
+              .pause(3000)
+              .build_project()
+              .pause(1000)
+              .click('.g_windows_tab_li.active .tab_close_button')
+              .pause(1000)
+              .open_file(path.substring(path))
+              .pause(3000)
+              .verify.containsText('.ui-dialog-content[path$="' + path + '"] .CodeMirror-lines', 'abcdefg')
+          })
+      })
+  },
   'delete_project' : function (browser) {
     browser
       .delete_project(project_name)
       .end();
   }
-
 }
