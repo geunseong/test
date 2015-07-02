@@ -1,6 +1,6 @@
-var project_name = 'java_test12347777';
-var plugin = 'java';
-var detail_type = 'java_console';
+var project_name = 'c_test123';
+var plugin = 'cpp';
+var detail_type = 'c';
 
 module.exports = {
   'goorm_login' : function (browser) {
