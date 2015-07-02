@@ -50,7 +50,7 @@ module.exports = {
       .pause(1000)
       .click('#main-menu-project a[action=build_configuration]')
       .waitForElementVisible('#dlg_project_property', 20000, false)
-    change('index')
+    change('main')
     change('source_path')
     change('build_path')
     browser
