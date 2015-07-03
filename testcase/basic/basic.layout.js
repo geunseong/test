@@ -33,6 +33,21 @@ module.exports = {
                 }
             });
     },
+    'window_perspectives_left': function(browser) {
+        browser
+            .verify.visible('#goorm_left')
+            .click('#main-menu-window')
+            .waitForElementPresent('#main-menu-window.open', 2000)
+            .moveToElement('#parent_perspectives_menu', 50, 10)
+            .waitForElementVisible('#child_perspectives_menu', 2000)
+            .click('#child_perspectives_menu a[action="left_layout_toggle"]')
+            .pause(2000)
+            .verify.hidden('#goorm_left')
+            .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'l'])
+            .keys(browser.Keys.NULL)
+            .pause(2000)
+            .verify.visible('#goorm_left')
+    },
     'goorm_end': function(browser) {
         browser.end();
     }
