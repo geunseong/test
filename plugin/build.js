@@ -2,7 +2,7 @@ var fs = require('fs');
 var data;
 var difference;
 
-var per_plugin = false;
+var per_plugin = true;
 
 var change_difference = function (template_name, difference) {
 	var data = fs.readFileSync(__dirname + '/templates/' + template_name, 'utf8');
