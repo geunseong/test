@@ -35,6 +35,7 @@ module.exports = {
     // },
     'window_perspectives_left': function(browser) {
         browser
+            .pause(1000)
             .verify.visible('#goorm_left')
             .click('#main-menu-window')
             .waitForElementPresent('#main-menu-window.open', 2000)
@@ -105,6 +106,56 @@ module.exports = {
             .keys(browser.Keys.NULL)
             .pause(1000)
             .verify.visible('#gLayoutTab_document_viewer');
+    },
+    'show_history': function(browser) {
+        browser
+            .click('#main-menu-window')
+            .waitForElementPresent('#main-menu-window.open', 2000)
+            .moveToElement('#parent_perspectives_menu', 50, 10)
+            .waitForElementVisible('#child_perspectives_menu', 2000)
+            .click('#child_perspectives_menu a[action="right_history_show"]')
+            .pause(1000)
+            .verify.hidden('#gLayoutTab_History')
+            .keys([browser.Keys.ALT, '3'])
+            .keys(browser.Keys.NULL)
+            .pause(1000)
+            .verify.visible('#gLayoutTab_History');
+    },
+    'show_outline': function(browser) {
+        browser
+            .click('#main-menu-window')
+            .waitForElementPresent('#main-menu-window.open', 2000)
+            .moveToElement('#parent_perspectives_menu', 50, 10)
+            .waitForElementVisible('#child_perspectives_menu', 2000)
+            .isVisible('#child_perspectives_menu a[action="right_outline_show"]', function(result) {
+                console.log('result:', result);
+                if(result.value === true) {
+                    this.click('#child_perspectives_menu a[action="right_outline_show"]')
+                        .pause(1000)
+                        .verify.hidden('#gLayoutTab_Outline')
+                        .keys([browser.Keys.ALT, '4'])
+                        .keys(browser.Keys.NULL)
+                        .pause(1000)
+                        .verify.visible('#gLayoutTab_Outline');
+                } else {
+                    this.click('#main-menu-window')
+                        .pause(1000);
+                }
+            })
+    },
+    'show_bookmark': function(browser) {
+        browser
+            .click('#main-menu-window')
+            .waitForElementPresent('#main-menu-window.open', 2000)
+            .moveToElement('#parent_perspectives_menu', 50, 10)
+            .waitForElementVisible('#child_perspectives_menu', 2000)
+            .click('#child_perspectives_menu a[action="right_bookmark_show"]')
+            .pause(1000)
+            .verify.hidden('#gLayoutTab_Bookmark')
+            .keys([browser.Keys.ALT, '5'])
+            .keys(browser.Keys.NULL)
+            .pause(1000)
+            .verify.visible('#gLayoutTab_Bookmark');
     },
     'goorm_end': function(browser) {
         browser.end();
