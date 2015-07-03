@@ -30,7 +30,7 @@ module.exports = {
       .click('#gLayoutTab_Debug')
       .pause(2000)
       .click('button[action=' + save_with + ']')
-      .pause(2000)
+      .pause(10000)
       .verify.hidden('#output_tab_' + plugin)
   },
   'make_error_and_warning_file' : function (browser) {
@@ -41,7 +41,7 @@ module.exports = {
       }, [context])
       .pause(3000)
       .click('button[action=' + save_with + ']')
-      .pause(2000);
+      .pause(10000);
   },
   'check_output_tab_visible' : function (browser) {
     browser
