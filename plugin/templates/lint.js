@@ -44,9 +44,12 @@ module.exports = {
       .pause(10000);
   },
   'check_output_tab_visible' : function (browser) {
-    browser
-      .verify.visible('#output_tab_' + plugin)
-      .pause(1000)
+    if (save_with === 'build_project') {
+      browser
+        .verify.visible('#output_tab_' + plugin)
+        .pause(1000)
+    }
+
   },
   'check_output_exist' : function (browser) {
     browser
