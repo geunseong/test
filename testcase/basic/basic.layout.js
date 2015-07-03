@@ -225,6 +225,30 @@ module.exports = {
             .verify.visible('a[id^="gLayoutOutput"]')
             .verify.visible('div.output_tab');
     },
+    'default_layout': function(browser) {
+        browser
+            .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'r'])
+            .keys(browser.Keys.NULL)
+            .pause(1000)
+            .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'l'])
+            .keys(browser.Keys.NULL)
+            .pause(1000)
+            .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'b'])
+            .keys(browser.Keys.NULL)
+            .pause(1000)
+            .verify.hidden('#goorm_left')
+            .verify.hidden('#goorm_inner_layout_right')
+            .verify.hidden('#goorm_inner_layout_bottom')
+            .click('#main-menu-window')
+            .waitForElementPresent('#main-menu-window.open', 2000)
+            .moveToElement('#parent_perspectives_menu', 50, 10)
+            .waitForElementVisible('#child_perspectives_menu', 2000)
+            .click('#child_perspectives_menu a[action="layout_default"]')
+            .pause(2000)
+            .verify.visible('#goorm_left')
+            .verify.visible('#goorm_inner_layout_right')
+            .verify.visible('#goorm_inner_layout_bottom');
+    },
     'goorm_end': function(browser) {
         browser.end();
     }
