@@ -1,4 +1,8 @@
 exports.command = function(file_name) {
+	if(!file_name) {
+		file_name = 'new_file';
+	}
+
 	this
 		.click('#main_file_toolbar [action=new_file_file]')
 		.waitForElementVisible('#dlg_new_file', 2000)

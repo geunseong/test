@@ -14,7 +14,7 @@ exports.command = function(id, pw, plugin) {
         var callback = function () {
             self
                 .pause(5000)
-                .waitForElementVisible('#workspace', 180000)
+                .waitForElementVisible('#workspace', 200000)
                 .verify.urlEquals('http://ide.goorm.io/')
                 .waitForElementPresent('#terminal > div span[style="color:#8ae234;"]', 30000)
                 .waitForElementNotVisible('#dlg_loading_bar', 10000)
@@ -24,7 +24,7 @@ exports.command = function(id, pw, plugin) {
                         if (result.value == 'block') {
                             this.click('#g_cfrm_btn_yes')
                                 .pause(5000)
-                                .waitForElementVisible('#workspace', 120000)
+                                .waitForElementVisible('#workspace', 200000)
                                 .verify.urlEquals('http://ide.goorm.io/')
                                 .waitForElementPresent('#terminal > div span[style="color:#8ae234;"]', 30000)
                                 .waitForElementNotVisible('#dlg_loading_bar', 10000)
