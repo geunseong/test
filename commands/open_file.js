@@ -6,9 +6,11 @@ exports.command = function(file_name) {
 	for(var i = 0; i<file_name.length; i++) {
 		this
 			.waitForElementVisible('#file_open_files [filename="' + file_name[i] + '"]', 8000, false)
-			.moveToElement('#file_open_files [filename="' + file_name[i] + '"]', 30, 30)
+			.click('#file_open_files [filename="' + file_name[i] + '"]')
 			.pause(1000)
-			.doubleClick();
+			.keys([this.Keys.ENTER])
+			.pause(300)
+			.keys(this.Keys.NULL)
 	}
 	this
 		.click('#dlg_open_file .close') //if it didn't be closed yet 

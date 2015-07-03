@@ -9,12 +9,12 @@ exports.command = function(id, pw, plugin) {
         .click('button[id=btn-login]')
         .waitForElementVisible('div#ide-vm-list', 10000)
         .pause(3000)
-        .waitForElementNotPresent('button.btn-run-ide[disabled=disabled]', 10000);
+        .waitForElementNotPresent('button.btn-run-ide[disabled=disabled]', 20000);
 
         var callback = function () {
             self
                 .pause(5000)
-                .waitForElementVisible('#workspace', 120000)
+                .waitForElementVisible('#workspace', 180000)
                 .verify.urlEquals('http://ide.goorm.io/')
                 .waitForElementPresent('#terminal > div span[style="color:#8ae234;"]', 30000)
                 .waitForElementNotVisible('#dlg_loading_bar', 10000)
