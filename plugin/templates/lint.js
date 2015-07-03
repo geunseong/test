@@ -9,6 +9,11 @@ var check_type = 'TYPE';
 var nth = 'NTH';
 var error_msg = 'ERROR_MSG';
 
+var save_with = 'save_file';
+if (plugin === 'cpp' || plugin === 'java' || plugin === 'jsp' || plugin === '_net') {
+  save_with = 'build_project';
+}
+
 module.exports = {
   'goorm_login' : function (browser) {
     var data = browser.globals;
@@ -24,7 +29,7 @@ module.exports = {
     browser
       .click('#gLayoutTab_Debug')
       .pause(2000)
-      .click('button[action=build_project]')
+      .click('button[action=' + save_with + ']')
       .pause(2000)
       .verify.hidden('#output_tab_' + plugin)
   },
@@ -35,7 +40,7 @@ module.exports = {
           core.module.layout.workspace.window_manager.window[active].editor.editor.setValue(context);
       }, [context])
       .pause(3000)
-      .click('button[action=build_project]')
+      .click('button[action=' + save_with + ']')
       .pause(2000);
   },
   'check_output_tab_visible' : function (browser) {
