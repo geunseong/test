@@ -79,6 +79,22 @@ module.exports = {
             .pause(2000)
             .verify.visible('#goorm_inner_layout_bottom');
     },
+    'toggle_workspace': function(browser) {
+        browser
+            .click('#main-menu-window')
+            .waitForElementPresent('#main-menu-window.open', 2000)
+            .click('#main-menu-window a[action="toggle_full_workspace"]')
+            .pause(2000)
+            .verify.hidden('#goorm_left')
+            .verify.hidden('#goorm_inner_layout_right')
+            .verify.hidden('#goorm_inner_layout_bottom')
+            .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'w'])
+            .keys(browser.Keys.NULL)
+            .pause(2000)
+            .verify.visible('#goorm_left')
+            .verify.visible('#goorm_inner_layout_right')
+            .verify.visible('#goorm_inner_layout_bottom')
+    },
     'show_collaboration': function(browser) {
         browser
             .click('#main-menu-window')
