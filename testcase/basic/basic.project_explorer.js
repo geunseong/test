@@ -145,6 +145,14 @@ module.exports = {
 			.waitForElementNotVisible('#dlg_confirmation', 3000)
 			.verify.elementNotPresent('#project_treeview li.jstree-node[id$="' + saved_filename + '"]');
 	},
+	'check_deleted_file_on_terminal': function(browser) {
+		browser
+            .click('#terminal > div > span')
+            .keys(['l', 's', browser.Keys.ENTER])
+            .pause(3000)
+            .expect.element('#terminal > div:nth-child(2)').text.to.not.contain(saved_filename)
+			.expect.element('#terminal > div:nth-child(3)').text.to.not.contain(saved_filename)
+	},
 	'rename_folder_from_tree': function(browser) {
 		browser
 			.moveToElement('#project_treeview > ul > li.jstree-node > a.jstree-anchor:first-of-type', 30, 10)

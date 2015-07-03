@@ -22,7 +22,7 @@ module.exports = {
     'show_more_toolbar': function(browser) {
         browser
             .isVisible('#main_debug_toolbar', function(result) {
-                if (result.value === true) {
+                if (result.value == true) {
                     this
                         .resizeWindow(900, 700)
                         .pause(3000)
@@ -33,13 +33,7 @@ module.exports = {
                 }
             });
     },
-    'terminal_ls': function(browser) {
-        browser
-            .click('#terminal > div > span')
-            .keys(['l', 's', browser.Keys.ENTER])
-            .pause(3000)
-    },
     'goorm_end': function(browser) {
-        // browser.end();
+        browser.end();
     }
 }
