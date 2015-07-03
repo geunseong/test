@@ -10,13 +10,16 @@ module.exports = {
             .click('#main-menu-window a[action="new_terminal_window"]')
             .pause(1000)
             .verify.visible('.ui-dialog-content.terminal')
-            .keys([browser.Keys.ALT, 'x'])
+            .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'x'])
             .keys(browser.Keys.NULL)
             .pause(500)
             .keys([browser.Keys.ALT, browser.Keys.SHIFT, 't'])
             .keys(browser.Keys.NULL)
             .pause(500)
             .verify.visible('.ui-dialog-content.terminal')
+            .getText('#selected_project_name', function(result) {
+                this.expect.element('span.ui-dialog-title').text.to.contain(result.value)
+            })
             .end();
     }
 };
