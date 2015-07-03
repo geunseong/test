@@ -46,7 +46,7 @@ module.exports = {
             .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'l'])
             .keys(browser.Keys.NULL)
             .pause(2000)
-            .verify.visible('#goorm_left')
+            .verify.visible('#goorm_left');
     },
     'window_perspectives_right': function(browser) {
         browser
@@ -61,7 +61,7 @@ module.exports = {
             .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'r'])
             .keys(browser.Keys.NULL)
             .pause(2000)
-            .verify.visible('#goorm_inner_layout_right')
+            .verify.visible('#goorm_inner_layout_right');
     },
     'window_perspectives_bottom': function(browser) {
         browser
@@ -76,7 +76,35 @@ module.exports = {
             .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'b'])
             .keys(browser.Keys.NULL)
             .pause(2000)
-            .verify.visible('#goorm_inner_layout_bottom')
+            .verify.visible('#goorm_inner_layout_bottom');
+    },
+    'show_collaboration': function(browser) {
+        browser
+            .click('#main-menu-window')
+            .waitForElementPresent('#main-menu-window.open', 2000)
+            .moveToElement('#parent_perspectives_menu', 50, 10)
+            .waitForElementVisible('#child_perspectives_menu', 2000)
+            .click('#child_perspectives_menu a[action="right_chat_show"]')
+            .pause(1000)
+            .verify.hidden('#gLayoutTab_chat')
+            .keys([browser.Keys.ALT, '1'])
+            .keys(browser.Keys.NULL)
+            .pause(1000)
+            .verify.visible('#gLayoutTab_chat');
+    },
+    'show_docs': function(browser) {
+        browser
+            .click('#main-menu-window')
+            .waitForElementPresent('#main-menu-window.open', 2000)
+            .moveToElement('#parent_perspectives_menu', 50, 10)
+            .waitForElementVisible('#child_perspectives_menu', 2000)
+            .click('#child_perspectives_menu a[action="right_slideshare_show"]')
+            .pause(1000)
+            .verify.hidden('#gLayoutTab_document_viewer')
+            .keys([browser.Keys.ALT, '2'])
+            .keys(browser.Keys.NULL)
+            .pause(1000)
+            .verify.visible('#gLayoutTab_document_viewer');
     },
     'goorm_end': function(browser) {
         browser.end();
