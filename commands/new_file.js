@@ -1,6 +1,6 @@
 exports.command = function(file_name) {
 	if(!file_name) {
-		file_name = 'new_file';
+		file_name = Math.random().toString();
 	}
 
 	this

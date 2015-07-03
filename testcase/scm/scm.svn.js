@@ -200,6 +200,7 @@ module.exports = {
           .click('#g_cfrm_btn_yes')
           .waitForElementNotVisible('#dlg_confirmation', 2000)
           .waitForElementNotVisible('#dlg_loading_bar', 10000)
+          .waitForElementNotVisible('#dlg_alert', 10000)
           .waitForElementNotPresent('#svn_status_files input[name*="' + result.value + '"]', 2000)
           .waitForElementVisible('#dlg_confirmation', 2000, false)
           .click('#g_cfrm_btn_no')
@@ -215,6 +216,7 @@ module.exports = {
       .click('#g_cfrm_btn_yes')
       .waitForElementNotVisible('#dlg_confirmation', 2000)
       .waitForElementNotVisible('#dlg_loading_bar', 2000)
+      .waitForElementNotVisible('#dlg_alert', 10000)
       .waitForElementVisible('#svn_status_files input[scm_type*="A"]', 2000)
   },
   'commit': function(browser) {
@@ -247,8 +249,9 @@ module.exports = {
               // .waitForElementVisible('#dlg_confirmation', 2000)
               // .click('#g_cfrm_btn_yes')
               // .waitForElementNotVisible('#dlg_confirmation', 2000)
-              // .waitForElementNotVisible('#dlg_loading_bar', 10000)
               // .waitForElementNotVisible('#dlg_svn_commit', 2000)
+              // .waitForElementNotVisible('#dlg_loading_bar', 10000)
+              // .waitForElementNotVisible('#dlg_alert', 10000)
               // .waitForElementNotPresent('#svn_status_files input[scm_type*="M"]', 2000)
               // .waitForElementNotPresent('#svn_status_files input[scm_type*="A"]', 2000)
           })
@@ -265,6 +268,7 @@ module.exports = {
       .waitForElementNotVisible('#dlg_confirmation', 2000)
       .waitForElementNotVisible('#dlg_loading_bar', 2000)
       .waitForElementVisible('#svn_status_files input[scm_type*="D"]', 2000)
+      .waitForElementNotVisible('#dlg_alert', 10000)
       .click('#dlg_svn .close')
       .waitForElementNotVisible('#dlg_svn', 2000)
   },

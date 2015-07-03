@@ -2,23 +2,23 @@ module.exports = {
   'goorm_login': function(browser) {
     var data = browser.globals;
 
-    browser
-      .run_ide(data.username, data.password)
-      .waitForElementVisible('#workspace', 200000)
-      .waitForElementPresent('.user_profile_image', 10000)
-      .pause(2000)
-      .waitForElementNotVisible('#dlg_loading_bar', 100000)
-
     // browser
-    //   .url(data.urls.local)
-    //   .waitForElementVisible('#goorm_id', 100000)
-    //   .setValue('#goorm_id', data.username)
-    //   .setValue('#goorm_pw', data.password)
-    //   .click('#goorm_login_button')
+    //   .run_ide(data.username, data.password)
     //   .waitForElementVisible('#workspace', 200000)
     //   .waitForElementPresent('.user_profile_image', 10000)
     //   .pause(2000)
-    //   .waitForElementNotVisible('#dlg_loading_bar', 10000)
+    //   .waitForElementNotVisible('#dlg_loading_bar', 100000)
+
+    browser
+      .url(data.urls.local)
+      .waitForElementVisible('#goorm_id', 100000)
+      .setValue('#goorm_id', data.username)
+      .setValue('#goorm_pw', data.password)
+      .click('#goorm_login_button')
+      .waitForElementVisible('#workspace', 200000)
+      .waitForElementPresent('.user_profile_image', 10000)
+      .pause(2000)
+      .waitForElementNotVisible('#dlg_loading_bar', 10000)
   },
   'scm_validation': function(browser) {
     var url = 'https://github.com/openstack/horizon.git';
@@ -155,14 +155,15 @@ module.exports = {
       .verify.cssClassNotPresent('#folder_context_git', 'disabled')
       .verify.cssClassNotPresent('#file_context_git', 'disabled')
   },
-  'status': function (browser) {
+  'status': function(browser) {
     browser
       .windowSize('current', 1280, 768)
       .waitForElementVisible('#main_scm_toolbar', 2000)
       .click('#main_file_toolbar [action=open_file]')
       .waitForElementVisible('#dlg_open_file', 2000)
+      .waitForElementVisible('#file_open_files .file_item', 10000)
       .click('#file_open_files .file_item')
-      .getText('#file_open_files .file_item', function (result) {
+      .getText('#file_open_files .file_item', function(result) {
         this
           .click('#g_of_btn_ok')
           .waitForElementNotVisible('#dlg_open_file', 2000)
@@ -199,10 +200,13 @@ module.exports = {
           .click('#g_cfrm_btn_yes')
           .waitForElementNotVisible('#dlg_confirmation', 2000)
           .waitForElementNotVisible('#dlg_loading_bar', 10000)
+          .waitForElementNotVisible('#dlg_alert', 10000)
           .waitForElementNotPresent('#git_status_files input[name*="' + result.value + '"]', 2000)
       })
   },
   'commit': function (browser) {
+    var self = this;
+
     browser
       .click('#dlg_git .close')
       .waitForElementNotVisible('#dlg_git', 2000)
@@ -212,6 +216,8 @@ module.exports = {
       .click('#git_commit_bt')
       .waitForElementVisible('#dlg_git_commit', 2000)
       .getAttribute('#git_status_files input:checked', 'name', function (result) {
+        self.file_name = result.value;
+
         this
           .verify.containsText('#git_commit_files td:last-child', result.value)
           .click('#dlg_git_commit .btn')
@@ -223,8 +229,9 @@ module.exports = {
           .waitForElementVisible('#dlg_confirmation', 2000)
           .click('#g_cfrm_btn_yes')
           .waitForElementNotVisible('#dlg_confirmation', 2000)
-          .waitForElementNotVisible('#dlg_loading_bar', 10000)
           .waitForElementNotVisible('#dlg_git_commit', 2000)
+          .waitForElementNotVisible('#dlg_loading_bar', 10000)
+          .waitForElementNotVisible('#dlg_alert', 10000)
           .waitForElementNotPresent('#git_status_files input[scm_type*="M"]', 2000)
           .waitForElementNotPresent('#git_status_files input[scm_type*="A"]', 2000)
       })
@@ -244,7 +251,25 @@ module.exports = {
       .click('#g_cfrm_btn_yes')
       .waitForElementNotVisible('#dlg_confirmation', 2000)
       .waitForElementNotVisible('#dlg_loading_bar', 2000)
+      .waitForElementNotVisible('#dlg_alert', 10000)
       .waitForElementVisible('#git_status_files input[staged*="A"]', 2000)
+  },
+  'undo_add': function (browser) {
+    browser
+      .click('#git_status_files input[staged*="A"]')
+      .waitForElementVisible('#git_status_files input:checked', 2000)
+      .getAttribute('#git_status_files input:checked', 'name', function (result) {
+        this
+          .click('#git_status_tab .dropdown-toggle')
+          .waitForElementVisible('#git_status_tab .dropdown-menu', 2000)
+          .click('#undo_add_bt')
+          .waitForElementVisible('#dlg_confirmation', 2000)
+          .click('#g_cfrm_btn_yes')
+          .waitForElementNotVisible('#dlg_confirmation', 2000)
+          .waitForElementNotVisible('#dlg_loading_bar', 10000)
+          .waitForElementNotVisible('#dlg_alert', 10000)
+          .waitForElementVisible('#git_status_files input[name*="' + result.value + '"][scm_type*="?"]', 2000)
+      })
   },
   'remove': function (browser) {
     browser
@@ -258,10 +283,59 @@ module.exports = {
           .click('#g_cfrm_btn_yes')
           .waitForElementNotVisible('#dlg_confirmation', 2000)
           .waitForElementNotVisible('#dlg_loading_bar', 2000)
+          .waitForElementNotVisible('#dlg_alert', 10000)
           .waitForElementVisible('#git_status_files input[staged*="D"]', 2000)
           .waitForElementNotPresent('#git_treeview [path$="' + result.value + '"]', 2000)
           .waitForElementNotPresent('#project_treeview [path$="' + result.value + '"]', 2000)
       })
+  },
+  'push': function(browser) {
+    var data = browser.globals;
+
+    browser
+      .click('#git_push_bt')
+      .waitForElementVisible('#dlg_scm_auth', 2000)
+      .setValue('#scm_auth_id', 'git')
+      .setValue('#scm_auth_password', 'git')
+      .click('#g_scm_auth_btn_ok')
+      .waitForElementNotVisible('#dlg_scm_auth', 2000)
+      .waitForElementVisible('#dlg_alert', 10000)
+      .click('#g_alert_btn_ok')
+      .click('#git_push_bt')
+      .waitForElementVisible('#dlg_scm_auth', 2000)
+      .setValue('#scm_auth_id', data.git_id)
+      .setValue('#scm_auth_password', data.git_pw)
+      .click('#g_scm_auth_btn_ok')
+      .waitForElementNotVisible('#dlg_scm_auth', 2000)
+      .waitForElementVisible('#dlg_notice', 10000)
+      .click('#g_nt_btn_ok')
+      .waitForElementNotVisible('#dlg_notice', 2000)
+      .waitForElementVisible('#dlg_git_push', 2000)
+      .verify.containsText('#dlg_git_push .panel-body', this.file_name)
+      .click('#g_push_btn_ok')
+      .waitForElementNotVisible('#dlg_git_push', 2000)
+      .waitForElementVisible('#dlg_confirmation', 2000)
+      .click('#g_cfrm_btn_yes')
+      .waitForElementNotVisible('#dlg_confirmation', 2000)
+      .waitForElementVisible('#dlg_loading_bar', 2000)
+      .waitForElementNotVisible('#dlg_loading_bar', 10000)
+      .waitForElementNotVisible('#dlg_alert', 10000)
+  },
+  'undo_push': function(browser) {
+    browser
+      .click('#git_status_tab .dropdown-toggle')
+      .waitForElementVisible('#git_status_tab .dropdown-menu', 2000)
+      .click('#undo_push_bt')
+      .waitForElementVisible('#dlg_confirmation', 2000)
+      .click('#g_cfrm_btn_yes')
+      .waitForElementNotVisible('#dlg_confirmation', 2000)
+      .waitForElementNotVisible('#dlg_loading_bar', 10000)
+      .waitForElementNotVisible('#dlg_alert', 10000)
+      .click('#git_push_bt')
+      .waitForElementVisible('#dlg_git_push', 10000)
+      .expect.element('#dlg_git_push .panel-body').text.to.match(/\w/)
+      .click('#dlg_git_push .close')
+      .waitForElementNotVisible('#dlg_git_push', 10000)
   },
   'branch': function (browser) {
     browser
