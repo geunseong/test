@@ -5,6 +5,7 @@ module.exports = {
     },
     'open_terminal_window': function(browser) {
         browser
+            .pause(1000)
             .click('#main-menu-window')
             .waitForElementPresent('#main-menu-window.open', 2000)
             .click('#main-menu-window a[action="new_terminal_window"]')
@@ -19,7 +20,15 @@ module.exports = {
             .verify.visible('.ui-dialog-content.terminal')
             .getText('#selected_project_name', function(result) {
                 this.expect.element('span.ui-dialog-title').text.to.contain(result.value)
-            })
+            });
+    },
+    'exit_terminal_window': function(browser) {
+        browser
+            .click('div.ui-dialog-content.terminal > div > span:first-of-type')
+            .keys(['exit', browser.Keys.ENTER])
+            .keys(browser.Keys.NULL)
+            .pause(2000)
+            .verify.elementNotPresent('.ui-dialog-content.terminal')
             .end();
     }
 };
