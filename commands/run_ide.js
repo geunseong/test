@@ -18,6 +18,7 @@ exports.command = function(id, pw, plugin) {
                 .verify.urlEquals('http://ide.goorm.io/')
                 .waitForElementPresent('#terminal > div span[style="color:#8ae234;"]', 30000)
                 .waitForElementNotVisible('#dlg_loading_bar', 10000)
+                .pause(3000)
                 .getCssProperty('#dlg_confirmation', 'display', function(result) {
                     if (typeof result == 'object') {
                         if (result.value == 'block') {

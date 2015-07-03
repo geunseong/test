@@ -1,7 +1,8 @@
 var fs = require('fs');
 var data;
 var difference;
-console.log();
+
+var per_plugin = false;
 
 var change_difference = function (template_name, difference) {
 	var data = fs.readFileSync(__dirname + '/templates/' + template_name, 'utf8');
@@ -15,10 +16,21 @@ var change_difference = function (template_name, difference) {
 			template = template.replace(replacement.toUpperCase(), difference[plugin][replacement]);
 		}
 		plugin = plugin.split('.');
-		if(!fs.existsSync(__dirname + '/../testcase/plugins/' + plugin[0])) {
-			fs.mkdirSync(__dirname + '/../testcase/plugins/' + plugin[0])
+		if (per_plugin) {
+			if(!fs.existsSync(__dirname + '/../testcase/plugins/' + plugin[0])) {
+				fs.mkdirSync(__dirname + '/../testcase/plugins/' + plugin[0])
+			}
+			fs.writeFileSync(__dirname + '/../testcase/plugins/' + plugin[0] + '/' + plugin[1] + '.' + template_name, template)
+		} else {
+			if(!fs.existsSync(__dirname + '/../testcase/plugins/' + template_name)) {
+				fs.mkdirSync(__dirname + '/../testcase/plugins/' + template_name)
+			}
+			if(!fs.existsSync(__dirname + '/../testcase/plugins/' + template_name + '/' + plugin[0])) {
+				fs.mkdirSync(__dirname + '/../testcase/plugins/' + template_name + '/' + plugin[0])
+			}
+			fs.writeFileSync(__dirname + '/../testcase/plugins/' + template_name + '/' + plugin[0] + '/' + plugin[1] + '.' + template_name, template)	
 		}
-		fs.writeFileSync(__dirname + '/../testcase/plugins/' + plugin[0] + '/' + plugin[1] + '.' + template_name, template)
+
 	}
 }
 
