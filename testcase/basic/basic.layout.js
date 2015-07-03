@@ -62,7 +62,7 @@ module.exports = {
             .keys(browser.Keys.NULL)
             .pause(2000)
             .verify.visible('#goorm_inner_layout_right')
-    }
+    },
     'goorm_end': function(browser) {
         browser.end();
     }
