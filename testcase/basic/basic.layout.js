@@ -124,28 +124,28 @@ module.exports = {
             .verify.visible('#gLayoutTab_History')
             .verify.visible('#history');
     },
-    'show_outline': function(browser) {
-        browser
-            .click('#main-menu-window')
-            .waitForElementPresent('#main-menu-window.open', 2000)
-            .moveToElement('#parent_perspectives_menu', 50, 10)
-            .waitForElementVisible('#child_perspectives_menu', 2000)
-            .isVisible('#child_perspectives_menu a[action="right_outline_show"]', function(result) {
-                if(result.value === true) {
-                    this.click('#child_perspectives_menu a[action="right_outline_show"]')
-                        .pause(1000)
-                        .verify.hidden('#gLayoutTab_Outline')
-                        .keys([browser.Keys.ALT, '4'])
-                        .keys(browser.Keys.NULL)
-                        .pause(1000)
-                        .verify.visible('#gLayoutTab_Outline')
-                        .verify.visible('#outline');
-                } else {
-                    this.click('#main-menu-window')
-                        .pause(1000);
-                }
-            })
-    },
+    // 'show_outline': function(browser) {
+    //     browser
+    //         .click('#main-menu-window')
+    //         .waitForElementPresent('#main-menu-window.open', 2000)
+    //         .moveToElement('#parent_perspectives_menu', 50, 10)
+    //         .waitForElementVisible('#child_perspectives_menu', 2000)
+    //         .isVisible('#child_perspectives_menu a[action="right_outline_show"]', function(result) {
+    //             if (result.value === true) {
+    //                 this.click('#child_perspectives_menu a[action="right_outline_show"]')
+    //                     .pause(1000)
+    //                     .verify.hidden('#gLayoutTab_Outline')
+    //                     .keys([browser.Keys.ALT, '4'])
+    //                     .keys(browser.Keys.NULL)
+    //                     .pause(1000)
+    //                     .verify.visible('#gLayoutTab_Outline')
+    //                     .verify.visible('#outline');
+    //             } else {
+    //                 this.click('#main-menu-window')
+    //                     .pause(1000);
+    //             }
+    //         });
+    // },
     'show_bookmark': function(browser) {
         browser
             .click('#main-menu-window')
@@ -160,6 +160,70 @@ module.exports = {
             .pause(1000)
             .verify.visible('#gLayoutTab_Bookmark')
             .verify.visible('#bookmark');
+    },
+    'show_debug': function(browser) {
+        browser
+            .isVisible('#main_debug_toolbar', function(result) {
+                if (result.value === true) {
+                    this.click('#main-menu-window')
+                        .waitForElementPresent('#main-menu-window.open', 2000)
+                        .moveToElement('#parent_perspectives_menu', 50, 10)
+                        .waitForElementVisible('#child_perspectives_menu', 2000)
+                        .click('#child_perspectives_menu a[action="bottom_debug_show"]')
+                        .pause(1000)
+                        .verify.hidden('#gLayoutTab_Debug')
+                        .keys([browser.Keys.CONTROL, browser.Keys.SHIFT, '1'])
+                        .keys(browser.Keys.NULL)
+                        .pause(1000)
+                        .verify.visible('#gLayoutTab_Debug')
+                        .verify.visible('#debug_tab');
+                }
+            })
+    },
+    'show_terminal': function(browser) {
+        browser
+            .click('#main-menu-window')
+            .waitForElementPresent('#main-menu-window.open', 2000)
+            .moveToElement('#parent_perspectives_menu', 50, 10)
+            .waitForElementVisible('#child_perspectives_menu', 2000)
+            .click('#child_perspectives_menu a[action="bottom_console_show"]')
+            .pause(1000)
+            .verify.hidden('#gLayoutTab_Terminal')
+            .keys([browser.Keys.CONTROL, browser.Keys.SHIFT, '2'])
+            .keys(browser.Keys.NULL)
+            .pause(1000)
+            .verify.visible('#gLayoutTab_Terminal')
+            .verify.visible('#terminal');
+    },
+    'show_search': function(browser) {
+        browser
+            .click('#main-menu-window')
+            .waitForElementPresent('#main-menu-window.open', 2000)
+            .moveToElement('#parent_perspectives_menu', 50, 10)
+            .waitForElementVisible('#child_perspectives_menu', 2000)
+            .click('#child_perspectives_menu a[action="bottom_search_show"]')
+            .pause(1000)
+            .verify.hidden('#gLayoutTab_Search')
+            .keys([browser.Keys.CONTROL, browser.Keys.SHIFT, '3'])
+            .keys(browser.Keys.NULL)
+            .pause(1000)
+            .verify.visible('#gLayoutTab_Search')
+            .verify.visible('#search_treeview');
+    },
+    'show_output': function(browser) {
+        browser
+            .click('#main-menu-window')
+            .waitForElementPresent('#main-menu-window.open', 2000)
+            .moveToElement('#parent_perspectives_menu', 50, 10)
+            .waitForElementVisible('#child_perspectives_menu', 2000)
+            .click('#child_perspectives_menu a[action^="toggle_bottom_gLayoutOutput"]')
+            .pause(1000)
+            .verify.hidden('a[id^="gLayoutOutput"]')
+            .keys([browser.Keys.CONTROL, browser.Keys.SHIFT, '4'])
+            .keys(browser.Keys.NULL)
+            .pause(1000)
+            .verify.visible('a[id^="gLayoutOutput"]')
+            .verify.visible('div.output_tab');
     },
     'goorm_end': function(browser) {
         browser.end();
