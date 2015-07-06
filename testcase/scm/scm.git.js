@@ -169,6 +169,7 @@ module.exports = {
           .waitForElementNotVisible('#dlg_open_file', 2000)
           .edit()
           .click('#main_file_toolbar [action=save_file]')
+          .waitForElementNotVisible('#g_window_tab_list .goorm_tab_menu:last-child .tab_option', 10000)
           .click('#main_scm_toolbar [action=scm_commit]')
           .waitForElementVisible('#dlg_git', 2000)
           .waitForElementVisible('#git_status_tab', 2000)

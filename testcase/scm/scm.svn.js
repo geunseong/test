@@ -171,6 +171,7 @@ module.exports = {
           .waitForElementNotVisible('#dlg_open_file', 2000)
           .edit(Math.random().toString())
           .click('#main_file_toolbar [action=save_file]')
+          .waitForElementNotVisible('#g_window_tab_list .goorm_tab_menu:last-child .tab_option', 10000)
           .click('#main_scm_toolbar [action=scm_commit]')
           .waitForElementVisible('#dlg_svn', 2000)
           .waitForElementVisible('#svn_status_tab', 2000)
@@ -227,10 +228,14 @@ module.exports = {
       .click('#project_treeview [aria-level="2"] .jstree-ocl')
       .waitForElementVisible('#project_treeview [aria-level="3"]', 2000)
       .getAttribute('#project_treeview [aria-level="3"]', 'path', function(result) {
+        var file_name = result.value.split('/');
+        file_name.shift();
+
         this
-          .open_file(result.value)
+          .open_file(file_name.join('/'))
           .edit()
           .click('#main_file_toolbar [action=save_file]')
+          .waitForElementNotVisible('#g_window_tab_list .goorm_tab_menu:last-child .tab_option', 10000)
           .click('#main_scm_toolbar [action=scm_commit]')
           .waitForElementVisible('#dlg_svn', 2000)
           .click('#svn_commit_bt')
