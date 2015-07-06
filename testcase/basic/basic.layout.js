@@ -37,7 +37,7 @@ module.exports = {
         browser
             .pause(1000)
             .verify.visible('#goorm_left')
-            .click('#main-menu-window')
+            .click('#main-menu-window > a')
             .waitForElementPresent('#main-menu-window.open', 2000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
@@ -52,7 +52,7 @@ module.exports = {
     'window_perspectives_right': function(browser) {
         browser
             .verify.visible('#goorm_inner_layout_right')
-            .click('#main-menu-window')
+            .click('#main-menu-window > a')
             .waitForElementPresent('#main-menu-window.open', 2000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
@@ -67,7 +67,7 @@ module.exports = {
     'window_perspectives_bottom': function(browser) {
         browser
             .verify.visible('#goorm_inner_layout_bottom')
-            .click('#main-menu-window')
+            .click('#main-menu-window > a')
             .waitForElementPresent('#main-menu-window.open', 2000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
@@ -81,7 +81,7 @@ module.exports = {
     },
     'toggle_workspace': function(browser) {
         browser
-            .click('#main-menu-window')
+            .click('#main-menu-window > a')
             .waitForElementPresent('#main-menu-window.open', 2000)
             .click('#main-menu-window a[action="toggle_full_workspace"]')
             .pause(2000)
@@ -97,7 +97,7 @@ module.exports = {
     },
     'show_collaboration': function(browser) {
         browser
-            .click('#main-menu-window')
+            .click('#main-menu-window > a')
             .waitForElementPresent('#main-menu-window.open', 2000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
@@ -112,7 +112,7 @@ module.exports = {
     },
     'show_docs': function(browser) {
         browser
-            .click('#main-menu-window')
+            .click('#main-menu-window > a')
             .waitForElementPresent('#main-menu-window.open', 2000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
@@ -127,7 +127,7 @@ module.exports = {
     },
     'show_history': function(browser) {
         browser
-            .click('#main-menu-window')
+            .click('#main-menu-window > a')
             .waitForElementPresent('#main-menu-window.open', 2000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
@@ -142,7 +142,7 @@ module.exports = {
     },
     // 'show_outline': function(browser) {
     //     browser
-    //         .click('#main-menu-window')
+    //         .click('#main-menu-window > a')
     //         .waitForElementPresent('#main-menu-window.open', 2000)
     //         .moveToElement('#parent_perspectives_menu', 50, 10)
     //         .waitForElementVisible('#child_perspectives_menu', 2000)
@@ -157,14 +157,14 @@ module.exports = {
     //                     .verify.visible('#gLayoutTab_Outline')
     //                     .verify.visible('#outline');
     //             } else {
-    //                 this.click('#main-menu-window')
+    //                 this.click('#main-menu-window > a')
     //                     .pause(1000);
     //             }
     //         });
     // },
     'show_bookmark': function(browser) {
         browser
-            .click('#main-menu-window')
+            .click('#main-menu-window > a')
             .waitForElementPresent('#main-menu-window.open', 2000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
@@ -181,7 +181,7 @@ module.exports = {
         browser
             .isVisible('#main_debug_toolbar', function(result) {
                 if (result.value === true) {
-                    this.click('#main-menu-window')
+                    this.click('#main-menu-window > a')
                         .waitForElementPresent('#main-menu-window.open', 2000)
                         .moveToElement('#parent_perspectives_menu', 50, 10)
                         .waitForElementVisible('#child_perspectives_menu', 2000)
@@ -198,7 +198,7 @@ module.exports = {
     },
     'show_terminal': function(browser) {
         browser
-            .click('#main-menu-window')
+            .click('#main-menu-window > a')
             .waitForElementPresent('#main-menu-window.open', 2000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
@@ -213,7 +213,7 @@ module.exports = {
     },
     'show_search': function(browser) {
         browser
-            .click('#main-menu-window')
+            .click('#main-menu-window > a')
             .waitForElementPresent('#main-menu-window.open', 2000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
@@ -228,7 +228,7 @@ module.exports = {
     },
     'show_output': function(browser) {
         browser
-            .click('#main-menu-window')
+            .click('#main-menu-window > a')
             .waitForElementPresent('#main-menu-window.open', 2000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
@@ -255,7 +255,7 @@ module.exports = {
             .verify.hidden('#goorm_left')
             .verify.hidden('#goorm_inner_layout_right')
             .verify.hidden('#goorm_inner_layout_bottom')
-            .click('#main-menu-window')
+            .click('#main-menu-window > a')
             .waitForElementPresent('#main-menu-window.open', 2000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
