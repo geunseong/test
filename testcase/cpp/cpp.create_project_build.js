@@ -13,7 +13,7 @@ module.exports = {
       .click('.btn-run-ide')
       .pause(5000)
       .waitForElementVisible('#workspace', 120000)
-      .verify.urlEquals('http://ide.goorm.io/');
+      .verify.urlEquals('http://ide.qa.goorm.io/');
   },
   'cpp_project_create' : function (browser) {
     browser

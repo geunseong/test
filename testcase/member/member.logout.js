@@ -42,7 +42,7 @@ module.exports = {
 	},
 	'force_move_ide' : function (browser) {
 		browser
-			.url('http://ide.goorm.io/')
+			.url('http://ide.qa.goorm.io/')
 			.pause(1000)
 			.verify.urlEquals('http://qa.goorm.io/')
 			.end();
