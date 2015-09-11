@@ -12,7 +12,7 @@ module.exports = {
 			.waitForElementPresent('#project_selector > div.open', 3000)
 			.getAttribute('#my_projects_header + li', 'project_path', function (result) {
 				var project_path = result.value;
-				var project_name = project_path.split("_").slice(2).join("_");
+				var project_name = project_path.split("_").pop();
 				this.click('#my_projects_header + li')
 					.waitForElementNotVisible('#dlg_loading_bar', 10000)
 					.verify.containsText('#selected_project_name', project_name)
