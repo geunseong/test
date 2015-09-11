@@ -1,16 +1,18 @@
 module.exports = {
     'goorm_login': function(browser) {
         var data = browser.globals;
-		browser.run_ide(data.username, data.password);
+		      browser.run_ide(data.username, data.password, data.plugin);
     },
     'open_terminal_window': function(browser) {
         browser
             .pause(1000)
+            .waitForElementPresent('#project_selectbox', 2000)
             .click('#main-menu-window')
             .waitForElementPresent('#main-menu-window.open', 2000)
             .click('#main-menu-window a[action="new_terminal_window"]')
             .pause(1000)
             .verify.visible('.ui-dialog-content.terminal')
+            .keys(['exit', browser.Keys.ENTER])
             .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'x'])
             .keys(browser.Keys.NULL)
             .pause(500)
@@ -18,6 +20,10 @@ module.exports = {
             .keys(browser.Keys.NULL)
             .pause(500)
             .verify.visible('.ui-dialog-content.terminal')
+            .click('#project_selectbox')
+            .waitForElementPresent('#project_selector .dropdown-menu', 2000)
+            .click('.project_item')
+            .pause(1000)
             .getText('#selected_project_name', function(result) {
                 this.expect.element('span.ui-dialog-title').text.to.contain(result.value)
             });
