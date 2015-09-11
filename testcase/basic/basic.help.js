@@ -1,7 +1,7 @@
 module.exports = {
 	'goorm_login' : function (browser) {
 		var data = browser.globals;
-    	browser.run_ide(data.username, data.password);
+    	browser.run_ide(data.username, data.password, data.plugin);
 	},
 	'open_help_contents' : function (browser) {
 		browser
@@ -11,10 +11,21 @@ module.exports = {
 			.click('#main-menu-help > a')
 			.waitForElementPresent('#main-menu-help.open', 1000)
 			.click('#main-menu-help a[action=help_contents]')
-			.waitForElementVisible('#dlg_help_contents', 2000)
-			.verify.visible('#dlg_help_contents')
-			.click('#g_hc_btn_cancel')
-			.waitForElementNotVisible('#dlg_help_contents', 1000)
+			.pause(3000)
+			.window_handles(function (result) {
+				var handle = result.value[1];
+				console.log('result:', result);
+				browser.switchWindow(handle);
+			})
+			.verify.urlEquals('http://help.goorm.io/')
+			.closeWindow()
+			.pause(1000)
+			.window_handles(function (result) {
+				var handle = result.value[0];
+				console.log('result:', result);
+				browser.switchWindow(handle);
+			})
+			.pause(1000)
 	},
 	'open_shortcuts' : function (browser) {
 		browser
@@ -26,6 +37,9 @@ module.exports = {
 			.moveTo('.modal-backdrop.in', 30, 30)
 			.mouseButtonDown(0)
 			.mouseButtonUp(0)
+			.keys([browser.Keys.COMMAND, 'h'])
+			.keys(browser.Keys.NULL)
+			.pause(2000)
 			.waitForElementNotVisible('#dlg_help_shortcuts', 1000)
 	},
 	'open_about' : function (browser) {
@@ -80,6 +94,7 @@ module.exports = {
 			.click('#main-menu-help > a')
 			.waitForElementPresent('#main-menu-help.open', 1000)
 			.click('#main-menu-help a[action=help_facebook]')
+			.pause(3000)
 			.window_handles(function (result) {
 				var handle = result.value[1];
 				console.log('result:', result);
