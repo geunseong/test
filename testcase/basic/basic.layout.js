@@ -1,13 +1,41 @@
 module.exports = {
     'goorm_login': function(browser) {
         var data = browser.globals;
-		browser.run_ide(data.username, data.password);
+        browser
+            .run_ide(data.username, data.password, data.plugin)
+            .pause(1000)
     },
+    'open_project_dialog': function(browser) {
+  		browser
+  			.pause(1000)
+  			.click('#main-menu-file > a')
+  			.waitForElementPresent('#main-menu-file.open', 1000)
+  			.click('#main-menu-file a[action=open_project]')
+  			.waitForElementVisible('#dlg_open_project', 2000)
+  			.click('#project_open_list .selector_project:last-of-type')
+  			.click('#g_op_btn_ok')
+  			.pause(1000)
+  			.check_confirm_plugin('yes')
+  			.waitForElementNotVisible('#dlg_open_project', 2000)
+  			// .waitForElementVisible('#dlg_loading_bar', 2000)
+  			.waitForElementNotVisible('#dlg_loading_bar', 10000)
+  			.verify.visible('#project_treeview')
+  	},
+    'open_project_table': function(browser) {
+  		browser
+  			.click('#project_selectbox')
+  			.waitForElementPresent('#project_selector > div.btn-group.open', 1000)
+  			.click('#back_to_project_table > a')
+  			.waitForElementNotVisible('#project_treeview', 3000)
+  			.waitForElementVisible('#project_list_jquery_table', 3000)
+  			.click('#project_list_jquery_table tr:first-of-type td:first-of-type')
+  			.waitForElementNotVisible('#dlg_loading_bar', 10000)
+  			.waitForElementVisible('#project_treeview', 10000)
+  			.verify.visible('#project_treeview')
+  	},
     'toggle_top': function(browser) {
         browser
             .pause(2000)
-            .verify.visible('#goorm-mainmenu')
-            .verify.visible('#goorm_main_toolbar')
             .click('div.ui-layout-toggler-north')
             .pause(2000)
             .verify.hidden('#goorm_main_toolbar')
@@ -27,7 +55,7 @@ module.exports = {
                         .resizeWindow(900, 700)
                         .pause(3000)
                         .verify.visible('#toolbar_more_button')
-                        .maximizeWindow()
+                        .resizeWindow(1500,1000)
                         .pause(3000)
                         .verify.hidden('#toolbar_more_button');
                 }
@@ -140,28 +168,28 @@ module.exports = {
             .verify.visible('#gLayoutTab_History')
             .verify.visible('#history');
     },
-    // 'show_outline': function(browser) {
-    //     browser
-    //         .click('#main-menu-window > a')
-    //         .waitForElementPresent('#main-menu-window.open', 2000)
-    //         .moveToElement('#parent_perspectives_menu', 50, 10)
-    //         .waitForElementVisible('#child_perspectives_menu', 2000)
-    //         .isVisible('#child_perspectives_menu a[action="right_outline_show"]', function(result) {
-    //             if (result.value === true) {
-    //                 this.click('#child_perspectives_menu a[action="right_outline_show"]')
-    //                     .pause(1000)
-    //                     .verify.hidden('#gLayoutTab_Outline')
-    //                     .keys([browser.Keys.ALT, '4'])
-    //                     .keys(browser.Keys.NULL)
-    //                     .pause(1000)
-    //                     .verify.visible('#gLayoutTab_Outline')
-    //                     .verify.visible('#outline');
-    //             } else {
-    //                 this.click('#main-menu-window > a')
-    //                     .pause(1000);
-    //             }
-    //         });
-    // },
+    'show_outline': function(browser) {
+        browser
+            .click('#main-menu-window > a')
+            .waitForElementPresent('#main-menu-window.open', 2000)
+            .moveToElement('#parent_perspectives_menu', 50, 10)
+            .waitForElementVisible('#child_perspectives_menu', 2000)
+            .isVisible('#child_perspectives_menu a[action="right_outline_show"]', function(result) {
+                if (result.value === true) {
+                    this.click('#child_perspectives_menu a[action="right_outline_show"]')
+                        .pause(1000)
+                        .verify.hidden('#gLayoutTab_Outline')
+                        .keys([browser.Keys.ALT, '4'])
+                        .keys(browser.Keys.NULL)
+                        .pause(1000)
+                        .verify.visible('#gLayoutTab_Outline')
+                        .verify.visible('#outline');
+                } else {
+                    this.click('#main-menu-window > a')
+                        .pause(1000);
+                }
+            });
+    },
     'show_bookmark': function(browser) {
         browser
             .click('#main-menu-window > a')
@@ -240,30 +268,6 @@ module.exports = {
             .pause(1000)
             .verify.visible('a[id^="gLayoutOutput"]')
             .verify.visible('div.output_tab');
-    },
-    'default_layout': function(browser) {
-        browser
-            .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'r'])
-            .keys(browser.Keys.NULL)
-            .pause(1000)
-            .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'l'])
-            .keys(browser.Keys.NULL)
-            .pause(1000)
-            .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'b'])
-            .keys(browser.Keys.NULL)
-            .pause(1000)
-            .verify.hidden('#goorm_left')
-            .verify.hidden('#goorm_inner_layout_right')
-            .verify.hidden('#goorm_inner_layout_bottom')
-            .click('#main-menu-window > a')
-            .waitForElementPresent('#main-menu-window.open', 2000)
-            .moveToElement('#parent_perspectives_menu', 50, 10)
-            .waitForElementVisible('#child_perspectives_menu', 2000)
-            .click('#child_perspectives_menu a[action="layout_default"]')
-            .pause(2000)
-            .verify.visible('#goorm_left')
-            .verify.visible('#goorm_inner_layout_right')
-            .verify.visible('#goorm_inner_layout_bottom');
     },
     'goorm_end': function(browser) {
         browser.end();
