@@ -2,7 +2,7 @@ module.exports = {
   'goorm_login' : function (browser) {
     var data = browser.globals;
     browser
-      .run_ide(data.username, data.password)
+      .run_ide(data.username, data.password, data.plugin)
       .waitForElementPresent('li.me img.user_profile_image', 20000)
       .waitForElementNotVisible('#dlg_loading_bar', 100000)
       .pause(1000)
@@ -14,10 +14,12 @@ module.exports = {
     browser
       .click('button#project_selectbox')
       .waitForElementPresent('#project_selector > div.open', 3000)
+      //Check Shared_Project
       .verify.elementPresent('#shared_header + li')
       .getAttribute('#shared_header + li', 'project_path', function (result) {
         var project_path = result.value;
-        var project_name = project_path.split("_").slice(2).join("_");
+        //asdsad_asdasdsad_Test => _ split => return last argu
+        var project_name = project_path.split("_").pop();
         this.click('#shared_header + li')
           .pause(2000)
           .waitForElementNotVisible('#dlg_loading_bar', 10000)
@@ -42,7 +44,7 @@ module.exports = {
       .waitForElementPresent('#project_selector > div.open', 3000)
       .getAttribute('#my_projects_header + li', 'project_path', function (result) {
         var project_path = result.value;
-        var project_name = project_path.split("_").slice(2).join("_");
+        var project_name = project_path.split("_").pop();
         this.click('#my_projects_header + li')
           .pause(2000)
           .waitForElementNotVisible('#dlg_loading_bar', 10000)
@@ -98,28 +100,30 @@ module.exports = {
   },
   'find_exist_user_with_email' : function (browser) {
     browser
-      .setValue('#user_search_input', 'attainer')
+    //Need common used account for QA team
+      .setValue('#user_search_input', 'test_qa1@goorm.io')
       .waitForElementVisible('#user_search_result_container > ul', 3000, false, function (result){
         if (result.value) {
           this
-            .verify.containsText('#user_search_result_container > ul a:first-child', 'attainer')
+            .verify.containsText('#user_search_result_container > ul a:first-child', 'test_qa1@goorm.io')
             .clearValue('#user_search_input')
-            .setValue('#user_search_input', 'nys')
+            .setValue('#user_search_input', 'test')
             .pause(2000)
-            .verify.containsText('#user_search_result_container > ul a:first-child', 'nys')
-            
+            .verify.containsText('#user_search_result_container > ul a:first-child', 'test')
+
         }
         this.clearValue('#user_search_input')
       })
   },
-  'find_exist_user_with_name' : function (browser) {
-    browser
-      .setValue('#user_search_input', '테스트')
-      .pause(2000)
-      .waitForElementVisible('#user_search_result_container > ul', 3000, false)
-      .verify.containsText('#user_search_result_container > ul a:first-child', '테스트')
-      .clearValue('#user_search_input')
-  },
+  // 'find_exist_user_with_name' : function (browser) {
+  //   browser
+  //   //Need common used account for QA team.
+  //     .setValue('#user_search_input', '테스트')
+  //     .pause(2000)
+  //     .waitForElementVisible('#user_search_result_container > ul', 3000, false)
+  //     .verify.containsText('#user_search_result_container > ul a:first-child', '테스트')
+  //     .clearValue('#user_search_input')
+  // },
   'check_when_user_not_selected' : function (browser) {
     browser
       .click('#g_prjs_btn_ok')
