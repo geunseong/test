@@ -16,4 +16,4 @@ module.exports = {
       .verify.urlEquals('http://ide.qa.goorm.io/')
       .end();
   }
-}; 
+};
