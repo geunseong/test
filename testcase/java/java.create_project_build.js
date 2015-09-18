@@ -35,6 +35,7 @@ module.exports = {
       .waitForElementNotVisible('#dlg_loading_bar', 1000000)
       .verify.containsText('#selected_project_name', 'java_test')
   },
+
   'java_project_error_make' : function (browser) {
     browser
       .waitForElementPresent('img.user_profile_image', 100000)
@@ -101,6 +102,7 @@ module.exports = {
       .click('#main-menu-edit a[action=sort_lines]')
       .click('#main_file_toolbar button[action=save_file]')
   },
+
   'java_project_build_toolbar_lint' : function (browser) {
     browser
       .waitForElementPresent('img.user_profile_image', 1000000)
@@ -162,3 +164,4 @@ module.exports = {
       .end();
   }
 };
+

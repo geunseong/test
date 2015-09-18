@@ -35,6 +35,7 @@ module.exports = {
       .waitForElementNotVisible('#dlg_loading_bar', 1000000)
       .verify.containsText('#selected_project_name', 'java_test')
   },
+/*
   'java_project_run_menu' : function (browser) {
     browser
       .waitForElementPresent('img.user_profile_image', 100000)
@@ -93,6 +94,7 @@ module.exports = {
       .waitForElementNotVisible('#dlg_loading_bar', 1000000)
       .verify.containsText('#selected_project_name', 'java_test')
   },
+*/
   'java_project_build_toolbar' : function (browser) {
     browser
       .waitForElementPresent('img.user_profile_image', 1000000)
@@ -163,3 +165,4 @@ module.exports = {
       .end()
   }
 };
+
