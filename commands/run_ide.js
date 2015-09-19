@@ -8,7 +8,8 @@ exports.command = function(id, pw, plugin) {
         .setValue('input[name=pw]', pw)
         .click('button[id=btn-login]')
         .waitForElementVisible('div#ide-vm-list', 10000)
-        .pause(3000)
+        .pause(3000)    
+        .waitForElementVisible('button.btn-run-ide', 10000)
         .waitForElementNotPresent('button.btn-run-ide[disabled=disabled]', 20000);
 
         var callback = function () {

@@ -1,21 +1,10 @@
 module.exports = {
 	'goorm_login' : function (browser) {
     var data = browser.globals;
-    browser
-      .url('http://qa.goorm.io')
-      .waitForElementVisible('input.login-form', 2000)
-      .setValue('input[name=id]', data.username)
-      .setValue('input[name=pw]', data.password)
-      .click('button[id=btn-login]')
-      .waitForElementVisible('div#ide-vm-list', 2000)
-      .waitForElementNotPresent('button.btn-run-ide[disabled=disabled]', 10000)
-      .click('.btn-run-ide')
-      .pause(5000)
-      .waitForElementVisible('#workspace', 120000)
-      .verify.urlEquals('http://ide.qa.goorm.io/');
+    browser.run_ide(data.username, data.password);
   },
   'project_open' : function (browser) {
-  	var project = 'c_basic';
+  	var project = 'Test';
   	browser
   		.waitForElementPresent('li.me img.user_profile_image', 20000)
 			.waitForElementNotVisible('#dlg_loading_bar', 10000)
@@ -28,9 +17,9 @@ module.exports = {
 			.verify.containsText('#selected_project_name', project);
   },
   'file_new_file' : function (browser) {
-  	var new_file = 'a';
+  	var new_file = 'test_file_' + Date.now();
   	browser
-  		.click('#main-menu-file > a')
+  		.click('#in-menu-file > a')
   		.waitForElementPresent('#main-menu-file.open', 2000)
   		.moveToElement('#parent_new_menu', 100, 10)
   		.waitForElementVisible('#child_new_menu', 1000)
