@@ -1,3 +1,4 @@
+var duplicate;
 module.exports = {
 	'goorm_login' : function (browser) {
     var data = browser.globals;
@@ -18,8 +19,9 @@ module.exports = {
   },
   'file_new_file' : function (browser) {
   	var new_file = 'test_file_' + Date.now();
-  	browser
-  		.click('#in-menu-file > a')
+    duplicate = new_file;
+    browser
+  		.click('#main-menu-file > a')
   		.waitForElementPresent('#main-menu-file.open', 2000)
   		.moveToElement('#parent_new_menu', 100, 10)
   		.waitForElementVisible('#child_new_menu', 1000)
@@ -28,7 +30,45 @@ module.exports = {
   		.setValue('#file_new_target_name', new_file)
   		.click('#g_nf_btn_ok')
   		.waitForElementNotVisible('#dlg_new_file', 3000)
-  		.waitForElementVisible('a[id="project_treeview/payphone66l99lmp3_c_basic/' + new_file + '_anchor"]', 5000)
-  		.end();
+  		//.waitForElementVisible('a[id="project_treeview/payphone66l99lmp3_c_basic/' + new_file + '_anchor"]', 5000)
+        .pause(2000);
+  },  
+  'file_new_duplicate_file' : function (browser) {
+    browser
+        .click('#main-menu-file > a')
+        .waitForElementPresent('#main-menu-file.open', 2000)
+        .moveToElement('#parent_new_menu', 100, 10)
+        .waitForElementVisible('#child_new_menu', 1000)
+  		.click('#child_new_menu li > a[action=new_file_file]')
+  		.waitForElementVisible('#dlg_new_file', 2000)
+  		.setValue('#file_new_target_name', duplicate)
+  		.click('#g_nf_btn_ok')
+        .waitForElementVisible('#dlg_confirmation', 2000)
+        .click('button#g_cfrm_btn_no')
+        .waitForElementNotVisible('#dlg_confirmation', 3000)
+        .click('button#g_nf_btn_cancel')
+  		.waitForElementNotVisible('#dlg_new_file', 3000)
+        /* tree test needed in here */
+        .pause(2000);
+  },
+  'file_new_inappropriate_file' : function (browser) {
+    var inappropriate_name = '!@#$d';
+    
+    browser
+        .click('#main-menu-file > a')
+        .waitForElementPresent('#main-menu-file.open', 2000)
+        .moveToElement('#parent_new_menu', 100, 10)
+  		.waitForElementVisible('#child_new_menu', 1000)
+  		.click('#child_new_menu li > a[action=new_file_file]')
+  		.waitForElementVisible('#dlg_new_file', 2000)
+  		.setValue('#file_new_target_name', inappropriate_name)
+  		.click('#g_nf_btn_ok')
+        .waitForElementVisible('#dlg_alert', 2000)
+  		.click('button#g_alert_btn_ok')
+        .waitForElementNotVisible('#dlg_alert', 3000)
+        .click('button#g_nf_btn_cancel')
+        .waitForElementNotVisible('#dlg_new_file', 3000)
+        /* tree test needed in here */
+        .end();
   }
 }
