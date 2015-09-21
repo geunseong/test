@@ -1,5 +1,5 @@
 module.exports = {
-  'goorm_login' : function (browser) {
+'goorm_login' : function (browser) {
     var data = browser.globals;
     browser
       .url('http://qa.goorm.io')
