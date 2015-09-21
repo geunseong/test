@@ -6,6 +6,10 @@ module.exports = {
     'open_terminal_window': function(browser) {
         browser
             .pause(1000)
+            .click('#project_selectbox')
+            .waitForElementPresent('#project_selector .dropdown-menu', 2000)
+            .click('.project_item')
+            .pause(1000)
             .waitForElementPresent('#project_selectbox', 2000)
             .click('#main-menu-window')
             .waitForElementPresent('#main-menu-window.open', 2000)
@@ -20,17 +24,28 @@ module.exports = {
             .keys(browser.Keys.NULL)
             .pause(500)
             .verify.visible('.ui-dialog-content.terminal')
-            .click('#project_selectbox')
-            .waitForElementPresent('#project_selector .dropdown-menu', 2000)
-            .click('.project_item')
-            .pause(1000)
             .getText('#selected_project_name', function(result) {
                 this.expect.element('span.ui-dialog-title').text.to.contain(result.value)
             });
     },
-    'exit_terminal_window': function(browser) {
+    'check_terminal_folder': function(browser) {
         browser
             .click('div.ui-dialog-content.terminal > div > span:first-of-type')
+            .pause(500)
+            .keys(['cd bin', browser.Keys.ENTER])
+            .keys(browser.Keys.NULL)
+            .pause(1000)
+            .expect.element('span.ui-dialog-title').text.to.contain('bin')
+        browser
+            .click('div.ui-dialog-content.terminal > div > span:first-of-type')
+            .pause(500)
+            .keys(['cd ../', browser.Keys.ENTER])
+            .keys(browser.Keys.NULL)
+            .pause(2000)
+            .expect.element('span.ui-dialog-title').text.to.contain('Test');
+    },
+    'exit_terminal_window': function(browser) {
+        browser
             .keys(['exit', browser.Keys.ENTER])
             .keys(browser.Keys.NULL)
             .pause(2000)
