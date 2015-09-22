@@ -13,6 +13,7 @@ module.exports = {
 			.getAttribute('#my_projects_header + li', 'project_path', function (result) {
 				var project_path = result.value;
 				var project_name = project_path.split("_").pop();
+
 				this.click('#my_projects_header + li')
 					.waitForElementNotVisible('#dlg_loading_bar', 10000)
 					.verify.containsText('#selected_project_name', project_name)
@@ -56,6 +57,13 @@ module.exports = {
 			.verify.urlEquals('http://qa.goorm.io/')
 			.waitForElementVisible('#login-section', 2000)
 			.verify.hidden('#user-section')
+			.end();
+	},
+        'force_move_ide' : function (browser) {
+		browser
+			.url('http://ide.qa.goorm.io/')
+			.pause(1000)
+			.verify.urlEquals('http://qa.goorm.io/')
 			.end();
 	}
 }
