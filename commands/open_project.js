@@ -4,7 +4,7 @@ exports.command = function(project_name) {
 		.waitForElementVisible('#dlg_open_project', 3000)
 		.pause(2000)
         .waitForElementVisible('#project_open_list', 3000)
-		.click('#project_open_list > div > a')
+		.click('#project_open_list > div[id$='+ project_name+'] > a')
         .click('#g_op_btn_ok')
         .waitForElementNotVisible('#dlg_open_project', 3000)
 		.pause(2000)
