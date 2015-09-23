@@ -7,9 +7,9 @@ module.exports = {
       .setValue('input[name=id]', data.username)
       .setValue('input[name=pw]', data.password)
       .click('button[id=btn-login]')
-      .waitForElementVisible('div#ide-vm-list', 2000)
+      .waitForElementVisible('div#ide-vm-list', 10000)
       .pause(3000)
-      .waitForElementNotPresent('button.btn-run-ide[disabled=disabled]', 10000)
+      .waitForElementNotPresent('button.btn-run-ide[disabled=disabled]', 30000)
       .click('.btn-run-ide')
       .pause(5000)
       .waitForElementVisible('#workspace', 120000)
@@ -68,7 +68,8 @@ module.exports = {
       .click('#main-menu-edit a[class=dropdown-toggle]')
       .click('#main-menu-edit a[action=do_undo]')
       .click('#main_file_toolbar button[action=save_file]')
-      .verify.elementPresent('#output_tab_cpp .dataTables_empty')
+      .click('#gLayoutOutput_cpp')
+      .verify.elementPresent('.dataTables_empty')
   },
 
   'cpp_project_build_menu' : function (browser) {
@@ -119,7 +120,8 @@ module.exports = {
       .click('#main-menu-edit a[class=dropdown-toggle]')
       .click('#main-menu-edit a[action=do_undo]')
       .click('#main_file_toolbar button[action=save_file]')
-      .verify.elementPresent('#output_tab_cpp .dataTables_empty')
+      .click('#gLayoutOutput_cpp')
+      .verify.elementPresent('.dataTables_empty')
   },
   'cpp_project_build_toolbar' : function (browser) {
     browser
@@ -134,6 +136,7 @@ module.exports = {
       .verify.containsText('#server_tab_build .inner_content', 'Build Complete')
       .click('#gLayoutServer_build .hide_tab')
   },
+
   'cpp_project_delete' : function (browser) {
     browser
       .waitForElementPresent('img.user_profile_image', 100000)
@@ -149,5 +152,6 @@ module.exports = {
       .click('#g_nt_btn_ok')
       .end();
   }
+
 };
 
