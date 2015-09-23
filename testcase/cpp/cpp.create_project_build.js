@@ -72,7 +72,7 @@ module.exports = {
       .verify.elementPresent('.dataTables_empty')
   },
 
-  'cpp_project_build_menu' : function (browser) {
+  'cpp_project_build_menu' : function (browser) { 
     browser
       .waitForElementPresent('img.user_profile_image', 100000)
       .waitForElementNotVisible('#dlg_loading_bar', 100000)
@@ -82,6 +82,7 @@ module.exports = {
       .waitForElementVisible('#dlg_toast', 100000)
       .verify.containsText('#server_tab_build .inner_content', 'Build Complete')
       .click('#server_tab_build .rebuild_btn')
+      .pause(5000)
       .verify.containsText('#server_tab_build .inner_content', 'Build Complete')
       .click('#gLayoutServer_build .hide_tab')
   },
@@ -133,6 +134,7 @@ module.exports = {
       .verify.containsText('#server_tab_build .inner_content', 'Build Complete')
       .click('#server_tab_build .rebuild_btn')
       .waitForElementVisible('#dlg_toast', 1000000)
+      .pause(5000)
       .verify.containsText('#server_tab_build .inner_content', 'Build Complete')
       .click('#gLayoutServer_build .hide_tab')
   },
