@@ -3,7 +3,7 @@ exports.command = function(file_name) {
 	this
 		.click('#main-menu-file > a')
 		.waitForElementPresent('#main-menu-file.open', 2000)
-		.click("#main-menu-file a[action=close_all]")
+		.click("#main-menu-file a[action=close_file]")
 		//need test for checking if it is closed or not
 	return this;
 };
