@@ -1,5 +1,5 @@
 exports.command = function(file_name) {
-	file_name = file_name.split('/');
+	// file_name = file_name.split('/');
 	this
         .click('#main-menu-file > a')
         .waitForElementPresent('#main-menu-file.open', 2000)
