@@ -55,7 +55,7 @@ module.exports = {
         .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'x'])
         .keys(browser.Keys.NULL)
     },
-    'open_editpr_treeview': function(browser) {
+    'open_editor_treeview': function(browser) {
       browser.getAttribute('#project_treeview li[path$="src"]','aria-expanded', function(result) {
           if(result.value == 'false') {
             this.click('#project_treeview li[path*="src"] > i');
@@ -70,6 +70,90 @@ module.exports = {
         .pause(1000)
         .verify.visible('.g_windows_tab_li .tab_title[filename="main.c"]')
     },
+    'show_file_tooltip': function(browser) {
+      browser.elements('css selector','#main_file_toolbar > button', function (result) {
+        var child_size = result.value.length;
+        for(var i=1; i<=child_size; i++) {
+          this
+            .moveToElement('#main_file_toolbar > button:nth-of-type(' + i + ')',10,10)
+            .verify.visible('#main_file_toolbar > button:nth-of-type(' + i + ')[aria-describedby^="tooltip"]')
+        }
+      });
+    },
+    'show_edit_tooltip': function(browser) {
+      browser.elements('css selector','#main_edit_toolbar > button', function (result) {
+        var child_size = result.value.length;
+        for(var i=1; i<=child_size; i++) {
+          this
+            .moveToElement('#main_edit_toolbar > button:nth-of-type(' + i + ')',10,10)
+            .verify.visible('#main_edit_toolbar > button:nth-of-type(' + i + ')[aria-describedby^="tooltip"]')
+        }
+      });
+    },
+    'show_project_tooltip': function(browser) {
+      browser.elements('css selector','#main_project_toolbar > button', function (result) {
+        var child_size = result.value.length;
+        for(var i=1; i<=child_size; i++) {
+          this
+            .moveToElement('#main_project_toolbar > button:nth-of-type(' + i + ')',10,10)
+            .verify.visible('#main_project_toolbar > button:nth-of-type(' + i + ')[aria-describedby^="tooltip"]');
+          if(i==1) {
+            this
+              .click('#main_project_toolbar > button:nth-of-type(1)')
+              .pause(5000);
+          }
+        }
+      });
+    },
+    'show_debug_tooltip': function(browser) {
+
+      browser.elements('css selector','#main_debug_toolbar > button', function (result) {
+        var child_size = result.value.length;
+        for(var i=1; i<=child_size; i++) {
+          if(i==2) {
+            this
+              .click('#main_debug_toolbar > button:first-of-type')
+              .waitForElementVisible('#main_debug_toolbar > button:nth-of-type(2)',10000)
+              .moveToElement('#main_debug_toolbar > button:nth-of-type(2)',10,10)
+              .verify.visible('#main_debug_toolbar > button:nth-of-type(2)[aria-describedby^="tooltip"]')
+              .waitForElementVisible('#main_debug_toolbar > button:nth-of-type(1)',10000)
+          }
+          else {
+          this
+            .moveToElement('#main_debug_toolbar > button:nth-of-type(' + i + ')',10,10)
+            .verify.visible('#main_debug_toolbar > button:nth-of-type(' + i + ')[aria-describedby^="tooltip"]')
+          }
+        }
+      });
+    },
+    'show_docs_tooltip': function(browser) {
+      browser
+        .keys([browser.Keys.ALT, '2'])
+        .keys(browser.Keys.NULL)
+        .pause(1000);
+      browser.elements('css selector','#slideshare_control > button', function (result) {
+        var child_size = result.value.length;
+        for(var i=1; i<=child_size; i++) {
+          this
+            .moveToElement('#slideshare_control > button:nth-of-type(' + i + ')',10,10)
+            .verify.visible('#slideshare_control > button:nth-of-type(' + i + ')[aria-describedby^="tooltip"]')
+        }
+      });
+    },
+    // 'show_history_tooltip': function(browser) {
+    //   browser
+    //     .keys([browser.Keys.ALT, '3'])
+    //     .keys(browser.Keys.NULL)
+    //     .pause(1000);
+    //   browser.elements('css selector','#history_player_control_toolbar button[tooltip]', function (result) {
+    //     var child_size = result.value.length;
+    //     for(var i=1; i<=child_size; i++) {
+    //       this
+    //         .moveToElement('#history_player_control_toolbar button[tooltip]:nth-child(' + i + ')',10,10)
+    //         .verify.visible('#history_player_control_toolbar button[tooltip]:nth-child(' + i + ')[aria-describedby^="tooltip"]')
+    //     }
+    //   });
+    // },
     'toggle_top': function(browser) {
         browser
             .pause(2000)
