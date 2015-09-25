@@ -1,11 +1,9 @@
 exports.command = function(file_name) {
 	file_name = file_name.split('/');
 	this
-		.keys(this.Keys.COMMAND)
-		.pause(300)
-		.keys('v')
-		.pause(300)
-		.keys(this.Keys.NULL)
+		.click('#main-menu-file > a')
+		.waitForElementPresent('#main-menu-file.open', 2000)
+		.click('#main-menu-file a[action=open_file]')
 		.pause(1000)
 	for(var i = 0; i<file_name.length; i++) {
 		this

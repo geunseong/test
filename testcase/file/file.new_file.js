@@ -61,6 +61,9 @@ module.exports = {
       .click('button#g_nf_btn_cancel')
       .waitForElementNotVisible('#dlg_new_file', 3000)
       /* tree test needed in here */
-      .end();
+      // .end();
+  }
+  'file_delete_file' : function (browser) {
+    browser.delete_file(duplicate);
   }
 }
