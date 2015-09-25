@@ -33,6 +33,43 @@ module.exports = {
   			.waitForElementVisible('#project_treeview', 10000)
   			.verify.visible('#project_treeview')
   	},
+    'open_editor_dialog': function(browser) {
+      browser
+        .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'x'])
+        .keys(browser.Keys.NULL)
+        .click('#main-menu-file > a')
+        .waitForElementPresent('#main-menu-file.open', 1000)
+        .click('#main-menu-file a[action="open_file"]')
+        .waitForElementVisible('#dlg_open_file', 2000)
+        .click('#dlg_open_file #file_open_files div[filename="src"]')
+        .keys(browser.Keys.ENTER)
+        .keys(browser.Keys.NULL)
+        .pause(500)
+        .click('#dlg_open_file #file_open_files > div[filename="main.c"]')
+        .keys(browser.Keys.ENTER)
+        .keys(browser.Keys.NULL)
+        .pause(500)
+        .waitForElementNotVisible('#dlg_open_file', 2000)
+        .waitForElementNotVisible('#dlg_loading_bar', 2000)
+        .verify.visible('.g_windows_tab_li .tab_title[filename="main.c"]')
+        .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'x'])
+        .keys(browser.Keys.NULL)
+    },
+    'open_editpr_treeview': function(browser) {
+      browser.getAttribute('#project_treeview li[path$="src"]','aria-expanded', function(result) {
+          if(result.value == 'false') {
+            this.click('#project_treeview li[path*="src"] > i');
+          }
+      });
+      browser
+        .waitForElementVisible('#project_treeview li[path$="src"] li[path$="main.c"]', 3000)
+        .moveToElement('#project_treeview li[path$="src"] li[path$="main.c"]',10,0,function() {
+          this.doubleClick()
+        })
+        .waitForElementNotVisible('#dlg_loading_bar', 10000)
+        .pause(1000)
+        .verify.visible('.g_windows_tab_li .tab_title[filename="main.c"]')
+    },
     'toggle_top': function(browser) {
         browser
             .pause(2000)
@@ -381,6 +418,14 @@ module.exports = {
             .keys([browser.Keys.CONTROL, browser.Keys.SHIFT, '2'])
             .keys(browser.Keys.NULL)
             .pause(1000)
+            .keys(['echo Test', browser.Keys.ENTER])
+            .keys(browser.Keys.NULL)
+            .pause(1000)
+            .expect.element('div#terminal > div:nth-child(2)').text.to.contain('Test');
+        browser
+            .keys(['clear', browser.Keys.ENTER])
+            .keys(browser.Keys.NULL)
+            .pause(1000)
             .verify.visible('#gLayoutTab_Terminal')
             .verify.visible('#terminal');
     },
@@ -409,7 +454,6 @@ module.exports = {
             .keys([browser.Keys.CONTROL, browser.Keys.SHIFT, '3'])
             .keys(browser.Keys.NULL)
             .pause(1000)
-
             .verify.visible('#gLayoutTab_Search')
             .verify.visible('#search_treeview');
     },
