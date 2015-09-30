@@ -22,7 +22,7 @@ module.exports = {
   	var new_file = 'test_file_' + Date.now();
     duplicate = new_file;
     browser
-      .new_file(new_file);
+      .new_file(new_file)
       .pause(2000);
   },  
   'file_new_duplicate_file' : function (browser) {
@@ -62,7 +62,7 @@ module.exports = {
       .waitForElementNotVisible('#dlg_new_file', 3000)
       /* tree test needed in here */
       // .end();
-  }
+  },
   'file_delete_file' : function (browser) {
     browser.delete_file(duplicate);
   }

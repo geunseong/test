@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="4">
+
+  <testsuite name="file.rename_file"
+    errors="0" failures="0" hostname="" id="" package="file.rename_file" skipped="0"
+    tests="4" time="0.000" timestamp="Wed, 30 Sep 2015 16:45:26 GMT">
+  
+    <testcase name="goorm_login" time="50.39" assertions="8">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="project_open" time="6.710" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="file_rename" time="4.992" assertions="5">
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="file_recover_rename" time="6.945" assertions="5">
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>

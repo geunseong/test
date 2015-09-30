@@ -1,0 +1,7 @@
+module.exports = {
+	username: "keonwoo.kim@goorm.io",
+	password: "@GRkeon8256!",
+	urls : {
+		qa: 'http://qa.goorm.io'
+	}
+};

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="6">
+
+  <testsuite name="file.open_file"
+    errors="0" failures="1" hostname="" id="" package="file.open_file" skipped="0"
+    tests="6" time="0.000" timestamp="Wed, 30 Sep 2015 06:22:37 GMT">
+  
+    <testcase name="goorm_login" time="58.66" assertions="8">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="project_open" time="6.055" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="file_open_file_from_toolbar" time="9.753" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="file_open_file_from_menu" time="6.627" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="file_open_file_from_shortcut" time="13.37" assertions="2">  <failure message="Timed out while waiting for element &lt;#file_open_files [filename=&quot;test_file&quot;]&gt; to be visible for 8000 milliseconds.">    at Object.exports.command (C:\Users\K1\projects\goorm-test\commands\open_file_shortcut.js:12:5)
+    at Object.F.command (C:\Users\K1\AppData\Roaming\npm\node_modules\nightwatch\lib\core\api.js:274:31)
+    at Object.commandFn (C:\Users\K1\AppData\Roaming\npm\node_modules\nightwatch\lib\core\api.js:287:24)
+    at AsyncTree.runCommand (C:\Users\K1\AppData\Roaming\npm\node_modules\nightwatch\lib\core\queue.js:157:30)
+    at AsyncTree.runChildNode (C:\Users\K1\AppData\Roaming\npm\node_modules\nightwatch\lib\core\queue.js:117:8)
+    at AsyncTree.walkDown (C:\Users\K1\AppData\Roaming\npm\node_modules\nightwatch\lib\core\queue.js:83:10)
+    at AsyncTree.traverse (C:\Users\K1\AppData\Roaming\npm\node_modules\nightwatch\lib\core\queue.js:71:10)
+    at queueRunner [as run] (C:\Users\K1\AppData\Roaming\npm\node_modules\nightwatch\lib\core\queue.js:218:18)</failure>
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="file_open_file_from_url" time="3.724" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>
