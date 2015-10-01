@@ -2,9 +2,7 @@ exports.command = function(file_name) {
 	file_name = file_name.split('/');
 	this
 		.keys(this.Keys.COMMAND)
-		.pause(300)
 		.keys('v')
-		.pause(300)
 		.keys(this.Keys.NULL)
 		.pause(1000)
 	for(var i = 0; i<file_name.length; i++) {
@@ -20,4 +18,4 @@ exports.command = function(file_name) {
 		.click('#dlg_open_file .close') //if it didn't be closed yet 
 		.waitForElementVisible('div.ui-dialog', 5000)
 	return this;
-};
+};	

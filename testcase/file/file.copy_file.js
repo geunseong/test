@@ -1,4 +1,3 @@
-var duplicate;
 module.exports = {
   'goorm_login' : function (browser) {
     var data = browser.globals;
@@ -7,7 +6,6 @@ module.exports = {
   // I should try this without project open
   'project_open' : function (browser) {
     var project = 'Test';
-    // Selecting project from menu
     browser.open_project(project);
   },
   'file_duplicate_file_from_menu_without_choosing_file' : function (browser){
@@ -45,7 +43,7 @@ module.exports = {
   },  
 
   //에러 
-  'file_duplicate_file_from_right_click' : function (browser){
+  'file_duplicate_file_with_right_click' : function (browser){
     var file_name = "test_file";
     browser
       .waitForElementPresent('.jstree-node[id$="' + file_name + '"]', 2000)
@@ -64,21 +62,15 @@ module.exports = {
       .pause(2000)
   },  
 
-  //에러
   'file_duplicate_file_from_shortcut' : function (browser){
     var file_name = "test_file";
     browser
       .waitForElementPresent('.jstree-node[id$="' + file_name + '"]', 2000)
       .click('.jstree-node[id$="' + file_name + '"]')
-      .pause(1000) 
-      .keys(browser.keys.CONTROL, function(){console.log("Typed Control")})
-      .pause(300)
-      .keys(browser.keys.SHIFT, function(){console.log("Typed Shift")})
-      .pause(300)
-      .keys('A', function(){console.log("Typed A")})
-      .pause(300)
-      .keys(browser.keys.NULL)
-      .pause(300)
+      .keys(browser.Keys.CONTROL)
+      .keys(browser.Keys.SHIFT)
+      .keys('a')
+      .keys(browser.Keys.NULL)
       .waitForElementPresent('.jstree-node[id$="' + file_name + '_copy0"]', 5000)
   },
 
@@ -86,10 +78,6 @@ module.exports = {
     var file_name = "test_file_copy0"
     browser
       .delete_file(file_name)
-      .pause(2000)
+      .end();
   },  
-
-
-
-
 }

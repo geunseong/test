@@ -32,7 +32,7 @@ module.exports = {
     browser
         .click('#main-menu-file > a')
         .waitForElementPresent('#main-menu-file.open', 2000)
-        .click("#main-menu-file a[action=open_url]")
+        .click("#main-menu-file a[action=print]")
         .waitForElementVisible("#dlg_open_url", 2000)
         .setValue('#open_url_address', url)
         .click('#g_ou_btn_ok')
