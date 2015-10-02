@@ -38,51 +38,87 @@ module.exports = {
 	'open_preference' : function (browser) {
 		browser
 			.click('#main_edit_toolbar button[action=preference]')
-			.waitForElementVisible('#dlg_preference', 2000)
+			.waitForElementVisible('#dlg_preference', 2000)},
+	'font_change' : function (browser) {
+		browser
+			.click('select[id="preference.editor.font_family"]')
+			.keys(['\uE005','\uE006'])
+			.click('option[value="Courier New"]')
+			.click('#preference_applyBt_0')
+			.expect.element('.ui-dialog .CodeMirror-lines').to.have.css('font-family').to.have.contains('Courier New');
+		browser
+			.click('select[id="preference.editor.font_family"]')
+			.keys(['\uE005','\uE006'])
+			.click('option[value="Lucida Console"]')
+			.click('#preference_applyBt_0')
+			.expect.element('.ui-dialog .CodeMirror-lines').to.have.css('font-family').which.contains('Lucida Console');
+		browser
+			.click('select[id="preference.editor.font_family"]')
+			.keys(['\uE005','\uE006'])
+			.click('option[value="Nanum Gothic Coding"]')
+			.click('#preference_applyBt_0')
+			.expect.element('.ui-dialog .CodeMirror-lines').to.have.css('font-family').which.contains('Nanum Gothic Coding');
+		browser
+			.click('select[id="preference.editor.font_family"]')
+			.keys(['\uE005','\uE006'])
+			.click('option[value="Source Code Pro"]')
+			.click('#preference_applyBt_0')
+			.expect.element('.ui-dialog .CodeMirror-lines').to.have.css('font-family').which.contains('Source Code Pro');
+	
 	},
-	/*'font_change' : function (browser) {
-		this.open_preference(browser);
-			$("preference.editor.font_family").val('Courier New')
-			browser.click('#preference_applyBt_0')
-			browser.expect.element('.ui-dialog .CodeMirror-lines').to.have.css('font-family').which.equals('Courier New')
-			$("preference.editor.font_family").val('Lucida Console')
-			browser.click('#preference_applyBt_0')
-			browser.expect.element('.ui-dialog .CodeMirror-lines').to.have.css('font-family').which.equals('Lucida Console')
-			$("preference.editor.font_family").val('Nanum Gothic Coding')
-			browser.click('#preference_applyBt_0')
-			browser.expect.element('.ui-dialog .CodeMirror-lines').to.have.css('font-family').which.equals('Nanum Gothic Coding')
-			$("preference.editor.font_family").val('Source Code Pro')
-			browser.click('#preference_applyBt_0')
-			browser.expect.element('.ui-dialog .CodeMirror-lines').to.have.css('font-family').which.equals('Source Code Pro')
-	},
-
 	'font_size_change' : function (browser) {
 		this.open_preference(browser);
 		browser
-			.element('#preference.editor.font_size').val(value="15")
+			.click('select[id="preference.editor.font_size"]')
+			.keys(['\uE005','\uE006'])
+			.click('option[value="15"]')
 			.click('#preference_applyBt_0')
-			.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('font-size').which.equals('15px')
-			.element('#preference.editor.font_size').click(option[value="20"])
+			//.assert.cssProperty(".ui-dialog .CodeMirror-wrap cm-s-default","font-size","15px")
+			.getcssProperty('class="ui-dialog .CodeMirror-wrap cm-s-default"', 'font-size', function (res) {
+				this.assert.equal(res,'15px');
+			})
+
+			.click('select[id="preference.editor.font_size"]')
+			.keys(['\uE005','\uE006'])
+			.click('option[value="20"]')
 			.click('#preference_applyBt_0')
-			.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('font-size').which.equals('20px')
-			.element('#preference.editor.font_size').click(option[value="12"])
+			//.assert.cssProperty(".ui-dialog .CodeMirror-wrap cm-s-default","font-size","20px")
+		//	.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('font-size').which.matchs(/20px/)
+
+			.click('select[id="preference.editor.font_size"]')
+			.keys(['\uE005','\uE006'])
+			.click('option[value="12"]')
 			.click('#preference_applyBt_0')
-			.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('font-size').which.equals('12px')
+			//.assert.cssProperty(".ui-dialog .CodeMirror-wrap cm-s-default","font-size","12px")
+	//		.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('font-size').which.matchs(/12px/)
 	},
-	'line_spacing' : function (browser) {
+/*	'line_spacing' : function (browser) {
 		this.open_preference(browser);
 		browser
-			.elementIdSelected('#preference.editor.line_spacing', '2')
+			.click('select[id="preference.editor.line_spacing"]')
+			.keys(['\uE005','\uE006'])
+			.click('option[value="2"]')
 			.click('#preference_applyBt_0')
-			.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('line-height').which.equals('1.2')
+			.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('line-height').which.contains('1.2')
+
+			.click('select[id="preference.editor.line_spacing"]')
+			.keys(['\uE005','\uE006'])
+			.click('option[value="5"]')
 			.click('#preference_applyBt_0')
-			.elementIdSelected('#preference.editor.line_spacing', '5')
-			.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('line-height').which.equals('1.5')
+			.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('line-height').which.contains('1.5')
+
+			.click('select[id="preference.editor.line_spacing"]')
+			.keys(['\uE005','\uE006'])
+			.click('option[value="1"]')
 			.click('#preference_applyBt_0')
-			.elementIdSelected('#preference.editor.line_spacing', '3')
+			.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('line-height').which.contains('1.1')
+
+			.click('select[id="preference.editor.line_spacing"]')
+			.keys(['\uE005','\uE006'])
+			.click('option[value="3"]')
 			.click('#preference_applyBt_0')
-			.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('line-height').which.equals('1.3')
-	},*/
+			.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('line-height').which.contains('1.3')
+	},
 
 	'indent_unit' : function (browser) {
 		this.open_preference(browser);
@@ -107,6 +143,38 @@ module.exports = {
 			.waitForElementNotVisible('#dlg_preference', 1000)
 //			.verify.elementPresent('')
 
+	},
+	'show_line_number' : function (browser) {
+		this.open_preference(browser);
+		browser
+			.click('input[id="preference.editor.show_line_numbers"] + ins')
+			.click('#preference_applyBt_0')
+			.click('#g_prf_btn_ok')
+			.waitForElementNotVisible('#dlg_preference', 1000)
+			.verify.elementNotPresent('.ui-dialog .CodeMirror-linenumbers');
+		this.open_preference(browser);
+		browser
+			.click('input[id="preference.editor.show_line_numbers"] + ins')
+			.click('#preference_applyBt_0')
+			.click('#g_prf_btn_ok')
+			.waitForElementNotVisible('#dlg_preference', 1000)
+			.verify.elementPresent('.ui-dialog .CodeMirror-linenumbers')
+	},
+	'highlight_active_line' : function (browser) {
+		this.open_preference(browser);
+		browser
+			.click('input[id="preference.editor.highlight_current_cursor_line"] + ins')
+			.click('#preference_applyBt_0')
+			.click('#g_prf_btn_ok')
+			.waitForElementNotVisible('#dlg_preference', 1000)
+			.verify.elementNotPresent('.ui-dialog .CodeMirror-activeline');
+		this.open_preference(browser);
+		browser
+			.click('input[id="preference.editor.highlight_current_cursor_line"] + ins')
+			.click('#preference_applyBt_0')
+			.click('#g_prf_btn_ok')
+			.waitForElementNotVisible('#dlg_preference', 1000)
+			.verify.elementPresent('.ui-dialog .CodeMirror-activeline')
 	},
 	'auto_close_brackets' : function (browser) {
 		this.open_preference(browser);
@@ -140,39 +208,6 @@ module.exports = {
 			.waitForElementNotVisible('#dlg_preference', 1000)
 //			.verify.elementPresent('.cm-s-default CodeMirror-wrap')
 	},
-	'wheel_zoom' : function (browser) {
-		this.open_preference(browser);
-		browser
-			.click('input[id="preference.editor.wheel_zoom"] + ins')
-			.click('#preference_applyBt_0')
-			.click('#g_prf_btn_ok')
-			.waitForElementNotVisible('#dlg_preference', 1000)
-//			.verify.elementNotPresent('');
-		this.open_preference(browser);
-		browser
-			.click('input[id="preference.editor.wheel_zoom"] + ins')
-			.click('#preference_applyBt_0')
-			.click('#g_prf_btn_ok')
-			.waitForElementNotVisible('#dlg_preference', 1000)
-//			.verify.elementPresent('')
-	},
-
-	'show_line_number' : function (browser) {
-		this.open_preference(browser);
-		browser
-			.click('input[id="preference.editor.show_line_numbers"] + ins')
-			.click('#preference_applyBt_0')
-			.click('#g_prf_btn_ok')
-			.waitForElementNotVisible('#dlg_preference', 1000)
-			.verify.elementNotPresent('.ui-dialog .CodeMirror-linenumbers');
-		this.open_preference(browser);
-		browser
-			.click('input[id="preference.editor.show_line_numbers"] + ins')
-			.click('#preference_applyBt_0')
-			.click('#g_prf_btn_ok')
-			.waitForElementNotVisible('#dlg_preference', 1000)
-			.verify.elementPresent('.ui-dialog .CodeMirror-linenumbers')
-	},
 	'show_ruler' : function (browser) {
 		this.open_preference(browser);
 		browser
@@ -194,31 +229,44 @@ module.exports = {
 			.waitForElementNotVisible('#dlg_preference', 1000)
 			.verify.elementNotPresent('.ui-dialog .CodeMirror-ruler')
 	},
-	'highlight_active_line' : function (browser) {
+	'wheel_zoom' : function (browser) {
 		this.open_preference(browser);
 		browser
-			.click('input[id="preference.editor.highlight_current_cursor_line"] + ins')
+			.click('input[id="preference.editor.wheel_zoom"] + ins')
 			.click('#preference_applyBt_0')
 			.click('#g_prf_btn_ok')
 			.waitForElementNotVisible('#dlg_preference', 1000)
-			.verify.elementNotPresent('.ui-dialog .CodeMirror-activeline');
+//			.verify.elementNotPresent('');
 		this.open_preference(browser);
 		browser
-			.click('input[id="preference.editor.highlight_current_cursor_line"] + ins')
+			.click('input[id="preference.editor.wheel_zoom"] + ins')
 			.click('#preference_applyBt_0')
 			.click('#g_prf_btn_ok')
 			.waitForElementNotVisible('#dlg_preference', 1000)
-			.verify.elementPresent('.ui-dialog .CodeMirror-activeline')
-			.end();
-	},
-/*	'theme_change' : function (browser) {
+//			.verify.elementPresent('')
+	},*/
+	'theme_change' : function (browser) {
+		this.open_preference(browser);
 		browser
-			.elementIdSelected('#preference.editor.theme', 'blackboard')
+			.click('#editor_theme')
+
+			.click('select[id="preference.editor.theme"]')
+			.keys(['\uE005','\uE006'])
+			.click('option[value="blackboard"]')
 			.click('#preference_applyBt_1')
-			.verify.elementPresent('.ui-dialog .CodeMirror-wrap cm-s-blackboard')
-			.elementIdSelected('#preference.editor.theme', 'default')
+			//.attributeEquals(".ui-dialog .CodeMirror-wrap cm-s-blackboard","true");
+		browser
+			.click('select[id="preference.editor.theme"]')
+			.keys(['\uE005','\uE006'])
+			.click('option[value="ambiance"]')
 			.click('#preference_applyBt_1')
-			.verify.elementPresent('.ui-dialog .CodeMirror-wrap cm-s-default')
+			//.attributeEquals(".ui-dialog .CodeMirror-wrap cm-s-ambiance","true");
+		browser
+			.click('select[id="preference.editor.theme"]')
+			.keys(['\uE005','\uE006'])
+			.click('option[value="default"]')
+			.click('#preference_applyBt_1')
+			//.attributeEquals(".ui-dialog .CodeMirror-wrap cm-s-default","true")
 			.end();
-	}*/
+	}
 }
