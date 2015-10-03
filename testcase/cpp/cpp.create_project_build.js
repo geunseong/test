@@ -27,11 +27,11 @@ module.exports = {
       .waitForElementVisible('div.project_wizard_second_button.selected_button', 1000000)
       .click('#g_np_btn_next')
       .waitForElementVisible('#input_project_name', 1000000)
-      .setValue('#input_project_name', 'cpp_test')
+      .setValue('#input_project_name', 'Test')
       .click('#g_np_btn_ok_template')
       .waitForElementNotVisible('#dlg_new_project', 1000000)
       .waitForElementNotVisible('#dlg_loading_bar', 1000000)
-      .verify.containsText('#selected_project_name', 'cpp_test')
+      .verify.containsText('#selected_project_name', 'Test')
   },
 
   'cpp_project_error_make' : function (browser) {
@@ -146,7 +146,7 @@ module.exports = {
       .click('#main-menu-project a[class=dropdown-toggle]')
       .click('#main-menu-project a[action=delete_project]')
       .waitForElementVisible('#dlg_delete_project', 100000)
-      .click('#selector_cpp_test')
+      .click('#selector_Test')
       .click('#g_dp_btn_ok')
       .waitForElementVisible('#dlg_confirmation', 100000)
       .click('#g_cfrm_btn_yes')
