@@ -1,8 +1,8 @@
 exports.command = function(file_name) {
 	file_name = file_name.split('/');
 	this
-		.keys(this.Keys.COMMAND)
-		.keys('v')
+		.keys([this.Keys.COMMAND,'v'])
+		// .keys('v')
 		.keys(this.Keys.NULL)
 		.pause(1000)
 	for(var i = 0; i<file_name.length; i++) {

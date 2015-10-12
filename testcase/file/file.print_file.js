@@ -8,6 +8,22 @@ module.exports = {
     browser
       .open_project(project)
   },
+
+  'file_close_all_files' : function(browser){
+    browser
+      .close_all_menu()
+  },
+
+  'file_print_from_menu' : function(browser){
+    browser
+      .click('#main-menu-file > a')
+      .waitForElementPresent('#main-menu-file.open', 2000)
+      .click("#main-menu-file a[action=print]")
+      .waitForElementVisible('#dlg_alert', 2000)
+      .click('#g_alert_btn_ok')
+      .waitForElementNotVisible('#dlg_alert', 2000)
+  },
+
   'file_open_file_from_toolbar' : function (browser) {
     var file_name = "test_file";
     browser
@@ -17,7 +33,7 @@ module.exports = {
     browser
       .click('#main-menu-file > a')
       .waitForElementPresent('#main-menu-file.open', 2000)
-      .click("#main-menu-file a[action=open_url]")
+      .click("#main-menu-file a[action=print]")
   }
 
 }

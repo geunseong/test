@@ -20,7 +20,7 @@ module.exports = {
   'file_recover_new_file' : function (browser) {
     var new_file = 'test_file';
     browser
-      .new_file(new_file);
+      .new_file(new_file)
       .end();
   },  
 }
