@@ -54,14 +54,10 @@ module.exports = {
 		for(var menuNum = 1; menuNum<= 3; ++menuNum){
 			browser
 				.waitForElementVisible('ul#insidepagenav li:nth-child('+menuNum+').active', 1000)
-				.waitForElementVisible('.nav.nav-pills.nav-stacked.affix', 1000)		
-			if(menuNum === 1){
-				max = 8;
-			}else if(menuNum === 2){
-				max = 3;
-			}else{
-				max = 15;
-			}
+				.waitForElementVisible('.nav.nav-pills.nav-stacked.affix', 1000)		5;
+		
+			var max = menuNum===1?8:menuNum===2?3:15
+
 			for(var i = 1; i <= max; ++i){ 
 				// function(){
 				browser
