@@ -1,8 +1,8 @@
 exports.command = function(file_name) {
 	file_name = file_name.split('/');
 	this
-		.keys([this.Keys.COMMAND,'v'])
-		// .keys('v')
+		// .click('#main-menu-file > a')
+		.keys([this.Keys.CONTROL,'o'])
 		.keys(this.Keys.NULL)
 		.pause(1000)
 	for(var i = 0; i<file_name.length; i++) {

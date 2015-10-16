@@ -64,6 +64,8 @@ module.exports = {
       // .end();
   },
   'file_delete_file' : function (browser) {
-    browser.delete_file(duplicate);
+    browser
+      .delete_file(duplicate);
+      .end;
   }
 }

@@ -72,7 +72,10 @@ module.exports = {
       .click('button#g_nfo_btn_cancel')
       .waitForElementNotVisible('#dlg_new_folder', 3000)
       /* tree test needed in here */
+  },
+  'delete_folder': function(browser){
+    browser
+      .delete_file(duplicate)
       .end();
-
   }
 }

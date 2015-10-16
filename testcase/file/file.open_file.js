@@ -22,6 +22,23 @@ module.exports = {
     browser
       .open_file_shortcut(file_name);
   },  
+  'file_open_file_from_url_without_project' :  function (browser) {
+    var url = "google.com"
+    browser
+        .click('button#project_selectbox')
+        .waitForElementPresent('#project_selector > div.open', 3000)
+        .click('li#back_to_project_table')
+        .verify.containsText('#selected_project_name', "Project List")
+
+        .click('#main-menu-file > a')
+        .waitForElementPresent('#main-menu-file.open', 2000)
+        .click("#main-menu-file a[action=open_url]")
+        .waitForElementVisible("#dlg_open_url", 2000)
+        .waitForElementVisible('#dlg_alert', 2000)
+        .click('button#g_alert_btn_ok')
+        .waitForElementNotVisible('#dlg_alert', 3000)
+
+  },  
   'file_open_file_from_url' :  function (browser) {
     var url = "google.com"
     browser
