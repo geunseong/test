@@ -16,7 +16,7 @@ module.exports = {
 			// .pause(2000)
 			// .waitForElementNotVisible('#dlg_loading_bar', 10000)
 			// .verify.containsText('span#selected_project_name', project);
-      .open_project(project);
+      .open_project_menu(project);
   },
   'file_new_folder' : function (browser) {
     var new_folder = 'test_folder_' + Date.now();

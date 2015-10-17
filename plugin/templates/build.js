@@ -80,7 +80,7 @@ module.exports = {
               .pause(1000)
               .click('.g_windows_tab_li.active .tab_close_button')
               .pause(1000)
-              .open_file(path.substring(path))
+              .open_file_toolbar(path.substring(path))
               .pause(3000)
               .verify.containsText('.ui-dialog-content[path$="' + path + '"] .CodeMirror-lines', 'abcdefg')
           })

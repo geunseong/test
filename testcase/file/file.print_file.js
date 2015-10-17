@@ -6,7 +6,7 @@ module.exports = {
   'project_open' : function (browser) {
     var project = 'Test';
     browser
-      .open_project(project)
+      .open_project_menu(project)
   },
 
   'file_close_all_files' : function(browser){
@@ -27,7 +27,7 @@ module.exports = {
   'file_open_file_from_toolbar' : function (browser) {
     var file_name = "test_file";
     browser
-      .open_file(file_name)
+      .open_file_toolbar(file_name)
   },
   'file_print_from_menu' : function(browser){
     browser

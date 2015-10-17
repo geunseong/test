@@ -64,7 +64,7 @@ module.exports = {
 					.waitForElementVisible('.nav.nav-pills.nav-stacked.affix > li:nth-child('+i+').active', 1000)
 					.pause(100)
 					.click((function(menuNum, i){
-						if(i< (menuNum===1?8:menuNum===2?3:15)){
+						if(i< max){
 							return '.nav.nav-pills.nav-stacked.affix > li:nth-child('+(i+1)+') > a';
 						}else{
 							return '.nav.nav-pills.nav-stacked.affix > a';

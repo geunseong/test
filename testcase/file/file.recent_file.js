@@ -8,7 +8,7 @@ module.exports = {
   'project_open' : function (browser) {
     var project = 'Test';
     // Selecting project from menu
-    browser.open_project(project);
+    browser.open_project_menu(project);
   },
   'file_open_most_recent_file_from_menu' : function (browser) {
     browser

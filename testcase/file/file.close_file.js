@@ -7,38 +7,25 @@ module.exports = {
   'project_open' : function (browser) {
     var project = 'Test';
     // Selecting project from menu
-    browser.open_project(project);
-  },
-  'file_open_one_file_from_toolbar' : function (browser) {
-    browser
-      .open_file("a")
-      .pause(1000);
+    browser.open_project_menu(project);
   },
   'file_close_one_file_from_menu' : function(browser){
     browser
+      .open_file_toolbar("a")
       .close_file_menu()
-      .pause(1000);
-  },
-  'file_open_one_file_from_toolbar' : function (browser) {
-    browser
-      .open_file("a")
-      .pause(1000);
   },
   'file_close_one_file_from_shortcut' : function(browser){
     browser
+      .open_file_toolbar("a")
       .close_file_shortcut()
       .pause(1000);
   },  
-  'file_open_many_files_from_toolbar' : function (browser) {
+  'file_cloase_all_files' : function (browser) {
     browser
-      .open_file("a")
-      .open_file("b")
-      .open_file("c")
-      .open_file("d")
-      .pause(1000);
-  },
-  'file_close_all_files' : function(browser){
-    browser
+      .open_file_toolbar("a")
+      .open_file_toolbar("b")
+      .open_file_toolbar("c")
+      .open_file_toolbar("d")
       .close_all_menu()
       .end();
   }

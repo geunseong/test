@@ -5,12 +5,12 @@ module.exports = {
   },
   'project_open' : function (browser) {
     var project = 'Test';
-    browser.open_project(project);
+    browser.open_project_menu(project);
   },
   'file_open_file_from_toolbar' : function (browser) {
     var file_name = "test_file";
     browser
-      .open_file(file_name)
+      .open_file_menu(file_name)
       .pause(2000);
   },
   'file_save_from_toolbar' : function (browser){

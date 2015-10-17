@@ -8,7 +8,8 @@ module.exports = {
   'project_open' : function (browser) {
     var project = 'Test';
     // Selecting project from menu
-    browser.open_project(project);
+    browser
+      .open_project_menu(project);
   },
   'file_unzip' : function (browser) {
     browser

@@ -8,7 +8,7 @@ module.exports = {
     var project = 'Test';
     // Selecting project from menu
     browser
-      .open_project(project)
+      .open_project_menu(project)
       .pause(2000);
   },
   'file_remove_file_from_menu' : function (browser) {
