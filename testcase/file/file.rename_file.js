@@ -1,4 +1,4 @@
-var project = 'Test';
+var project = 'Test2';
 var file_name = "test_file"
 module.exports = {
 	'goorm_login' : function (browser) {

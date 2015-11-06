@@ -5,7 +5,7 @@ module.exports = {
   },
   // I should try this without project open
   'project_open' : function (browser) {
-    var project = 'Test';
+    var project = 'Test2';
     // Selecting project from menu
     browser
       .open_project_menu(project)

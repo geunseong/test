@@ -1,3 +1,4 @@
+var file_name = "test_file";
 module.exports = {
 	'goorm_login' : function (browser) {
     var data = browser.globals;
@@ -13,8 +14,7 @@ module.exports = {
     browser
       .close_all_menu()
   },
-
-  'file_print_from_menu' : function(browser){
+  'file_print_without_opened_file' : function(browser){
     browser
       .click('#main-menu-file > a')
       .waitForElementPresent('#main-menu-file.open', 2000)
@@ -23,17 +23,22 @@ module.exports = {
       .click('#g_alert_btn_ok')
       .waitForElementNotVisible('#dlg_alert', 2000)
   },
-
-  'file_open_file_from_toolbar' : function (browser) {
-    var file_name = "test_file";
-    browser
-      .open_file_toolbar(file_name)
-  },
   'file_print_from_menu' : function(browser){
     browser
+      .open_file_toolbar(file_name)
       .click('#main-menu-file > a')
       .waitForElementPresent('#main-menu-file.open', 2000)
       .click("#main-menu-file a[action=print]")
+  },
+  // 다음테스트는 어떻게 하는가...
+  'file_print_from_shortcut' : function(browser){
+    browser
+      .open_file_toolbar(file_name)
+      .keys(browser.Keys.CONTROL)
+      .keys('p')
+      .pause(500)
+      .keys(browser.Keys.NULL);
+      .end();
   }
-
+  
 }

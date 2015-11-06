@@ -16,7 +16,7 @@ exports.command = function(id, pw, plugin) {
             self
                 .pause(5000)
                 .waitForElementVisible('#workspace', 300000) //임시로 300000으로 바꿈 원래 200000
-                .verify.urlEquals('http://ide.qa.goorm.io/')
+                .verify.urlEquals('http://ide-qa.goorm.io/')
                 .waitForElementPresent('#terminal > div span[style="color:#8ae234;"]', 30000)
                 .waitForElementNotVisible('#dlg_loading_bar', 10000)
                 .pause(3000)

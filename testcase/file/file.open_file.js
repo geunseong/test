@@ -20,15 +20,29 @@ module.exports = {
       .open_file_menu(file_name);
   },
   'file_open_file_from_shortcut' : function (browser) {
-    var file_name = "test_file";
+    var file_name = "test_file".trim();
     browser
-      .open_file_shortcut(file_name);
+      .keys([browser.Keys.CONTROL,'o'])
+      .keys(browser.Keys.NULL)
+      .waitForElementVisible('#file_open_files [filename="' + file_name + '"]', 8000, false, function(e){console.log(e)})
+      .click('#file_open_files [filename="' + file_name + '"]')
+      .pause(300)
+      .keys([browser.Keys.ENTER])
+      .pause(300)
+      .keys(browser.Keys.NULL)
+      .click('#dlg_open_file .close') //if it didn't be closed yet 
+      .waitForElementVisible('div.ui-dialog', 5000)
+
   },
   'file_edit_and_save_opend_file' : function (browser) {
     var file_name = "test_file";
     browser
       .keys('e')
-      .save_file_menu(file_name);
+      //아마 오류날듯
+      .click('#main-menu-file > a')
+      .waitForElementPresent('#main-menu-file.open', 2000)
+      .click("#main-menu-file a[action=save_file]")
+      .pause(2000)
   },
   'file_property_from_menu' :  function (browser) {
     var file_name = "test_file";

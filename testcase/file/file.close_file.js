@@ -5,7 +5,7 @@ module.exports = {
   },
   // I should try this without project open
   'project_open' : function (browser) {
-    var project = 'Test';
+    var project = 'Test2';
     // Selecting project from menu
     browser.open_project_menu(project);
   },
@@ -17,16 +17,31 @@ module.exports = {
   'file_close_one_file_from_shortcut' : function(browser){
     browser
       .open_file_toolbar("a")
-      .close_file_shortcut()
-      .pause(1000);
+      .keys(browser.Keys.ALT)
+      .keys('x')
+      .pause(500)
+      .keys(browser.Keys.NULL);
   },  
-  'file_cloase_all_files' : function (browser) {
+  'file_cloase_all_files_menu' : function (browser) {
     browser
       .open_file_toolbar("a")
       .open_file_toolbar("b")
       .open_file_toolbar("c")
       .open_file_toolbar("d")
-      .close_all_menu()
+      .close_all_menu();
+      .end();
+  }
+  'file_cloase_all_files_shortcut' : function (browser) {
+    browser
+      .open_file_toolbar("a")
+      .open_file_toolbar("b")
+      .open_file_toolbar("c")
+      .open_file_toolbar("d")
+      .keys(browser.Keys.ALT)
+      .keys(browser.Keys.SHIFT)
+      .keys('x')
+      .pause(500)
+      .keys(browser.Keys.NULL)
       .end();
   }
 }

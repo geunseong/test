@@ -4,7 +4,7 @@ module.exports = {
     browser.run_ide(data.username, data.password);
   },
   'project_open' : function (browser) {
-    var project = 'Test';
+    var project = 'Test2';
     browser.open_project_menu(project);
   },
   'file_open_file_from_toolbar' : function (browser) {
@@ -20,13 +20,20 @@ module.exports = {
   },
   'file_save_from_menu' : function (browser) {
     browser
-      .save_file_menu()
-      .pause();
+      .click('#main-menu-file > a')
+      .waitForElementPresent('#main-menu-file.open', 2000)
+      .click("#main-menu-file a[action=save_file]")
   },  
   'file_save_file_as' :  function (browser) {
     var new_name = "save_as_file"
     browser
-      .save_as_file_menu(new_name)
+      .click('#main-menu-file > a')
+      .waitForElementPresent('#main-menu-file.open', 2000)
+      .click("#main-menu-file a[action=save_file]")
+      .waitForElementVisible("#dlg_save_as_file", 2000)
+      .setValue('#file_save_as_target_name', file_name)
+      .click('#g_saf_btn_ok')
+      .waitForElementNotVisible("#dlg_save_as_file", 10000)
       .end();
   },
 }

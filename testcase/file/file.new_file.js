@@ -7,15 +7,6 @@ module.exports = {
   'project_open' : function (browser) {
   	var project = 'Test';
     browser
-  	// 	.waitForElementPresent('li.me img.user_profile_image', 20000)
-			// .waitForElementNotVisible('#dlg_loading_bar', 10000)
-			// .pause(1000)
-			// .click('button#project_selectbox')
-			// .waitForElementPresent('#project_selector > div.open', 3000)
-			// .click('li.project_item[project_path=payphone66l99lmp3_' + project + ']')
-			// .pause(2000)
-			// .waitForElementNotVisible('#dlg_loading_bar', 10000)
-			// .verify.containsText('#selected_project_name', project);
       .open_project_menu(project);
   },
   'file_new_file' : function (browser) {
@@ -65,7 +56,7 @@ module.exports = {
   },
   'file_delete_file' : function (browser) {
     browser
-      .delete_file(duplicate);
+      .delete_file(duplicate)
       .end;
   }
 }
