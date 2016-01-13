@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="4">
+
+  <testsuite name="member.profile.photo_delete"
+    errors="0" failures="0" hostname="" id="" package="member.profile.photo_delete" skipped="0"
+    tests="4" time="37.33" timestamp="Tue, 12 Jan 2016 07:42:48 GMT">
+  
+    <testcase name="goorm_login" time="29.50" assertions="8">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="photo_not_delete" time="2.075" assertions="8">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="photo_delete_wrong_pw" time="1.405" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="photo_changed_yes" time="4.353" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>

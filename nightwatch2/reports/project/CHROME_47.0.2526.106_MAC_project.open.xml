@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="2">
+
+  <testsuite name="project.open"
+    errors="0" failures="1" hostname="" id="" package="project.open" skipped="0"
+    tests="2" time="31.32" timestamp="Tue, 12 Jan 2016 09:24:43 GMT">
+  
+    <testcase name="goorm_login" time="28.33" assertions="8">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="project_open" time="2.990" assertions="4">
+
+    
+
+    
+
+      <failure message="Timed out while waiting for element &lt;#dlg_loading_bar&gt; to be visible for 2000 milliseconds.">Timed out while waiting for element &lt;#dlg_loading_bar&gt; to be visible for 2000 milliseconds.: Expected &quot;visible&quot; but got: &quot;not visible&quot;
+    at F.WaitForElement.fail (/usr/local/lib/node_modules/nightwatch/lib/api/element-commands/_waitForElement.js:193:15)
+    at F.WaitForElementVisible.elementNotVisible (/usr/local/lib/node_modules/nightwatch/lib/api/element-commands/waitForElementVisible.js:61:15)
+    at Object.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/api/element-commands/_waitForElement.js:241:17)
+    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:311:20)
+    at HttpRequest.emit (events.js:98:17)
+    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:334:15)
+    at HttpRequest.emit (events.js:106:17)
+    at IncomingMessage.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/http/request.js:148:16)
+    at IncomingMessage.emit (events.js:117:20)
+    at _stream_readable.js:943:16</failure>
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>

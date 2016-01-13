@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="4">
+
+  <testsuite name="member.profile.photo_delete"
+    errors="0" failures="1" hostname="" id="" package="member.profile.photo_delete" skipped="0"
+    tests="4" time="39.93" timestamp="Tue, 12 Jan 2016 02:58:18 GMT">
+  
+    <testcase name="goorm_login" time="32.69" assertions="8">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="photo_not_delete" time="2.013" assertions="8">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="photo_delete_wrong_pw" time="0.6750" assertions="3">
+
+    
+
+      <failure message="Testing if element &lt;#dlg_confirmation&gt; is hidden.">Testing if element &lt;#dlg_confirmation&gt; is hidden.: Expected &quot;true&quot; but got: &quot;false&quot;
+    at Object.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:105:19)
+    at Object.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/api/element-commands.js:354:20)
+    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:311:20)
+    at HttpRequest.emit (events.js:98:17)
+    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:334:15)
+    at HttpRequest.emit (events.js:106:17)
+    at IncomingMessage.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/http/request.js:148:16)
+    at IncomingMessage.emit (events.js:117:20)
+    at _stream_readable.js:943:16
+    at process._tickCallback (node.js:419:13)</failure>
+
+    
+    </testcase>
+  
+    <testcase name="photo_changed_yes" time="4.555" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>

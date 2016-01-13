@@ -1,0 +1,14 @@
+15:48:15.963 INFO - Launching a standalone server
+15:48:16.001 INFO - Java: Oracle Corporation 24.79-b02
+15:48:16.002 INFO - OS: Linux 3.19.0-26-generic amd64
+15:48:16.055 INFO - v2.45.0, with Core v2.45.0. Built from revision 5017cb8
+15:48:16.175 INFO - Default driver org.openqa.selenium.ie.InternetExplorerDriver registration is skipped: registration capabilities Capabilities [{platform=WINDOWS, ensureCleanSession=true, browserName=internet explorer, version=}] does not match with current platform: LINUX
+15:48:16.216 INFO - RemoteWebDriver instances should connect to: http://127.0.0.1:4444/wd/hub
+15:48:16.217 INFO - Version Jetty/5.1.x
+15:48:16.220 INFO - Started HttpContext[/selenium-server/driver,/selenium-server/driver]
+15:48:16.220 INFO - Started HttpContext[/selenium-server,/selenium-server]
+15:48:16.220 INFO - Started HttpContext[/,/]
+15:48:16.260 INFO - Started org.openqa.jetty.jetty.servlet.ServletHandler@26f6d704
+15:48:16.260 INFO - Started HttpContext[/wd,/wd]
+15:48:16.267 INFO - Started SocketListener on 0.0.0.0:4444
+15:48:16.267 INFO - Started org.openqa.jetty.jetty.Server@1435f58a

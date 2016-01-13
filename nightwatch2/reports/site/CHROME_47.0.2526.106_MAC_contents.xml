@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="4">
+
+  <testsuite name="contents"
+    errors="0" failures="1" hostname="" id="" package="contents" skipped="0"
+    tests="4" time="12.19" timestamp="Tue, 12 Jan 2016 10:00:43 GMT">
+  
+    <testcase name="open_site" time="4.484" assertions="1">
+
+    
+    </testcase>
+  
+    <testcase name="check_main_content" time="0.9140" assertions="16">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="move_to_help_page" time="1.406" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="check_help_contents" time="5.384" assertions="19">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+      <failure message="Timed out while waiting for element &lt;ul#insidepagenav li:nth-child(1).active&gt; to be removed for 1000 milliseconds.">Timed out while waiting for element &lt;ul#insidepagenav li:nth-child(1).active&gt; to be removed for 1000 milliseconds.: Expected &quot;not found&quot; but got: &quot;found&quot;
+    at F.WaitForElement.fail (/usr/local/lib/node_modules/nightwatch/lib/api/element-commands/_waitForElement.js:193:15)
+    at F.WaitForElementNotPresent.elementFound (/usr/local/lib/node_modules/nightwatch/lib/api/element-commands/waitForElementNotPresent.js:44:15)
+    at Object.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/api/element-commands/_waitForElement.js:217:19)
+    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:311:20)
+    at HttpRequest.emit (events.js:98:17)
+    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:334:15)
+    at HttpRequest.emit (events.js:106:17)
+    at IncomingMessage.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/http/request.js:148:16)
+    at IncomingMessage.emit (events.js:117:20)
+    at _stream_readable.js:943:16</failure>
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>

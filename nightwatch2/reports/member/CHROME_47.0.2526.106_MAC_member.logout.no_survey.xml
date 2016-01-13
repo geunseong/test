@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="1"
+            failures="2"
+            tests="5">
+
+  <testsuite name="member.logout.no_survey"
+    errors="1" failures="2" hostname="" id="" package="member.logout.no_survey" skipped="2"
+    tests="5" time="40.26" timestamp="Tue, 12 Jan 2016 07:41:30 GMT">
+  
+    <testcase name="goorm_login" time="28.84" assertions="8">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+      <system-err>
+        Unable to locate element: &quot;span.tab_option&quot; using: css selector
+      </system-err>
+  
+    <testcase name="open_file" time="9.230" assertions="13">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+      <failure message="Testing if element &lt;span.tab_option&gt; is visible. Element could not be located.">Testing if element &lt;span.tab_option&gt; is visible. Element could not be located.: Expected &quot;true&quot; but got: &quot;null&quot;
+    at Object.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/core/assertion.js:105:19)
+    at Object.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/api/element-commands.js:344:18)
+    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:311:20)
+    at HttpRequest.emit (events.js:98:17)
+    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:344:15)
+    at HttpRequest.emit (events.js:106:17)
+    at IncomingMessage.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/http/request.js:150:16)
+    at IncomingMessage.emit (events.js:117:20)
+    at _stream_readable.js:943:16
+    at process._tickCallback (node.js:419:13)</failure>
+
+    
+    </testcase>
+      <system-err>
+        Unable to locate element: &quot;span.tab_option&quot; using: css selector
+      </system-err>
+  
+    <testcase name="try_logout" time="2.195" assertions="3">
+
+    
+
+      <failure message="Timed out while waiting for element &lt;#dlg_confirmation_save&gt; to be visible for 1000 milliseconds.">Timed out while waiting for element &lt;#dlg_confirmation_save&gt; to be visible for 1000 milliseconds.: Expected &quot;visible&quot; but got: &quot;not visible&quot;
+    at F.WaitForElement.fail (/usr/local/lib/node_modules/nightwatch/lib/api/element-commands/_waitForElement.js:193:15)
+    at F.WaitForElementVisible.elementNotVisible (/usr/local/lib/node_modules/nightwatch/lib/api/element-commands/waitForElementVisible.js:61:15)
+    at Object.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/api/element-commands/_waitForElement.js:241:17)
+    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:311:20)
+    at HttpRequest.emit (events.js:98:17)
+    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:334:15)
+    at HttpRequest.emit (events.js:106:17)
+    at IncomingMessage.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/http/request.js:148:16)
+    at IncomingMessage.emit (events.js:117:20)
+    at _stream_readable.js:943:16</failure>
+
+    
+    </testcase>
+      <system-err>
+        Unable to locate element: &quot;span.tab_option&quot; using: css selector
+      </system-err>
+  
+  
+    
+    <testcase
+      name="survey_no">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="force_move_ide">
+      <skipped />
+    </testcase>
+    
+  
+  </testsuite>
+</testsuites>

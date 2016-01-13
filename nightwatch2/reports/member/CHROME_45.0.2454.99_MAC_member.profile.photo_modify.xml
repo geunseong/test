@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="6">
+
+  <testsuite name="member.profile.photo_modify"
+    errors="0" failures="1" hostname="" id="" package="member.profile.photo_modify" skipped="0"
+    tests="6" time="68.88" timestamp="Tue, 12 Jan 2016 02:58:58 GMT">
+  
+    <testcase name="goorm_login" time="28.59" assertions="8">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="profile_photo_change_pixel" time="23.88" assertions="20">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="photo_not_changed" time="2.739" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="photo_changed_wrong_pw" time="3.409" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="photo_changed_yes" time="3.320" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="photo_changed_confirmation" time="6.951" assertions="4">
+
+    
+
+    
+
+      <failure message="Timed out while waiting for element &lt;#fat-menu.open&gt; to be present for 1000 milliseconds.">Timed out while waiting for element &lt;#fat-menu.open&gt; to be present for 1000 milliseconds.: Expected &quot;found&quot; but got: &quot;not found&quot;
+    at F.WaitForElement.fail (/usr/local/lib/node_modules/nightwatch/lib/api/element-commands/_waitForElement.js:193:15)
+    at F.WaitForElementPresent.elementNotFound (/usr/local/lib/node_modules/nightwatch/lib/api/element-commands/waitForElementPresent.js:57:15)
+    at Object.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/api/element-commands/_waitForElement.js:220:17)
+    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:311:20)
+    at HttpRequest.emit (events.js:98:17)
+    at HttpRequest.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/index.js:334:15)
+    at HttpRequest.emit (events.js:106:17)
+    at IncomingMessage.&lt;anonymous&gt; (/usr/local/lib/node_modules/nightwatch/lib/http/request.js:148:16)
+    at IncomingMessage.emit (events.js:117:20)
+    at _stream_readable.js:943:16</failure>
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>

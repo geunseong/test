@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="6">
+
+  <testsuite name="member.profile.name"
+    errors="0" failures="0" hostname="" id="" package="member.profile.name" skipped="0"
+    tests="6" time="39.55" timestamp="Tue, 12 Jan 2016 02:57:38 GMT">
+  
+    <testcase name="goorm_login" time="29.73" assertions="8">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="open_profile_panel" time="1.956" assertions="11">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="name_not_changed" time="1.622" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="name_changed_no" time="1.572" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="name_changed_yes_wrong_pw" time="1.274" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="name_changed_yes" time="3.398" assertions="6">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+  
+  </testsuite>
+</testsuites>
