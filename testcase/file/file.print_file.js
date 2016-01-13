@@ -37,8 +37,8 @@ module.exports = {
       .keys(browser.Keys.CONTROL)
       .keys('p')
       .pause(500)
-      .keys(browser.Keys.NULL);
+      .keys(browser.Keys.NULL)
       .end();
   }
-  
+
 }

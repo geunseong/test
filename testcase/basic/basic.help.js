@@ -31,8 +31,8 @@ module.exports = {
 		browser
 			.click('#main-menu-help > a')
 			.waitForElementPresent('#main-menu-help.open', 1000)
-			.click('#main-menu-help a[action=view_all_shortcuts]')
-			.waitForElementVisible('#dlg_help_shortcuts', 2000)
+			.click('#main-menu-help a[action="view_all_shortcuts"]')
+			.waitForElementVisible('#dlg_help_shortcuts', 3000)
 			.verify.visible('#dlg_help_shortcuts')
 			.moveTo('.modal-backdrop.in', 30, 30)
 			.mouseButtonDown(0)
@@ -42,7 +42,7 @@ module.exports = {
 			.pause(2000)
 			.waitForElementNotVisible('#dlg_help_shortcuts', 1000)
 	},
-	'open_about' : function (browser) {
+/*	'open_about' : function (browser) {
 		browser
 			.click('#main-menu-help > a')
 			.waitForElementPresent('#main-menu-help.open', 1000)
@@ -51,12 +51,12 @@ module.exports = {
 			.verify.visible('#dlg_help_about')
 			.click('#g_ha_btn_close')
 			.waitForElementNotVisible('#dlg_help_about', 1000)
-	},
+	},*/
 	'open_license' : function (browser) {
 		browser
-			.click('#main-menu-help > a')
-			.waitForElementPresent('#main-menu-help.open', 1000)
-			.click('#main-menu-help a[action=help_license]')
+			.click('#main-menu-goorm > a')
+			.waitForElementPresent('#main-menu-goorm.open', 1000)
+			.click('#main-menu-goorm a[action=help_license]')
 			.waitForElementVisible('#dlg_help_license', 2000)
 			.verify.visible('#dlg_help_license')
 			// .click('#g_hl_btn_close')
@@ -65,9 +65,9 @@ module.exports = {
 	},
 	'open_bug_report' : function (browser) {
 		browser
-			.click('#main-menu-help > a')
-			.waitForElementPresent('#main-menu-help.open', 1000)
-			.click('#main-menu-help a[action=help_bug_report]')
+			.click('#main-menu-goorm > a')
+			.waitForElementPresent('#main-menu-goorm.open', 1000)
+			.click('#main-menu-goorm a[action=help_bug_report]')
 			.waitForElementVisible('#dlg_help_bug_report', 2000)
 			.verify.visible('#dlg_help_bug_report')
 			.setValue('#bug_reports_content', 'Nightwatch testing...')
@@ -88,8 +88,8 @@ module.exports = {
 			.verify.visible('#dlg_notice')
 			.click('#g_nt_btn_ok')
 			.waitForElementNotVisible('#dlg_notice', 1000)
-	},
-	'go_to_facebook' : function (browser) {
+	}//,
+/*	'go_to_facebook' : function (browser) {
 		browser
 			.click('#main-menu-help > a')
 			.waitForElementPresent('#main-menu-help.open', 1000)
@@ -102,5 +102,5 @@ module.exports = {
 			})
 			.verify.urlEquals('https://www.facebook.com/goormIDE')
 			.end();
-	}
+	}*/
 }

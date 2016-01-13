@@ -3,7 +3,7 @@ module.exports = {
 		var data = browser.globals;
 	    browser
 			.maximizeWindow()
-			.url('http://qa.goorm.io')
+			.url('https://qa.goorm.io')
 			.waitForElementVisible('input.login-form', 2000)
 	},
 	'check_main_content' : function (browser) {
@@ -13,10 +13,10 @@ module.exports = {
 			.assert.attributeContains('#insidepagenav li:nth-child(1) a', 'href', '#service')
 			.assert.attributeContains('#insidepagenav li:nth-child(2) a', 'href', '#ideservice')
 			.assert.attributeContains('#insidepagenav li:nth-child(3) a', 'href', '#eduservice')
-			.assert.attributeContains('#insidepagenav li:nth-child(4) a', 'href', 'http://help.goorm.io/')
-			.assert.attributeContains('#insidepagenav li:nth-child(5) a', 'href', '#contact')
+			.assert.attributeContains('#insidepagenav li:nth-child(4) a', 'href', 'https://qa.goorm.io')
+			.assert.attributeContains('#insidepagenav li:nth-child(5) a', 'href', 'http://help.goorm.io/')
 			.click('#insidepagenav li:nth-child(1) a')
-			
+
 			.waitForElementVisible('#modals', 1000)
 
 			.waitForElementVisible('#service', 1000)
@@ -33,9 +33,9 @@ module.exports = {
 			.waitForElementVisible('#footer', 1000)
 	},
 	'move_to_help_page' : function (browser) {
-		
+
 		browser
-			.getAttribute('#insidepagenav li:nth-child(4) a', 'href', function (link) {
+			.getAttribute('#insidepagenav li:nth-child(5) a', 'href', function (link) {
 				newWindowUrl = link.value;
 			})
 			.click('#insidepagenav li:nth-child(4) a')
@@ -54,14 +54,14 @@ module.exports = {
 		for(var menuNum = 1; menuNum<= 3; ++menuNum){
 			browser
 				.waitForElementVisible('ul#insidepagenav li:nth-child('+menuNum+').active', 1000)
-				.waitForElementVisible('.nav.nav-pills.nav-stacked.affix', 1000)		5;
-		
+				.waitForElementVisible('.nav.nav-pills.nav-stacked.affix', 1000);
+
 			var max = menuNum===1?8:menuNum===2?3:15
 
-			for(var i = 1; i <= max; ++i){ 
+			for(var i = 1; i <= max; ++i){
 				// function(){
 				browser
-					.waitForElementVisible('.nav.nav-pills.nav-stacked.affix > li:nth-child('+i+').active', 1000)
+					//.waitForElementVisible('.nav.nav-pills.nav-stacked.affix > li:nth-child('+i+').active', 1000)
 					.pause(100)
 					.click((function(menuNum, i){
 						if(i< max){
@@ -101,21 +101,52 @@ module.exports = {
 									return '#help_user';
 							}
 						}else{
-							//일단 이렇게 해둠
+							switch(i){
+								case 1:
+									return '#help_intro';
+								case 2:
+									return '#help_start';
+								case 3:
+									return '#help_do_project';
+								case 4:
+									return '#help_collaboration';
+								case 5:
+									return '#help_language';
+								case 6:
+									return '#help_manage_project';
+								case 7:
+									return '#help_scm';
+								case 8:
+									return '#help_file'
+								case 9:
+									return '#help_editor';
+								case 10:
+									return '#help_terminal';
+								case 11:
+									return '#help_layout';
+								case 12:
+									return '#help_preference';
+								case 13:
+									return '#help_profile';
+								case 14:
+									return '#help_bug_report';
+								case 15:
+									return '#help_extra';
+							}
 							return 'body';
 						}
-					})(menuNum, i), 1000)
-							
+					})(menuNum, i), 5000)
+
 			}
 			// after inner loop
 			browser
-				.click((function(){
-					if(menuNum < 3){
-						return 'ul#insidepagenav li:nth-child('+(menuNum+1)+')';
-					}else{
-						return'ul#insidepagenav li:nth-child('+1+')';
-					}
-				})(menuNum))
+				//.click((function(){
+				//	if(menuNum < 3){
+				//		return 'ul#insidepagenav li:nth-child('+(menuNum+1)+')';
+				//	}else{
+				//		return'ul#insidepagenav li:nth-child('+1+')';
+				//	}
+		//		})(menuNum))
 				.waitForElementNotPresent('ul#insidepagenav li:nth-child('+menuNum+').active', 1000)
 		}
 		browser.end();

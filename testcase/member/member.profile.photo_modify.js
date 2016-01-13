@@ -26,7 +26,6 @@ module.exports = {
 			.setValue('#profile_old_pw_input', browser.globals.password)
                         .click('#g_cfrm_btn_yes')
                         .pause(1000)
-
                         .click('#g_ap_btn_profile_edit')
                         .waitForElementPresent('#dlg_auth_profile_image', 1000)
                         .setValue('input[id="upload_image"]',require('path').resolve(process.cwd() + '/photo/profile/300.png'))
@@ -38,7 +37,6 @@ module.exports = {
 			.setValue('#profile_old_pw_input', browser.globals.password)
                         .click('#g_cfrm_btn_yes')
                         .pause(1000)
-
                         .click('#g_ap_btn_profile_edit')
                         .waitForElementPresent('#dlg_auth_profile_image', 1000)
                         .setValue('input[id="upload_image"]',require('path').resolve(process.cwd() + '/photo/profile/150.png'))
@@ -50,7 +48,6 @@ module.exports = {
 			.setValue('#profile_old_pw_input', browser.globals.password)
                         .click('#g_cfrm_btn_yes')
                         .pause(1000)
-
                         .click('#g_ap_btn_profile_edit')
                         .waitForElementPresent('#dlg_auth_profile_image', 1000)
                         .setValue('input[id="upload_image"]',require('path').resolve(process.cwd() + '/photo/profile/50.png'))
@@ -62,7 +59,6 @@ module.exports = {
 			.setValue('#profile_old_pw_input', browser.globals.password)
                         .click('#g_cfrm_btn_yes')
                         .pause(1000)
-
                         .click('#g_ap_btn_profile_edit')
                         .waitForElementPresent('#dlg_auth_profile_image', 1000)
                         .setValue('input[id="upload_image"]',require('path').resolve(process.cwd() + '/photo/profile/25.png'))
@@ -74,7 +70,6 @@ module.exports = {
 			.setValue('#profile_old_pw_input', browser.globals.password)
                         .click('#g_cfrm_btn_yes')
                         .pause(1000)
-
                         .click('#g_ap_btn_profile_edit')
                         .waitForElementPresent('#dlg_auth_profile_image', 1000)
                         .setValue('input[id="upload_image"]',require('path').resolve(process.cwd() + '/photo/profile/1200.jpg'))
@@ -86,7 +81,6 @@ module.exports = {
 			.setValue('#profile_old_pw_input', browser.globals.password)
                         .click('#g_cfrm_btn_yes')
                         .pause(1000)
-
                         .click('#g_ap_btn_profile_edit')
                         .waitForElementPresent('#dlg_auth_profile_image', 1000)
                         .setValue('input[id="upload_image"]',require('path').resolve(process.cwd() + '/photo/profile/1.5.JPG'))
@@ -103,10 +97,10 @@ module.exports = {
 	'photo_not_changed' : function (browser) {
 		browser
 			.click('#g_ap_btn_profile_edit')
-                        .waitForElementPresent('#dlg_auth_profile_image', 1000)
-                        .click('#upload_profile_image')
-                        .waitForElementPresent('#dlg_confirmation', 1000)
-                        .pause(2000)
+                  .waitForElementPresent('#dlg_auth_profile_image', 1000)
+                  .click('#upload_profile_image')
+                  .waitForElementPresent('#dlg_confirmation', 1000)
+                  .pause(2000)
 			.click('#g_cfrm_btn_no')
 			.waitForElementNotVisible('#profile_old_input_container', 2000)
 			.verify.hidden('#dlg_confirmation')
@@ -114,10 +108,10 @@ module.exports = {
 	'photo_changed_wrong_pw' : function (browser) {
 		browser
 			.click('#g_ap_btn_profile_edit')
-                        .waitForElementPresent('#dlg_auth_profile_image', 1000)
-                        .click('#upload_profile_image')
-                        .waitForElementPresent('#dlg_confirmation', 1000)
-                        .pause(2000)
+                  .waitForElementPresent('#dlg_auth_profile_image', 1000)
+                  .click('#upload_profile_image')
+                  .waitForElementPresent('#dlg_confirmation', 1000)
+                  .pause(2000)
 			.setValue('#profile_old_pw_input', '1234')
 			.click('#g_cfrm_btn_yes')
 			.waitForElementNotVisible('#profile_old_input_container', 2000)
@@ -125,9 +119,9 @@ module.exports = {
 	},
 	'photo_changed_yes' : function (browser) {
 		browser
-                        .click('#upload_profile_image')
-                        .waitForElementPresent('#dlg_confirmation', 1000)
-                        .pause(2000)
+                  .click('#upload_profile_image')
+                  .waitForElementPresent('#dlg_confirmation', 1000)
+                  .pause(2000)
 			.setValue('#profile_old_pw_input', browser.globals.password)
 			.click('#g_cfrm_btn_yes')
 			.waitForElementNotVisible('#profile_old_input_container', 2000)
@@ -135,21 +129,20 @@ module.exports = {
 	},
 	'photo_changed_confirmation' :function (browser) {
 		browser
-                        .click('#g_ap_btn_cancel')
+                  .click('#g_ap_btn_cancel')
 			.waitForElementPresent('#goorm', 10000)
 	 		.refresh()
 			.acceptAlert()
 			.waitForElementPresent('li.me img.user_profile_image', 30000)
 			.waitForElementNotVisible('#dlg_loading_bar', 10000)
 			.pause(1000)
-                        .click('#user-email-container')
+                  .click('#user-email-container')
 			.waitForElementPresent('#fat-menu.open', 1000)
 			.assert.cssClassPresent('#fat-menu', 'open')
 			.click('a[action="account_profile"]')
-			.waitForElementPresent('#dlg_auth_profile.in', 1000)
+			.waitForElementPresent('#dlg_auth_profile.in', 3000)
 			.assert.cssClassPresent('#dlg_auth_profile', 'in')
 			.pause(1000)
-
-                        .end();
+                  .end();
 	}
 }

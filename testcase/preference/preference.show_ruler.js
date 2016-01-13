@@ -15,7 +15,7 @@ module.exports = {
 			.click('#project_open_list .selector_project:last-of-type')
 			.click('#g_op_btn_ok')
 			.waitForElementNotVisible('#dlg_open_project', 2000)
-			.waitForElementVisible('#dlg_loading_bar', 2000)
+		//.waitForElementVisible('#dlg_loading_bar', 2000)
 			.waitForElementNotVisible('#dlg_loading_bar', 30000)
 			.verify.visible('#project_treeview')
 	},

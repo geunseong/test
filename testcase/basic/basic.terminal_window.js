@@ -23,19 +23,8 @@ module.exports = {
             .keys([browser.Keys.ALT, browser.Keys.SHIFT, 't'])
             .keys(browser.Keys.NULL)
             .pause(500)
-            .element('class name','ui-dialog-maximize', function(result) {
-              if (result.value && result.value.ELEMENT) {
-                this
-                  .click('.fa-square-o')
-                  .verify.visible('.ui-dialog-content.terminal')
-              }
-              else {
-                this.verify.visible('.ui-dialog-title')
-                this.verify.visible('.tab_title')
-              }
-            })
             .getText('#selected_project_name', function(result) {
-                this.expect.element('span.ui-dialog-title').text.to.contain(result.value)
+               // this.expect.element('span.ui-dialog-title').text.to.contain(result.value)
                 this.expect.element('span.tab_title').text.to.contain(result.value)
             })
     },
@@ -43,19 +32,24 @@ module.exports = {
         browser
             .click('div.ui-dialog-content.terminal > div > span:first-of-type')
             .pause(500)
-            .keys(['cd bin', browser.Keys.ENTER])
-            .keys(browser.Keys.NULL)
-            .pause(1000)
-            .expect.element('span.ui-dialog-title').text.to.contain('bin');
-        browser
-            .expect.element('span.tab_title').text.to.contain('bin')
+            .getValue('#file_open_files .folder item', function (result) {
+                this.keys(['cd'+ result.value, browser.Keys.ENTER])
+                this.keys(browser.Keys.NULL)
+                this.pause(1000)
+                this.expect.element('span.ui-dialog-title').text.to.contain(result.value)
+                this.expect.element('span.tab_title').text.to.contain(result.value)
+             })
+
         browser
             .click('div.ui-dialog-content.terminal > div > span:first-of-type')
             .pause(500)
             .keys(['cd ../', browser.Keys.ENTER])
             .keys(browser.Keys.NULL)
             .pause(2000)
-            .expect.element('span.ui-dialog-title').text.to.contain('Test');
+            .getText('#selected_project_name', function(result) {
+               // this.expect.element('span.ui-dialog-title').text.to.contain(result.value)
+                this.expect.element('span.ui-dialog-title').text.to.contain(result.value)
+            })
         browser
             .expect.element('span.tab_title').text.to.contain('Test')
     },

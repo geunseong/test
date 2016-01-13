@@ -3,7 +3,7 @@ module.exports = {
   'goorm_login_without_id_and_pw' : function (browser) {
     browser
         .maximizeWindow()
-        .url('http://qa.goorm.io')
+        .url('https://qa.goorm.io')
         .waitForElementVisible('input.login-form', 2000)
         .setValue('input[name=id]', '')
         .setValue('input[name=pw]', '')
@@ -30,7 +30,7 @@ module.exports = {
         .waitForElementVisible('div#warn-pw', 2000)
         .setValue('input[name=id]', '')
         .setValue('input[name=pw]', '')
-    
+
   },
   'goorm_login_with_wrong_id' : function (browser) {
     browser
@@ -39,7 +39,7 @@ module.exports = {
         .replace_input('input[name=pw]', '123123qwe')
         .click('button[id=btn-login]')
         .waitForElementVisible('div#warn-email', 2000)
-    
+
   },
   'goorm_login_success' : function (browser) {
     var data = browser.globals;
@@ -48,7 +48,7 @@ module.exports = {
         .replace_input('input[name=pw]', data.password)
         .click('button[id=btn-login]')
         .waitForElementVisible('div#ide-vm-list', 2000)
-        .verify.urlEquals('http://qa.goorm.io/my')
+        .verify.urlEquals('https://qa.goorm.io/my')
         .end();
   }
 };

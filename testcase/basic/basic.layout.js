@@ -41,7 +41,22 @@ module.exports = {
         .waitForElementPresent('#main-menu-file.open', 1000)
         .click('#main-menu-file a[action="open_file"]')
         .waitForElementVisible('#dlg_open_file', 2000)
-        .click('#dlg_open_file #file_open_files div[filename="src"]')
+        .waitForElementNotVisible('#dlg_loading_bar', 10000)
+        .waitForElementPresent('#file_open_files .file_item', 10000)
+        .click('#file_open_files .file_item')
+        .pause(500)
+        .getValue('#file_open_target_name', function (result) {
+            this.verify.equal(true, /^[A-Za-z]/.test(result.value))
+        })
+        .click('#g_of_btn_ok')
+        .waitForElementNotVisible('#dlg_open_file', 1000)
+        .waitForElementPresent('li.g_windows_tab_li', 2000)
+        .execute(function() {
+            core.module.layout.workspace.window_manager.window[0].editor.editor.setValue('@@@');
+        }, [])
+        .pause(2000)
+        //.verify.visible('span.tab_option')
+        /*.click('#dlg_open_file #file_open_files div[filename="src"]')
         .keys(browser.Keys.ENTER)
         .keys(browser.Keys.NULL)
         .pause(500)
@@ -53,9 +68,9 @@ module.exports = {
         .waitForElementNotVisible('#dlg_loading_bar', 2000)
         .verify.visible('.g_windows_tab_li .tab_title[filename="main.c"]')
         .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'x'])
-        .keys(browser.Keys.NULL)
+        .keys(browser.Keys.NULL)*/
     },
-    'open_editor_treeview': function(browser) {
+   /* 'open_editor_treeview': function(browser) {
       browser.getAttribute('#project_treeview li[path$="src"]','aria-expanded', function(result) {
           if(result.value == 'false') {
             this.click('#project_treeview li[path*="src"] > i');
@@ -79,8 +94,8 @@ module.exports = {
             .verify.visible('#main_file_toolbar > button:nth-of-type(' + i + ')[aria-describedby^="tooltip"]')
         }
       });
-    },
-    'show_edit_tooltip': function(browser) {
+    },*/ // 수정 필
+  /*  'show_edit_tooltip': function(browser) {
       browser.elements('css selector','#main_edit_toolbar > button', function (result) {
         var child_size = result.value.length;
         for(var i=1; i<=child_size; i++) {
@@ -139,7 +154,7 @@ module.exports = {
             .verify.visible('#slideshare_control > button:nth-of-type(' + i + ')[aria-describedby^="tooltip"]')
         }
       });
-    },
+    },*/
     // 'show_history_tooltip': function(browser) {
     //   browser
     //     .keys([browser.Keys.ALT, '3'])
@@ -154,7 +169,7 @@ module.exports = {
     //     }
     //   });
     // },
-    'toggle_top': function(browser) {
+   'toggle_top': function(browser) {
         browser
             .pause(2000)
             .click('div.ui-layout-toggler-north')
@@ -302,7 +317,7 @@ module.exports = {
     'show_collaboration': function(browser) {
         browser
             .click('#main-menu-window > a')
-            .waitForElementPresent('#main-menu-window.open', 2000)
+            .waitForElementPresent('#main-menu-window.open', 3000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
             .click('#child_perspectives_menu a[action="right_chat_show"]')
@@ -330,7 +345,7 @@ module.exports = {
     'show_docs': function(browser) {
         browser
             .click('#main-menu-window > a')
-            .waitForElementPresent('#main-menu-window.open', 2000)
+            .waitForElementPresent('#main-menu-window.open', 5000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
             .click('#child_perspectives_menu a[action="right_slideshare_show"]')
@@ -358,7 +373,7 @@ module.exports = {
     'show_history': function(browser) {
         browser
             .click('#main-menu-window > a')
-            .waitForElementPresent('#main-menu-window.open', 2000)
+            .waitForElementPresent('#main-menu-window.open', 5000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
             .click('#child_perspectives_menu a[action="right_history_show"]')
@@ -386,7 +401,7 @@ module.exports = {
     'show_outline': function(browser) {
         browser
             .click('#main-menu-window > a')
-            .waitForElementPresent('#main-menu-window.open', 2000)
+            .waitForElementPresent('#main-menu-window.open', 5000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
             .isVisible('#child_perspectives_menu a[action="right_outline_show"]', function(result) {
@@ -420,7 +435,7 @@ module.exports = {
     'show_bookmark': function(browser) {
         browser
             .click('#main-menu-window > a')
-            .waitForElementPresent('#main-menu-window.open', 2000)
+            .waitForElementPresent('#main-menu-window.open', 5000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
             .click('#child_perspectives_menu a[action="right_bookmark_show"]')
@@ -450,7 +465,7 @@ module.exports = {
             .isVisible('#main_debug_toolbar', function(result) {
                 if (result.value === true) {
                     this.click('#main-menu-window > a')
-                        .waitForElementPresent('#main-menu-window.open', 2000)
+                        .waitForElementPresent('#main-menu-window.open', 5000)
                         .moveToElement('#parent_perspectives_menu', 50, 10)
                         .waitForElementVisible('#child_perspectives_menu', 2000)
                         .click('#child_perspectives_menu a[action="bottom_debug_show"]')
@@ -480,7 +495,7 @@ module.exports = {
     'show_terminal': function(browser) {
         browser
             .click('#main-menu-window > a')
-            .waitForElementPresent('#main-menu-window.open', 2000)
+            .waitForElementPresent('#main-menu-window.open', 3000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
             .click('#child_perspectives_menu a[action="bottom_console_show"]')
@@ -496,10 +511,15 @@ module.exports = {
             .click('#main-menu-window > a')
             .waitForElementPresent('#main-menu-window.open', 2000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
-            .waitForElementVisible('#child_perspectives_menu', 2000)
+            .verify.visible('#gLayoutTab_Terminal')
             .click('#child_perspectives_menu a[action="bottom_console_show"]')
             .pause(1000)
+            .click('#main-menu-window > a')
+            .waitForElementPresent('#main-menu-window.open', 2000)
+            .moveToElement('#parent_perspectives_menu', 50, 10)
+            .click('#child_perspectives_menu a[action="bottom_console_show"]')
             .keys([browser.Keys.CONTROL, browser.Keys.SHIFT, '2'])
+            .verify.visible('#gLayoutTab_Terminal')
             .keys(browser.Keys.NULL)
             .pause(1000)
             .keys(['echo Test', browser.Keys.ENTER])
@@ -516,7 +536,7 @@ module.exports = {
     'show_search': function(browser) {
         browser
             .click('#main-menu-window > a')
-            .waitForElementPresent('#main-menu-window.open', 2000)
+            .waitForElementPresent('#main-menu-window.open', 5000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
             .click('#child_perspectives_menu a[action="bottom_search_show"]')
@@ -544,7 +564,7 @@ module.exports = {
     'show_output': function(browser) {
         browser
             .click('#main-menu-window > a')
-            .waitForElementPresent('#main-menu-window.open', 2000)
+            .waitForElementPresent('#main-menu-window.open', 5000)
             .moveToElement('#parent_perspectives_menu', 50, 10)
             .waitForElementVisible('#child_perspectives_menu', 2000)
             .click('#child_perspectives_menu a[action^="toggle_bottom_gLayoutOutput"]')

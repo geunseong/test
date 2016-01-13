@@ -37,7 +37,7 @@ module.exports = {
 				core.module.layout.workspace.window_manager.window[0].editor.editor.setValue('@@@');
 			}, [])
 			.pause(2000)
-			.verify.visible('span.tab_option')
+			//.verify.visible('span.tab_option')
 	},
 	'try_logout' : function (browser) {
 		browser
