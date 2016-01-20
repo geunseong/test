@@ -5,14 +5,16 @@ module.exports = {
   },
   'project_open' : function (browser) {
   	browser
-  		.waitForElementPresent('li.me img.user_profile_image', 20000)
-			.waitForElementNotVisible('#dlg_loading_bar', 10000)
 			.click('button#project_selectbox')
 			.waitForElementPresent('#project_selector > div.open', 3000)
-			.click('li.project_item')
-			.waitForElementVisible('#dlg_loading_bar', 2000)
-			.waitForElementNotVisible('#dlg_loading_bar', 10000)
-			.verify.containsText('#selected_project_name', 'cpp1')
-			.end();
+			.getAttribute('#my_projects_header + li', 'project_path', function (result) {
+				var project_path = result.value;
+				var project_name = project_path.split("_").pop();
+
+				this.click('#my_projects_header + li')
+					.waitForElementNotVisible('#dlg_loading_bar', 10000)
+					.verify.containsText('#selected_project_name', project_name)
+			})
+			.logout(browser);
   }
 }

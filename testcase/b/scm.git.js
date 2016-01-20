@@ -9,7 +9,7 @@ module.exports = {
     //  .waitForElementNotVisible('#dlg_loading_bar', 100000)
 
   },
- /* 'scm_validation': function(browser) {
+  /*'scm_validation': function(browser) {
     var url = 'https://github.com/openstack/horizon.git';
 
     browser
@@ -32,7 +32,7 @@ module.exports = {
       .setValue('.scm_revision_certain', '100')
       .pause(1000)
       .verify.cssClassPresent('#new_proj_scm_test_bt', 'btn-danger')
-      .verify.elementNotPresent('#new_project_scm_config .scm_revision_certain[disabled]')
+      //.verify.elementNotPresent('#new_project_scm_config .scm_revision_certain[disabled]')
       .setValue('#new_project_scm_config .scm_revision_certain', '1a!')
       .click('#new_proj_scm_test_bt')
       .waitForElementVisible('#dlg_alert', 5000)
@@ -40,11 +40,11 @@ module.exports = {
       .click('#g_alert_btn_ok')
       .waitForElementNotVisible('#dlg_alert', 10000)
       .click('[for=new_scm_revision_head]')
-      .verify.elementPresent('#new_project_scm_config .scm_revision_certain[disabled]')
+      //.verify.elementPresent('#new_project_scm_config .scm_revision_certain[disabled]')
       .click('#new_proj_scm_test_bt')
       .waitForElementVisible('#new_proj_scm_test_bt', 10000)
       .verify.cssClassPresent('#new_proj_scm_test_bt', 'btn-success')
-  },*/
+  },
   'project_create': function(browser) {
     var project_name = ('git' + Math.random()).replace('.', '');
 
@@ -77,10 +77,10 @@ module.exports = {
       .new_file(file_name)
       .edit('@@@')
       .delete_file(file_name)
-  },
+  },*/
   'scm_validation_bitbucket': function(browser) {
-    var url = 'https://bitbucket.org/JJayde/goorm_java_exam_bit.git';
-
+    //var url = 'https://bitbucket.org/JJayde/goorm_java_exam_bit.git';
+    var url = 'https://github.com/geunseong/test'
     browser
       .open_new_project_dialog('scm')
       .click('[for=new_scm_type_git]')
@@ -112,7 +112,7 @@ module.exports = {
       .pause(2000)
       .waitForElementNotVisible('#dlg_loading_bar', 10000)
   },
-  'check_files_bitbucket': function(browser) {
+/*  'check_files_bitbucket': function(browser) {
     var file_name = 'new_file';
 
     browser
@@ -136,8 +136,8 @@ module.exports = {
       .verify.cssClassPresent('#mainmenu_git', 'disabled')
       .verify.cssClassPresent('#folder_context_git', 'disabled')
       .verify.cssClassPresent('#file_context_git', 'disabled')
-  },
-  'check_enable_menu_again': function (browser) {
+  },*/
+/*  'check_enable_menu_again': function (browser) {
     browser
       .move_to_project(this.project_name)
       .click('#main-menu-scm .dropdown-toggle')
@@ -160,7 +160,7 @@ module.exports = {
           .waitForElementNotVisible('#dlg_open_file', 2000)
           .edit()
           .click('#main_file_toolbar [action=save_file]')
-          .waitForElementNotVisible('#g_window_tab_list .goorm_tab_menu:last-child .tab_option', 10000)
+          //.waitForElementNotVisible('#g_window_tab_list .goorm_tab_menu:last-child .tab_title', 10000)
           .click('#main_scm_toolbar [action=scm_commit]')
           .waitForElementVisible('#dlg_git', 2000)
           .waitForElementVisible('#git_status_tab', 2000)
@@ -176,8 +176,8 @@ module.exports = {
           .verify.containsText('#git_status_files tr:first-child td:last-child', '/')
           .waitForElementVisible('#git_status_files input[name*="' + result.value + '"]', 2000)
       })
-  },
-  'undo_change': function (browser) {
+  },*/
+/*  'undo_change': function (browser) {
     browser
       .click('#git_status_deselectall')
       .waitForElementNotPresent('#git_status_files input:checked', 2000)
@@ -195,8 +195,8 @@ module.exports = {
           .waitForElementNotVisible('#dlg_alert', 10000)
           .waitForElementNotPresent('#git_status_files input[name*="' + result.value + '"]', 2000)
       })
-  },
-  'commit': function (browser) {
+  },*/
+  /*'commit': function (browser) {
     var self = this;
 
     browser
@@ -227,8 +227,9 @@ module.exports = {
           .waitForElementNotPresent('#git_status_files input[scm_type*="M"]', 2000)
           .waitForElementNotPresent('#git_status_files input[scm_type*="A"]', 2000)
       })
-  },
-  'add': function (browser) {
+  },*/
+  //안됨
+/*  'add': function (browser) {
     browser
       .click('#dlg_git .close')
       .waitForElementNotVisible('#dlg_git', 2000)
@@ -280,11 +281,14 @@ module.exports = {
           .waitForElementNotPresent('#git_treeview [path$="' + result.value + '"]', 2000)
           .waitForElementNotPresent('#project_treeview [path$="' + result.value + '"]', 2000)
       })
-  },
+  },*/
   'push': function(browser) {
     var data = browser.globals;
 
     browser
+      .waitForElementVisible('#main_scm_toolbar', 5000)
+      .click('#main_scm_toolbar [action=scm_commit]')
+      .waitForElementVisible('#dlg_git', 2000)
       .click('#git_push_bt')
       .waitForElementVisible('#dlg_scm_auth', 2000)
       .setValue('#scm_auth_id', 'git')

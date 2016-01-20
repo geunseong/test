@@ -1,7 +1,7 @@
 module.exports = {
 	'goorm_login' : function (browser) {
 		var data = browser.globals;
-    	browser.run_ide(data.username, data.password, data.plugin);
+    	browser.run_ide(data.username, data.password);
 	},
 	'open_help_contents' : function (browser) {
 		browser
@@ -51,7 +51,7 @@ module.exports = {
 			.verify.visible('#dlg_help_about')
 			.click('#g_ha_btn_close')
 			.waitForElementNotVisible('#dlg_help_about', 1000)
-	},*/
+	},*/ // help_about이 사라짐
 	'open_license' : function (browser) {
 		browser
 			.click('#main-menu-goorm > a')
@@ -88,6 +88,7 @@ module.exports = {
 			.verify.visible('#dlg_notice')
 			.click('#g_nt_btn_ok')
 			.waitForElementNotVisible('#dlg_notice', 1000)
+			.logout(browser);
 	}//,
 /*	'go_to_facebook' : function (browser) {
 		browser

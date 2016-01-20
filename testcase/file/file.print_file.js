@@ -5,11 +5,8 @@ module.exports = {
     browser.run_ide(data.username, data.password);
   },
   'project_open' : function (browser) {
-    var project = 'Test';
-    browser
-      .open_project_menu(project)
+    browser.open_project_menu();
   },
-
   'file_close_all_files' : function(browser){
     browser
       .close_all_menu()
@@ -25,20 +22,21 @@ module.exports = {
   },
   'file_print_from_menu' : function(browser){
     browser
-      .open_file_toolbar(file_name)
+      .open_file_toolbar()
       .click('#main-menu-file > a')
       .waitForElementPresent('#main-menu-file.open', 2000)
       .click("#main-menu-file a[action=print]")
+      .logout(browser);
   },
   // 다음테스트는 어떻게 하는가...
-  'file_print_from_shortcut' : function(browser){
+ /* 'file_print_from_shortcut' : function(browser){
     browser
       .open_file_toolbar(file_name)
       .keys(browser.Keys.CONTROL)
       .keys('p')
       .pause(500)
       .keys(browser.Keys.NULL)
-      .end();
-  }
+      .logout(browser);
+  }*/
 
 }

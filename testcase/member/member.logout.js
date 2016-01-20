@@ -11,6 +11,7 @@ module.exports = {
 			//.click('#user-email-container')
 			//.waitForElementPresent('#fat-menu.open', 1000)
 			//.assert.cssClassPresent('#fat-menu', 'open')
+			//
 			.click('#main-menu-goorm')
 			.waitForElementPresent('#main-menu-goorm.open',1000)
 			//.assert.cssClassPresent('#dropdown-menu', 'open')
@@ -24,14 +25,14 @@ module.exports = {
 			.waitForElementNotVisible('#confirmation_content_container', 1000)
 			.assert.hidden('#confirmation_content_container')
 	},
-/*	'logout_yes' : function (browser) {
+	'logout_yes' : function (browser) {
 		this.open_logout_confirm(browser);
 		browser
 			.click('#g_cfrm_btn_yes')
-			.waitForElementVisible('#dlg_survey', 1000)
-			.assert.visible('#dlg_survey')
+			//.waitForElementVisible('#dlg_survey', 1000)
+			//.assert.visible('#dlg_survey')
 	},
-	'survey_send' : function (browser) {
+/*	'survey_send' : function (browser) {
 		browser
 			.setValue('#survey_inputbox', 'Nightwatch testing...')
 			.getValue('#survey_inputbox', function (result) {
@@ -43,11 +44,13 @@ module.exports = {
 			.waitForElementVisible('#login-section', 2000)
 			.verify.hidden('#user-section')
 	},*/
+	// 서베이 기능이 로그아웃과 합쳐짐
 	'force_move_ide' : function (browser) {
 		browser
-			.url('http://ide.qa.goorm.io/')
+			.pause(2000)
+			.url('https://ide.qa.goorm.io/')
 			.pause(1000)
-			.verify.urlEquals('http://qa.goorm.io/')
+			.verify.urlEquals('https://ide.qa.goorm.io/')
 			.end();
 	}
 }

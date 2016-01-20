@@ -38,6 +38,6 @@ module.exports = {
 			.click('#main-menu-edit a[action=toggle_rulers]')
 			.waitForElementNotPresent('#main-menu-edit.open', 2000)
 			.verify.elementPresent('div.CodeMirror-ruler')
-			.end();
+			.logout(browser);
 	}
 }

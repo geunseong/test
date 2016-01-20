@@ -50,6 +50,6 @@ module.exports = {
 			.click('#slideshare_draw_bt')
 			.waitForElementVisible('#slideshare_drawing_container', 2000)
 			.verify.visible('#slideshare_drawing_container')
-			.end();
+			.logout(browser);
 	}
 }

@@ -37,6 +37,6 @@ module.exports = {
 			.click('#g_cfrm_btn_yes')
 			.waitForElementNotVisible('#profile_old_input_container', 2000)
 			.verify.hidden('#dlg_confirmation')
-			.end();
+			.logout(browser);
 	}
 }

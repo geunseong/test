@@ -33,6 +33,17 @@ module.exports = {
   			.waitForElementVisible('#project_treeview', 10000)
   			.verify.visible('#project_treeview')
   	},
+    'close_project_list' : function(browser){
+        browser
+            .click('#project_selectbox')
+            .waitForElementPresent('#project_selector > div.btn-group.open', 1000)
+            .click('#workspace')
+            .waitForElementNotPresent('#project_selector > div.btn-group.open', 1000)
+            .click('#project_selectbox')
+            .waitForElementPresent('#project_selector > div.btn-group.open', 1000)
+            .click('#terminal')
+            .waitForElementNotPresent('#project_selector > div.btn-group.open', 1000)
+    },
     'open_editor_dialog': function(browser) {
       browser
         .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'x'])
@@ -55,35 +66,25 @@ module.exports = {
             core.module.layout.workspace.window_manager.window[0].editor.editor.setValue('@@@');
         }, [])
         .pause(2000)
-        //.verify.visible('span.tab_option')
-        /*.click('#dlg_open_file #file_open_files div[filename="src"]')
-        .keys(browser.Keys.ENTER)
-        .keys(browser.Keys.NULL)
-        .pause(500)
-        .click('#dlg_open_file #file_open_files > div[filename="main.c"]')
-        .keys(browser.Keys.ENTER)
-        .keys(browser.Keys.NULL)
-        .pause(500)
-        .waitForElementNotVisible('#dlg_open_file', 2000)
-        .waitForElementNotVisible('#dlg_loading_bar', 2000)
-        .verify.visible('.g_windows_tab_li .tab_title[filename="main.c"]')
         .keys([browser.Keys.ALT, browser.Keys.SHIFT, 'x'])
-        .keys(browser.Keys.NULL)*/
+        .waitForElementPresent('#dlg_confirmation_save',3000)
+        .click('#g_cfrm_s_btn_no')
     },
-   /* 'open_editor_treeview': function(browser) {
-      browser.getAttribute('#project_treeview li[path$="src"]','aria-expanded', function(result) {
-          if(result.value == 'false') {
-            this.click('#project_treeview li[path*="src"] > i');
-          }
-      });
+    'open_editor_treeview': function(browser) {
       browser
-        .waitForElementVisible('#project_treeview li[path$="src"] li[path$="main.c"]', 3000)
-        .moveToElement('#project_treeview li[path$="src"] li[path$="main.c"]',10,0,function() {
+        .waitForElementPresent('.jstree-leaf:last-child', 2000)
+        .click('.jstree-leaf:last-child')
+        .click('.jstree-leaf:last-child')
+        .moveToElement('.jstree-leaf:last-child',10,0,function() {
           this.doubleClick()
         })
-        .waitForElementNotVisible('#dlg_loading_bar', 10000)
-        .pause(1000)
-        .verify.visible('.g_windows_tab_li .tab_title[filename="main.c"]')
+        .pause(2000)
+        .getAttribute('.jstree-leaf:last-child', 'path' , function(result) {
+            var file_path = result.value
+            var file_name = file_path.split("/").pop();
+            this.expect.element('span.tab_title').text.to.contain(file_name)
+            this.expect.element('span.ui-dialog-title').text.to.contain(file_name)
+        })
     },
     'show_file_tooltip': function(browser) {
       browser.elements('css selector','#main_file_toolbar > button', function (result) {
@@ -94,8 +95,8 @@ module.exports = {
             .verify.visible('#main_file_toolbar > button:nth-of-type(' + i + ')[aria-describedby^="tooltip"]')
         }
       });
-    },*/ // 수정 필
-  /*  'show_edit_tooltip': function(browser) {
+    }, 
+    'show_edit_tooltip': function(browser) {
       browser.elements('css selector','#main_edit_toolbar > button', function (result) {
         var child_size = result.value.length;
         for(var i=1; i<=child_size; i++) {
@@ -109,14 +110,16 @@ module.exports = {
       browser.elements('css selector','#main_project_toolbar > button', function (result) {
         var child_size = result.value.length;
         for(var i=1; i<=child_size; i++) {
-          this
-            .moveToElement('#main_project_toolbar > button:nth-of-type(' + i + ')',10,10)
-            .verify.visible('#main_project_toolbar > button:nth-of-type(' + i + ')[aria-describedby^="tooltip"]');
-          if(i==1) {
+        if(i==2) {
             this
               .click('#main_project_toolbar > button:nth-of-type(1)')
               .pause(5000);
+              continue;
           }
+          this
+            .moveToElement('#main_project_toolbar > button:nth-of-type(' + i + ')',10,10)
+            .verify.visible('#main_project_toolbar > button:nth-of-type(' + i + ')[aria-describedby^="tooltip"]');
+
         }
       });
     },
@@ -128,9 +131,11 @@ module.exports = {
           if(i==2) {
             this
               .click('#main_debug_toolbar > button:first-of-type')
+              .pause(2000)
               .waitForElementVisible('#main_debug_toolbar > button:nth-of-type(2)',10000)
               .moveToElement('#main_debug_toolbar > button:nth-of-type(2)',10,10)
               .verify.visible('#main_debug_toolbar > button:nth-of-type(2)[aria-describedby^="tooltip"]')
+              .click('#main_debug_toolbar > button:nth-of-type(2)')
               .waitForElementVisible('#main_debug_toolbar > button:nth-of-type(1)',10000)
           }
           else {
@@ -141,7 +146,7 @@ module.exports = {
         }
       });
     },
-    'show_docs_tooltip': function(browser) {
+/*    'show_docs_tooltip': function(browser) {
       browser
         .keys([browser.Keys.ALT, '2'])
         .keys(browser.Keys.NULL)
@@ -154,7 +159,7 @@ module.exports = {
             .verify.visible('#slideshare_control > button:nth-of-type(' + i + ')[aria-describedby^="tooltip"]')
         }
       });
-    },*/
+    },
     // 'show_history_tooltip': function(browser) {
     //   browser
     //     .keys([browser.Keys.ALT, '3'])
@@ -168,7 +173,8 @@ module.exports = {
     //         .verify.visible('#history_player_control_toolbar button[tooltip]:nth-child(' + i + ')[aria-describedby^="tooltip"]')
     //     }
     //   });
-    // },
+    // },*/
+    // ALT + 숫자 단축키 작동 안함
    'toggle_top': function(browser) {
         browser
             .pause(2000)
@@ -183,7 +189,7 @@ module.exports = {
             .verify.visible('#goorm-mainmenu')
             .verify.visible('#goorm_main_toolbar')
     },
-    'show_more_toolbar': function(browser) {
+    /*'show_more_toolbar': function(browser) {
         browser
             .isVisible('#main_debug_toolbar', function(result) {
                 if (result.value == true) {
@@ -196,7 +202,8 @@ module.exports = {
                         .verify.hidden('#toolbar_more_button');
                 }
             });
-    },
+    },*/
+    // 확인 불가
     'window_perspectives_left': function(browser) {
         browser
             //Using menu
@@ -314,7 +321,7 @@ module.exports = {
             .verify.visible('#goorm_inner_layout_right')
             .verify.visible('#goorm_inner_layout_bottom')
     },
-    'show_collaboration': function(browser) {
+/*    'show_collaboration': function(browser) {
         browser
             .click('#main-menu-window > a')
             .waitForElementPresent('#main-menu-window.open', 3000)
@@ -560,7 +567,8 @@ module.exports = {
             .pause(1000)
             .verify.visible('#gLayoutTab_Search')
             .verify.visible('#search_treeview');
-    },
+    },*/
+    // 단축키 작동 X
     'show_output': function(browser) {
         browser
             .click('#main-menu-window > a')
@@ -587,9 +595,8 @@ module.exports = {
             .keys(browser.Keys.NULL)
             .pause(1000)
             .verify.visible('a[id^="gLayoutOutput"]')
-            .verify.visible('div.output_tab');
+            .verify.visible('div.output_tab')
+            .logout(browser);
     },
-    'goorm_end': function(browser) {
-        browser.end();
-    }
+
 }

@@ -5,17 +5,15 @@ module.exports = {
     browser.run_ide(data.username, data.password);
   },
   'project_open' : function (browser) {
-  	var project = 'Test';
-    browser
-      .open_project_menu(project);
-  },
+    browser.open_project_menu();
+      },
   'file_new_file' : function (browser) {
   	var new_file = 'test_file_' + Date.now();
     duplicate = new_file;
     browser
       .new_file(new_file)
       .pause(2000);
-  },  
+  },
   'file_new_duplicate_file' : function (browser) {
     browser
       .click('#main-menu-file > a')
@@ -36,7 +34,7 @@ module.exports = {
   },
   'file_new_inappropriate_file' : function (browser) {
     var inappropriate_name = '!@#$d';
-    
+
     browser
       .click('#main-menu-file > a')
       .waitForElementPresent('#main-menu-file.open', 2000)
@@ -57,6 +55,6 @@ module.exports = {
   'file_delete_file' : function (browser) {
     browser
       .delete_file(duplicate)
-      .end;
+      .logout(browser);
   }
 }

@@ -61,6 +61,6 @@ module.exports = {
 			.verify.attributeEquals('#profile_name_input', 'disabled', 'true')
 			.click('#g_ap_btn_cancel')
 			.verify.elementNotPresent('#dlg_auth_profile.in')
-			.end();
+			.logout(browser);
 	}
 }

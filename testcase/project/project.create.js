@@ -5,8 +5,6 @@ module.exports = {
   },
   'project_create' : function (browser) {
     browser
-      .waitForElementPresent('img.user_profile_image', 10000)
-      .waitForElementNotVisible('#dlg_loading_bar', 10000)
       .click('#main_file_toolbar button[action=new_project]')
       .waitForElementVisible('#dlg_new_project', 2000)
       .pause(2000)
@@ -20,6 +18,6 @@ module.exports = {
       .waitForElementNotVisible('#dlg_new_project', 10000)
       .waitForElementNotVisible('#dlg_loading_bar', 10000)
       .verify.containsText('#selected_project_name', 'cpp1')
-      .end();
+      .logout(browser);
   }
 };

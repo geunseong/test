@@ -1,4 +1,4 @@
-module.exports = {
+/*module.exports = {
 	'goorm_login' : function (browser) {
 		var data = browser.globals;
     	browser.run_ide(data.username, data.password);
@@ -45,8 +45,8 @@ module.exports = {
 			.waitForElementPresent('#fat-menu.open', 1000)
 			.assert.cssClassPresent('#fat-menu', 'open')
 			.click('a[action="account_logout"]')
-			.waitForElementVisible('#dlg_confirmation_save', 1000)
-			.assert.visible('#g_cfrm_s_btn_yes')
+			//.waitForElementVisible('#dlg_confirmation_save', 1000)
+			//.assert.visible('#g_cfrm_s_btn_yes')
 			.click('#g_cfrm_s_btn_no')
 	},
 	'survey_no' : function (browser) {
@@ -61,9 +61,11 @@ module.exports = {
 	},
         'force_move_ide' : function (browser) {
 		browser
-			.url('http://ide.qa.goorm.io/')
+			.url('https://ide.qa.goorm.io/')
 			.pause(1000)
-			.verify.urlEquals('http://qa.goorm.io/')
+			.verify.urlEquals('https://qa.goorm.io/')
 			.end();
 	}
-}
+}*/
+// 서베이창이 없어져 불필요
+

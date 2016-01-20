@@ -38,32 +38,33 @@ module.exports = {
 	'open_preference' : function (browser) {
 		browser
 			.click('#main_edit_toolbar button[action=preference]')
-			.waitForElementVisible('#dlg_preference', 2000)},
+			.waitForElementVisible('#dlg_preference', 2000)
+		},
 	'font_change' : function (browser) {
 		browser
 			.click('select[id="preference.editor.font_family"]')
 			.keys(['\uE005','\uE006'])
 			.click('option[value="Courier New"]')
 			.click('#preference_applyBt_0')
-			.expect.element('.ui-dialog .CodeMirror-lines').to.have.css('font-family').to.have.contains('Courier New');
+			.expect.element('.ui-dialog .CodeMirror-lines').to.have.attribute('style').to.have.contains('Courier New');
 		browser
 			.click('select[id="preference.editor.font_family"]')
 			.keys(['\uE005','\uE006'])
 			.click('option[value="Lucida Console"]')
 			.click('#preference_applyBt_0')
-			.expect.element('.ui-dialog .CodeMirror-lines').to.have.css('font-family').which.contains('Lucida Console');
+			.expect.element('.ui-dialog .CodeMirror-lines').to.have.attribute('style').which.contains('Lucida Console');
 		browser
 			.click('select[id="preference.editor.font_family"]')
 			.keys(['\uE005','\uE006'])
 			.click('option[value="Nanum Gothic Coding"]')
 			.click('#preference_applyBt_0')
-			.expect.element('.ui-dialog .CodeMirror-lines').to.have.css('font-family').which.contains('Nanum Gothic Coding');
+			.expect.element('.ui-dialog .CodeMirror-lines').to.have.attribute('style').which.contains('Nanum Gothic Coding');
 		browser
 			.click('select[id="preference.editor.font_family"]')
 			.keys(['\uE005','\uE006'])
 			.click('option[value="Source Code Pro"]')
 			.click('#preference_applyBt_0')
-			.expect.element('.ui-dialog .CodeMirror-lines').to.have.css('font-family').which.contains('Source Code Pro');
+			.expect.element('.ui-dialog .CodeMirror-lines').to.have.attribute('style').which.contains('Source Code Pro');
 
 	},
 	'font_size_change' : function (browser) {
@@ -73,24 +74,19 @@ module.exports = {
 			.keys(['\uE005','\uE006'])
 			.click('option[value="15"]')
 			.click('#preference_applyBt_0')
-			//.assert.cssProperty(".ui-dialog .CodeMirror-wrap cm-s-default","font-size","15px")
-			//.getcssProperty('class="ui-dialog .CodeMirror-wrap cm-s-default"', 'font-size', function (res) {
-			//	this.assert.equal(res,'15px');
-			//})
-
+			.expect.element('.ui-dialog .CodeMirror-wrap').to.have.attribute('style').which.contains('15px');
+		browser
 			.click('select[id="preference.editor.font_size"]')
 			.keys(['\uE005','\uE006'])
 			.click('option[value="20"]')
 			.click('#preference_applyBt_0')
-			//.assert.cssProperty(".ui-dialog .CodeMirror-wrap cm-s-default","font-size","20px")
-			//.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('font-size').which.matchs(/20px/)
-
+			.expect.element('.ui-dialog .CodeMirror-wrap').to.have.attribute('style').which.contains('20px');
+		browser
 			.click('select[id="preference.editor.font_size"]')
 			.keys(['\uE005','\uE006'])
 			.click('option[value="12"]')
 			.click('#preference_applyBt_0')
-			//.assert.cssProperty(".ui-dialog .CodeMirror-wrap cm-s-default","font-size","12px")
-			//.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('font-size').which.matchs(/12px/)
+			.expect.element('.ui-dialog .CodeMirror-wrap').to.have.attribute('style').which.contains('12px');
 	},
 	'line_spacing' : function (browser) {
 		this.open_preference(browser);
@@ -99,33 +95,33 @@ module.exports = {
 			.keys(['\uE005','\uE006'])
 			.click('option[value="2"]')
 			.click('#preference_applyBt_0')
-			//.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('line-height').which.contains('1.2')
-
+			.expect.element('.ui-dialog .CodeMirror-wrap').to.have.attribute('style').which.contains('1.2');
+		browser
 			.click('select[id="preference.editor.line_spacing"]')
 			.keys(['\uE005','\uE006'])
 			.click('option[value="5"]')
 			.click('#preference_applyBt_0')
-			//.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('line-height').which.contains('1.5')
-
+			.expect.element('.ui-dialog .CodeMirror-wrap').to.have.attribute('style').which.contains('1.5');
+		browser
 			.click('select[id="preference.editor.line_spacing"]')
 			.keys(['\uE005','\uE006'])
 			.click('option[value="1"]')
 			.click('#preference_applyBt_0')
-			//.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('line-height').which.contains('1.1')
-
+			.expect.element('.ui-dialog .CodeMirror-wrap').to.have.attribute('style').which.contains('1.1');
+		browser
 			.click('select[id="preference.editor.line_spacing"]')
 			.keys(['\uE005','\uE006'])
 			.click('option[value="3"]')
 			.click('#preference_applyBt_0')
-			//.expect.element('.ui-dialog .CodeMirror-wrap cm-s-default').to.have.css('line-height').which.contains('1.3')
-	},
-
+			.expect.element('.ui-dialog .CodeMirror-wrap').to.have.attribute('style').which.contains('1.3');
+},
 	'indent_unit' : function (browser) {
 		this.open_preference(browser);
 		browser
 			.setValue('input[id="preference.editor.indent_unit"]', [Math.floor((Math.random() * 5) + 1).toString()])
 			.click('#preference_applyBt_0')
-
+			.setValue('input[id="preference.editor.indent_unit"]', 4)
+			.click('#preference_applyBt_0')
 	},
 	'indent_with_tab' : function (browser) {
 		this.open_preference(browser);
@@ -255,18 +251,23 @@ module.exports = {
 			.click('option[value="blackboard"]')
 			.click('#preference_applyBt_1')
 			//.attributeEquals(".ui-dialog .CodeMirror-wrap cm-s-blackboard","true");
+			.expect.element('.ui-dialog .CodeMirror-wrap').to.have.attribute('class').which.contains('blackboard');
 		browser
 			.click('select[id="preference.editor.theme"]')
 			.keys(['\uE005','\uE006'])
 			.click('option[value="ambiance"]')
 			.click('#preference_applyBt_1')
 			//.attributeEquals(".ui-dialog .CodeMirror-wrap cm-s-ambiance","true");
+			.expect.element('.ui-dialog .CodeMirror-wrap').to.have.attribute('class').which.contains('ambiance');
 		browser
 			.click('select[id="preference.editor.theme"]')
 			.keys(['\uE005','\uE006'])
 			.click('option[value="default"]')
 			.click('#preference_applyBt_1')
 			//.attributeEquals(".ui-dialog .CodeMirror-wrap cm-s-default","true")
-			.end();
+			.expect.element('.ui-dialog .CodeMirror-wrap').to.have.attribute('class').which.contains('default');
+		browser
+			.click('#g_prf_btn_cancel')
+			.logout(browser);
 	}
 }

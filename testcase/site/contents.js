@@ -9,7 +9,7 @@ module.exports = {
 	'check_main_content' : function (browser) {
 		browser
 			.waitForElementPresent('#insidepagenav', 2000)
-			.waitForElementPresent('#insidepagenav li:first-child',1000)
+			.waitForElementPresent('#insidepagenav li:first-child',3000)
 			.assert.attributeContains('#insidepagenav li:nth-child(1) a', 'href', '#service')
 			.assert.attributeContains('#insidepagenav li:nth-child(2) a', 'href', '#ideservice')
 			.assert.attributeContains('#insidepagenav li:nth-child(3) a', 'href', '#eduservice')
@@ -17,20 +17,20 @@ module.exports = {
 			.assert.attributeContains('#insidepagenav li:nth-child(5) a', 'href', 'http://help.goorm.io/')
 			.click('#insidepagenav li:nth-child(1) a')
 
-			.waitForElementVisible('#modals', 1000)
+			.waitForElementVisible('#modals', 3000)
 
-			.waitForElementVisible('#service', 1000)
-			.waitForElementVisible('#browsersupport', 1000)
-			.waitForElementVisible('#screenshot', 1000)
+			.waitForElementVisible('#service', 3000)
+			.waitForElementVisible('#browsersupport', 3000)
+			.waitForElementVisible('#screenshot', 3000)
 
 			.click('#insidepagenav li:nth-child(2) a')
-			.waitForElementVisible('#ideservice', 1000)
+			.waitForElementVisible('#ideservice', 3000)
 			.click('#insidepagenav li:nth-child(3) a')
-			.waitForElementVisible('#eduservice', 1000)
-			.waitForElementVisible('#testimonial', 1000)
+			.waitForElementVisible('#eduservice', 3000)
+			.waitForElementVisible('#testimonial', 3000)
 			.click('#insidepagenav li:nth-child(5) a')
-			.waitForElementVisible('#contact', 1000)
-			.waitForElementVisible('#footer', 1000)
+			.waitForElementVisible('#contact', 3000)
+			.waitForElementVisible('#footer', 3000)
 	},
 	'move_to_help_page' : function (browser) {
 
@@ -53,15 +53,15 @@ module.exports = {
 	'check_help_contents' : function(browser){
 		for(var menuNum = 1; menuNum<= 3; ++menuNum){
 			browser
-				.waitForElementVisible('ul#insidepagenav li:nth-child('+menuNum+').active', 1000)
-				.waitForElementVisible('.nav.nav-pills.nav-stacked.affix', 1000);
+				.waitForElementVisible('ul#insidepagenav li:nth-child('+menuNum+').active', 3000)
+				.waitForElementVisible('.nav.nav-pills.nav-stacked.affix', 3000);
 
 			var max = menuNum===1?8:menuNum===2?3:15
 
 			for(var i = 1; i <= max; ++i){
 				// function(){
 				browser
-					//.waitForElementVisible('.nav.nav-pills.nav-stacked.affix > li:nth-child('+i+').active', 1000)
+					//.waitForElementVisible('.nav.nav-pills.nav-stacked.affix > li:nth-child('+i+').active', 3000)
 					.pause(100)
 					.click((function(menuNum, i){
 						if(i< max){
@@ -70,7 +70,7 @@ module.exports = {
 							return '.nav.nav-pills.nav-stacked.affix > a';
 						}
 					})(menuNum, i))
-					.waitForElementNotPresent('.nav.nav-pills.nav-stacked.affix > li:nth-child('+i+').active', 1000)
+					.waitForElementNotPresent('.nav.nav-pills.nav-stacked.affix > li:nth-child('+i+').active', 3000)
 					.waitForElementVisible( (function(menuNum, i){
 						if(menuNum === 1){
 							switch(i){
@@ -140,14 +140,14 @@ module.exports = {
 			}
 			// after inner loop
 			browser
-				//.click((function(){
-				//	if(menuNum < 3){
-				//		return 'ul#insidepagenav li:nth-child('+(menuNum+1)+')';
-				//	}else{
-				//		return'ul#insidepagenav li:nth-child('+1+')';
-				//	}
-		//		})(menuNum))
-				.waitForElementNotPresent('ul#insidepagenav li:nth-child('+menuNum+').active', 1000)
+				.click((function(){
+					if(menuNum < 3){
+						return 'ul#insidepagenav li:nth-child('+(menuNum+1)+')';
+					}else{
+						return'ul#insidepagenav li:nth-child('+1+')';
+					}
+				})(menuNum))
+				.waitForElementNotPresent('ul#insidepagenav li:nth-child('+menuNum+').active', 3000)
 		}
 		browser.end();
 	}

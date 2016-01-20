@@ -2,7 +2,7 @@ module.exports = {
   'goorm_login' : function (browser) {
     var data = browser.globals;
     browser
-      .run_ide(data.username, data.password, data.plugin)
+      .run_ide(data.username, data.password)
       .waitForElementPresent('li.me img.user_profile_image', 20000)
       .waitForElementNotVisible('#dlg_loading_bar', 100000)
       .pause(1000)
@@ -54,7 +54,7 @@ module.exports = {
           .click('#main-menu-project a[action=share_project]')
           .waitForElementVisible('#dlg_project_share', 3000)
           .pause(2000)
-          .verify.containsText('#project_share_select_list :checked', project_path)
+          .verify.containsText('#project_share_select_list :checked', project_name)
           .waitForElementPresent('.modal-backdrop.fade.in', 10000)
           .click('#g_prjs_btn_cancel')
           .waitForElementNotPresent('.modal-backdrop', 10000)
@@ -105,26 +105,27 @@ module.exports = {
       .waitForElementVisible('#user_search_result_container > ul', 3000, false, function (result){
         if (result.value) {
           this
-            .verify.containsText('#user_search_result_container > ul a:first-child', 'test_qa2@goorm.io')
+            .verify.containsText('#user_search_result_container > ul li:first-child', 'test_qa2@goorm.io')
             .pause(2000)
         }
         this.clearValue('#user_search_input')
       })
   },
-  'find_exist_user_with_name' : function (browser) {
+  /*'find_exist_user_with_name' : function (browser) {
     browser
     //Need common used account for QA team.
       .setValue('#user_search_input', 'QA')
       .pause(2000)
       .waitForElementVisible('#user_search_result_container > ul', 3000, false)
-      .verify.containsText('#user_search_result_container > ul a:first-child', 'QA')
+      .verify.containsText('#user_search_result_container > ul li:first-child', 'QA')
       .clearValue('#user_search_input')
-  },
+  },*/
+  // 이름으로 초대하는 기능이 없음
   'check_when_user_not_selected' : function (browser) {
     browser
       .click('#g_prjs_btn_ok')
       .pause(1000)
       .waitForElementNotVisible('#dlg_project_share', 3000, false)
-      .end()
+      .logout(browser);
   }
 }

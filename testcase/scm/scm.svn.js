@@ -367,5 +367,6 @@ module.exports = {
       .waitForElementNotVisible('#dlg_alert', 10000)
       .pause(2000)
       .waitForElementNotVisible('#dlg_loading_bar', 10000)
+      .logout(browser);
   }
 }

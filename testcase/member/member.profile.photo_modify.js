@@ -143,6 +143,6 @@ module.exports = {
 			.waitForElementPresent('#dlg_auth_profile.in', 3000)
 			.assert.cssClassPresent('#dlg_auth_profile', 'in')
 			.pause(1000)
-                  .end();
+                  .logout(browser);
 	}
 }

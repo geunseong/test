@@ -49,6 +49,6 @@ module.exports = {
         .click('button[id=btn-login]')
         .waitForElementVisible('div#ide-vm-list', 2000)
         .verify.urlEquals('https://qa.goorm.io/my')
-        .end();
+        .logout(browser);
   }
 };

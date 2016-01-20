@@ -4,23 +4,21 @@ module.exports = {
     browser.run_ide(data.username, data.password);
   },
   // I should try this without project open
-  'project_open' : function (browser) {
-    var project = 'Test2';
-    // Selecting project from menu
-    browser
-      .open_project_menu(project)
-      .pause(2000);
+ 'project_open' : function (browser) {
+    browser.open_project_menu();
   },
   'file_remove_file_from_menu' : function (browser) {
     var file_name = "test_file"
     browser
+      .new_file(file_name)
+      .pause(1000)
       .delete_file(file_name)
       .pause(2000)
   },
   'file_recover_new_file' : function (browser) {
-    var new_file = 'test_file';
+   // var new_file = 'test_file';
     browser
-      .new_file(new_file)
-      .end();
-  },  
+     // .new_file(new_file)
+      .logout(browser);
+  },
 }
