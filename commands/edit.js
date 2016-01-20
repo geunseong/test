@@ -9,7 +9,7 @@ exports.command = function(content) {
 
 			window_list[window_list.length - 1].editor.editor.setValue(_content);
 		}, [content])
-		.verify.visible('#g_window_tab_list .goorm_tab_menu:last-child .tab_option')
+		.verify.visible('#g_window_tab_list .goorm_tab_menu:last-child .tab_title')
 
 	return this;
 };

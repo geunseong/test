@@ -1,6 +1,6 @@
 exports.command = function(project_type, detail_type, project_name) {
     this
-    	.open_new_project_dialog()
+    .open_new_project_dialog()
 		.click('.project_wizard_first_button[project_type=' + project_type + ']')
 		.waitForElementVisible('.project_wizard_second_button[project_type=' + project_type + ']', 10000)
 		.click('.project_wizard_second_button[detail_type=' + detail_type + ']')

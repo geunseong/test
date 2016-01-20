@@ -7,6 +7,7 @@ exports.command = function(file_name) {
 		.waitForElementVisible('#dlg_confirmation', 2000)
 		.click('#g_cfrm_btn_yes')
 		.waitForElementNotVisible('#dlg_confirmation', 10000)
-		.waitForElementNotPresent('.jstree-node[id$="' + file_name.trim() + '"]', 2000)
+		.pause(1000)
+		.waitForElementNotPresent('.jstree-node[id$="' + file_name.trim() + '"]', 5000)
 	return this;
 };
